@@ -69,7 +69,7 @@ h2{font-size:clamp(28px,3.8vw,44px);letter-spacing:-.02em;color:var(--navy2);mar
 .doc{background:#fff;border-radius:var(--r);padding:26px;text-align:center;transition:.3s;border:2px solid transparent;cursor:pointer}
 .doc:hover{transform:translateY(-8px);border-color:var(--orange)}
 .ava{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--navy),var(--orange));display:grid;place-items:center;color:#fff;font-weight:800;font-size:34px;border:4px solid #fff;box-shadow:0 0 0 3px var(--orange2)}
-.doc small{color:var(--mut)}.ava svg{display:block}
+.doc small{color:var(--mut)}.ava svg{display:block}.ava{overflow:hidden}.ava img{width:100%;height:100%;object-fit:cover}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:s}
 .step{background:#fff;border-radius:var(--r);padding:26px;position:relative;counter-increment:s}
 .step:before{content:counter(s);display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;margin-bottom:12px}
@@ -185,7 +185,9 @@ const S=[
  {k:"Хирургия",i:"🩺",t:"Хирургическая стоматология",p:["Удаление зубов","Удаление зубов мудрости","Костная пластика","Лечение воспалений"]}];
 const ICO={tooth:'<path d="M12 5.5C10 3 6 4 6 8c0 3 1.2 4.5 1.8 7.5.3 1.7 1.6 1.9 2.1.3.4-1.3 1-2.3 2.1-2.3s1.7 1 2.1 2.3c.5 1.6 1.8 1.4 2.1-.3.6-3 1.8-4.5 1.8-7.5 0-4-4-5-6-2.5z"/>',spark:'<path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',shield:'<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',cross:'<path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z"/>'};
 const ICON=(k,s=44)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICO[k]}</svg>`;
-const D=[["Имплантология","Восстановление зубов","tooth"],["Эстетика","Виниры и дизайн улыбки","spark"],["Терапия","Лечение и гигиена","shield"],["Хирургия","Хирургическая стоматология","cross"]];
+/* ВРАЧИ: впишите имя в name и путь к фото в photo (например "img/doctor1.jpg"); пока фото пустое — показывается иконка */
+const AV=(ic,ph,nm,s)=>ph?`<img src="${ph}" alt="${nm}">`:ICON(ic,s);
+const D=[["Имплантология","Восстановление зубов","tooth","Имя Фамилия",""],["Эстетика","Виниры и дизайн улыбки","spark","Имя Фамилия",""],["Терапия","Лечение и гигиена","shield","Имя Фамилия",""],["Хирургия","Хирургическая стоматология","cross","Имя Фамилия",""]];
 const $=s=>document.querySelector(s);
 $('#burger').onclick=()=>$('#menu').classList.toggle('open');
 document.querySelectorAll('#menu a').forEach(a=>a.onclick=()=>$('#menu').classList.remove('open'));
@@ -196,8 +198,8 @@ function show(n){[...tabs.children].forEach((b,i)=>b.classList.toggle('on',i===n
 S.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s.k;b.onclick=()=>show(i);tabs.append(b)});show(0);
 $('#svc').innerHTML='<option value="">Что вас интересует?</option>'+S.map(s=>`<option>${s.k}</option>`).join('')+'<option>Бесплатная консультация</option>';
 // doctors
-$('#docs').innerHTML=D.map((d,i)=>`<div class="doc" onclick="openM(${i})"><div class="ava">${ICON(d[2])}</div><b>${d[0]}</b><br><small>${d[1]}</small></div>`).join('');
-function openM(i){$('#mAva').innerHTML=ICON(D[i][2]);$('#mName').textContent=D[i][0];$('#mRole').textContent=D[i][1]+' · специалисты Estetic Clinic';$('#modal').classList.add('on')}
+$('#docs').innerHTML=D.map((d,i)=>`<div class="doc" onclick="openM(${i})"><div class="ava">${AV(d[2],d[4],d[3],44)}</div><b>${d[3]}</b><br><small>${d[0]}</small></div>`).join('');
+function openM(i){const d=D[i];$('#mAva').innerHTML=AV(d[2],d[4],d[3],44);$('#mName').textContent=d[3];$('#mRole').textContent=d[0]+' · '+d[1];$('#modal').classList.add('on')}
 function closeM(){$('#modal').classList.remove('on')}$('#modal').onclick=e=>{if(e.target.id==='modal')closeM()};
 // before/after art
 function row(good){const w=good?'#fffefa':'#d8c27a',g=good?'#f3d9d3':'#c98a82',tilt=good?[0,0,0,0,0,0]:[-8,5,-3,9,-6,4];
