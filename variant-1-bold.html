@@ -58,7 +58,7 @@ h2{font-size:clamp(28px,3.8vw,44px);letter-spacing:-.02em;color:var(--navy2);mar
 .ba{background:var(--navy2);color:#fff;border-radius:30px;margin:0 20px}
 .ba .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:center}
 .ba h2{color:#fff}.ba p{color:#b9bce6}
-.slider{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/10;user-select:none;touch-action:none;cursor:ew-resize;background:#e9e4da}
+.slider{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/1;user-select:none;touch-action:none;cursor:ew-resize;background:#e9e4da}
 .slider svg{position:absolute;inset:0;width:100%;height:100%}
 .slider .after{clip-path:inset(0 0 0 50%)}
 .knob{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%)}
@@ -104,6 +104,7 @@ footer{padding:36px 0;text-align:center;color:var(--mut);font-size:14px}
 .soc{display:flex;gap:8px}.soc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:.2s}.soc svg{width:20px;height:20px}.soc a:hover{transform:translateY(-2px)}.soc .s-wa{background:#25d366;color:#fff}.soc .s-ig{background:linear-gradient(45deg,#f9ce34,#ee2a7b 55%,#6228d7);color:#fff}.hr{display:flex;align-items:center;gap:14px}
 .bm{position:fixed;inset:0;z-index:300;display:none;place-items:center;padding:20px;background:rgba(10,14,40,.62);backdrop-filter:blur(6px)}.bm.on{display:grid;animation:bmi .25s}@keyframes bmi{from{opacity:0}}.bmc{position:relative;width:min(420px,100%);padding:34px 30px 26px;max-height:92vh;overflow:auto}.bmx{position:absolute;top:10px;right:14px;border:0;background:none;font-size:30px;line-height:1;cursor:pointer;color:inherit;opacity:.6}.bmx:hover{opacity:1}.bmc h3{font-size:26px;margin-bottom:6px}.bms{opacity:.75;margin-bottom:18px;font-size:15px}.bmc form{display:grid;gap:12px}.bmc input{width:100%;padding:14px 16px;font-size:16px;font-family:inherit}.bme{display:none;color:#d93a3a;font-size:13.5px}.bmc input.bad{border-color:#d93a3a!important}.bmb{cursor:pointer;border:0;font-weight:600;font-size:16px;font-family:inherit;padding:15px;width:100%}.bmo{text-align:center;font-size:14px;margin-top:14px;opacity:.8}.bmo a,.bms a{font-weight:700;text-decoration:underline}
 .bmc{background:#fff;color:var(--ink);border-radius:26px;font-family:Manrope,sans-serif}.bmc h3{color:var(--navy)}.bmc input{border:2px solid #e1e3f3;border-radius:14px;background:#f6f7fc}.bmc input:focus{outline:0;border-color:var(--orange)}.bmb{background:var(--orange);color:#fff;border-radius:999px;box-shadow:0 10px 24px -8px rgba(242,138,31,.7)}.bmb:hover{filter:brightness(.95)}
+.slider .after{position:absolute;inset:0}.ph{position:absolute;inset:0;background:url(img/before-after.jpg) no-repeat;background-size:100% 200%}
 </style>
 </head>
 <body>
@@ -135,8 +136,8 @@ footer{padding:36px 0;text-align:center;color:var(--mut);font-size:14px}
 </div></section>
 
 <section id="results" class="ba rv"><div class="wrap">
- <div><div class="eyebrow">До / После</div><h2>Потяните и увидьте разницу</h2><p>Реальные кейсы клиники — в нашем Instagram в разделе «До/После». Ниже — иллюстрация того, как работает отбеливание и виниры.</p><br><a class="btn pri" href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener">Смотреть кейсы →</a></div>
- <div><div class="slider" id="slider"><div id="sBefore"></div><div class="after" id="sAfter"></div><span class="lbl" style="left:12px">До</span><span class="lbl" style="right:12px">После</span><div class="knob" id="knob"></div></div><div class="note">Иллюстрация. Результат зависит от клинической ситуации.</div></div>
+ <div><div class="eyebrow">До / После</div><h2>Потяните и увидьте разницу</h2><p>Реальные кейсы клиники — в нашем Instagram в разделе «До/После». Ниже — один из реальных результатов: потяните ползунок.</p><br><a class="btn pri" href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener">Смотреть кейсы →</a></div>
+ <div><div class="slider" id="slider"><div id="sBefore"></div><div class="after" id="sAfter"></div><span class="lbl" style="left:12px">До</span><span class="lbl" style="right:12px">После</span><div class="knob" id="knob"></div></div><div class="note">Реальный кейс клиники. Результат индивидуален и зависит от клинической ситуации.</div></div>
 </div></section>
 
 <section id="doctors"><div class="wrap rv">
@@ -204,11 +205,8 @@ $('#docs').innerHTML=D.map((d,i)=>`<div class="doc" onclick="openM(${i})"><div c
 function openM(i){const d=D[i];$('#mAva').innerHTML=AV(d[2],d[4],d[3],44);$('#mName').textContent=d[3];$('#mRole').textContent=d[0]+' · '+d[1];$('#modal').classList.add('on')}
 function closeM(){$('#modal').classList.remove('on')}$('#modal').onclick=e=>{if(e.target.id==='modal')closeM()};
 // before/after art
-function row(good){const w=good?'#fffefa':'#d8c27a',g=good?'#f3d9d3':'#c98a82',tilt=good?[0,0,0,0,0,0]:[-8,5,-3,9,-6,4];
- let t='';for(let i=0;i<6;i++){const x=70+i*100,y=good?0:(i%2?10:-6);t+=`<g transform="translate(${x} ${150+y}) rotate(${tilt[i]} 45 80)"><path d="M0 20Q0 0 25 0H65Q90 0 90 20V90Q90 140 45 140Q0 140 0 90Z" fill="${w}" stroke="#0002"/></g>`}
- return `<svg viewBox="0 0 700 400" preserveAspectRatio="xMidYMid slice"><rect width="700" height="400" fill="#f1b9ae"/><path d="M0 130Q350 60 700 130V160H0Z" fill="${g}"/><rect y="130" width="700" height="190" fill="#7a2d33"/>${t}<path d="M0 300Q350 250 700 300V400H0Z" fill="${g}"/></svg>`}
-$('#sBefore').outerHTML=`<div style="position:absolute;inset:0">${row(false)}</div>`;
-$('#sAfter').innerHTML=row(true);
+$('#sBefore').outerHTML='<div class="ph" style="background-position:top"></div>';
+$('#sAfter').innerHTML='<div class="ph" style="background-position:bottom"></div>';
 const sl=$('#slider'),af=$('#sAfter'),kn=$('#knob');
 function mv(x){const r=sl.getBoundingClientRect();let p=Math.max(0,Math.min(100,(x-r.left)/r.width*100));af.style.clipPath=`inset(0 0 0 ${p}%)`;kn.style.left=p+'%'}
 let drag=false;sl.addEventListener('pointerdown',e=>{drag=true;mv(e.clientX)});addEventListener('pointerup',()=>drag=false);addEventListener('pointermove',e=>drag&&mv(e.clientX));
