@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Estetic Clinic — Вариант 2 · Fresh Aqua</title>
+<meta name="description" content="Estetic Clinic — современная стоматология в Бишкеке: имплантация, виниры, лечение. Бесплатная консультация.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e2540;--mut:#587088;--teal:#12b3a6;--teal2:#0b8f85;--mint:#e4f7f5;--bg:#f3fbfa;--line:#d3e8e5;--or:#ff8a1e;--or2:#e9760c;--r:26px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font:400 17px/1.6 Onest,system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.w{max-width:1180px;margin:auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font:700 16px Onest;padding:15px 28px;border-radius:99px;transition:.25s}
+.btn.or{background:var(--or);color:#fff;box-shadow:0 12px 26px -10px rgba(255,138,30,.9)}.btn.or:hover{background:var(--or2);transform:translateY(-3px)}
+.btn.wh{background:#fff;color:var(--ink);border:1.5px solid var(--line)}.btn.wh:hover{border-color:var(--teal);color:var(--teal2)}
+.btn.tl{background:var(--teal);color:#fff}.btn.tl:hover{background:var(--teal2)}
+header{position:sticky;top:0;z-index:50;background:rgba(243,251,250,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;white-space:nowrap}.logo b{color:var(--teal)}.logo svg{width:32px;height:32px}
+nav ul{display:flex;gap:24px;list-style:none;padding:0;font-weight:500;font-size:15px;color:var(--mut)}
+nav a{white-space:nowrap}nav a:hover{color:var(--teal2)}
+.hr{display:flex;align-items:center;gap:12px}
+.burger{display:none;background:none;border:0;font-size:28px;cursor:pointer;color:var(--ink)}
+.soc{display:flex;gap:8px}.soc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:.2s;color:#fff}.soc svg{width:20px;height:20px}.soc a:hover{transform:translateY(-2px)}
+.soc .s-wa{background:#25d366}.soc .s-ig{background:linear-gradient(45deg,#f9ce34,#ee2a7b 55%,#6228d7)}
+/* hero */
+.hero{padding:54px 20px 30px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:7px 16px;font-size:14px;font-weight:600}
+.pill i{color:#f5b301;font-style:normal}.pill em{width:8px;height:8px;border-radius:50%;background:#2fd78f;display:inline-block}
+h1{font-size:clamp(36px,5.6vw,66px);line-height:1.04;letter-spacing:-.035em;font-weight:800;margin:20px 0 18px}
+h1 u{text-decoration:none;color:var(--teal);position:relative;white-space:nowrap}
+h1 u:after{content:"";position:absolute;left:0;right:0;bottom:2px;height:10px;background:var(--or);opacity:.28;border-radius:6px;z-index:-1}
+.lead{font-size:19px;color:var(--mut);max-width:520px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 30px}
+.mini{display:flex;gap:28px;flex-wrap:wrap}.mini div{font-size:14px;color:var(--mut)}.mini b{display:block;font-size:28px;color:var(--ink);line-height:1.1}
+.arch{position:relative;aspect-ratio:.9;max-width:470px;margin:auto;width:100%}
+.arch .fr{position:absolute;inset:0;border-radius:999px 999px 36px 36px;background:linear-gradient(165deg,#5fe0d3 0%,var(--teal) 45%,#0a7f8a 100%);overflow:hidden;box-shadow:0 40px 70px -40px rgba(11,143,133,.9)}
+.arch .fr:before{content:"";position:absolute;width:120%;aspect-ratio:1;left:-10%;top:-30%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),transparent 60%)}
+.arch .fr:after{content:"";position:absolute;inset:auto -10% -14% -10%;height:42%;border-radius:50%;background:rgba(255,255,255,.14)}
+.arch .rg{position:absolute;border:1.5px solid rgba(255,255,255,.35);border-radius:50%;left:50%;top:46%;transform:translate(-50%,-50%)}
+.rg.a{width:62%;aspect-ratio:1}.rg.b{width:86%;aspect-ratio:1;border-style:dashed;animation:spin 60s linear infinite}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.arch .th{position:absolute;left:50%;top:46%;width:52%;transform:translate(-50%,-50%);filter:drop-shadow(0 28px 24px rgba(4,50,60,.4));animation:flt 5s ease-in-out infinite}
+@keyframes flt{50%{transform:translate(-50%,-54%)}}
+.gc{position:absolute;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.95);border-radius:18px;padding:10px 16px 10px 10px;font-weight:700;font-size:14px;box-shadow:0 18px 36px -14px rgba(5,40,50,.5);animation:flt2 6s ease-in-out infinite;white-space:nowrap}
+@keyframes flt2{50%{transform:translateY(-8px)}}
+.gc i{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:var(--mint);color:var(--teal2)}.gc i svg{width:19px;height:19px}
+.gc small{display:block;font-weight:500;font-size:12px;color:var(--mut);line-height:1.1}
+.g1{top:16%;left:-8%}.g2{bottom:22%;right:-7%;animation-delay:1.2s}.g3{bottom:6%;left:4%;animation-delay:.6s}
+.sp{position:absolute;color:#fff;animation:tw 3s ease-in-out infinite;text-shadow:0 0 12px #fff}@keyframes tw{50%{opacity:.25;transform:scale(.6)}}
+/* stats */
+.band{background:var(--ink);color:#fff;margin:40px 0}
+.band .w{display:grid;grid-template-columns:repeat(4,1fr)}
+.st{padding:30px 20px;border-right:1px solid #ffffff1c}.st:last-child{border:0}
+.st b{display:block;font-size:38px;font-weight:800;color:#5fe0d3;line-height:1.1}.st span{font-size:14px;color:#a9bdd0}
+section{padding:70px 0}
+.eb{color:var(--teal2);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+h2{font-size:clamp(28px,4vw,46px);line-height:1.1;letter-spacing:-.03em;font-weight:800;margin:10px 0 14px}
+.sub{color:var(--mut);max-width:620px;margin-bottom:34px}
+/* services bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.sv{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;transition:.3s;position:relative;overflow:hidden}
+.sv:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 26px 44px -30px rgba(11,143,133,.7)}
+.sv:nth-child(1),.sv:nth-child(2){grid-column:span 3}.sv:nth-child(n+3){grid-column:span 2}
+.sv .art{width:100%;height:auto;max-height:230px;background:linear-gradient(160deg,var(--mint),#fff 80%);border-radius:18px;margin-bottom:16px}
+.sv h3{font-size:22px;font-weight:700}.sv p{color:var(--mut);font-size:15px;margin:6px 0 14px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}.tags span{background:var(--mint);color:var(--teal2);font-size:13px;font-weight:600;padding:4px 11px;border-radius:99px}
+.sv .go{margin-top:auto;color:var(--or2);font-weight:700;display:flex;align-items:center;gap:6px}.sv:hover .go{gap:12px}
+.bob{animation:bob 4.5s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-6px)}}
+.art .sp{position:static;color:inherit;transform-box:fill-box;transform-origin:center;animation:tw 2.8s ease-in-out infinite;text-shadow:none}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+.steps:before{content:"";position:absolute;left:12%;right:12%;top:34px;border-top:2px dashed var(--line)}
+.pr{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;position:relative}
+.pr .n{width:50px;height:50px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;margin-bottom:14px;box-shadow:0 0 0 6px var(--mint)}
+.pr b{font-size:18px}.pr p{color:var(--mut);font-size:15px;margin-top:4px}
+/* doctors */
+.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.dc{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 22px;text-align:center;transition:.3s;display:block}
+.dc:hover{transform:translateY(-6px);border-color:var(--teal);box-shadow:0 26px 44px -30px rgba(11,143,133,.7)}
+.av{width:112px;height:112px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(145deg,var(--mint),#fff);border:2px solid var(--line);display:grid;place-items:center;color:var(--teal2);overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.dc b{display:block;font-size:20px}.dc small{color:var(--mut);display:block;margin-top:2px}
+.dc em{display:inline-block;margin-top:14px;font-style:normal;font-weight:700;color:var(--or2);font-size:15px}
+/* results */
+.res{background:#fff;border:1px solid var(--line);border-radius:36px;padding:40px;display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:center}
+.rs{position:relative;aspect-ratio:2/1;border-radius:22px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:none;box-shadow:0 26px 44px -28px rgba(14,37,64,.6)}
+.rph{position:absolute;inset:0;background:url(img/before-after.jpg) no-repeat;background-size:100% 200%}.rafter{clip-path:inset(0 0 0 50%)}
+.rl{position:absolute;top:12px;padding:5px 13px;border-radius:99px;background:rgba(14,37,64,.7);color:#fff;font-size:13px;font-weight:700}
+.rk{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%)}
+.rk:after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--or);color:#fff;display:grid;place-items:center;font-size:20px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.note{font-size:13px;color:var(--mut);margin-top:10px}
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+details{background:#fff;border:1px solid var(--line);border-radius:20px;padding:0 24px}
+summary{cursor:pointer;list-style:none;font-weight:700;padding:20px 0;display:flex;justify-content:space-between;gap:14px}
+summary::-webkit-details-marker{display:none}summary:after{content:"+";font-size:24px;color:var(--teal2);line-height:1;transition:.2s}
+details[open] summary:after{transform:rotate(45deg)}details p{color:var(--mut);padding-bottom:20px}
+/* cta */
+.cb{background:linear-gradient(135deg,var(--teal),#0a7f8a);color:#fff;border-radius:40px;padding:56px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;position:relative;overflow:hidden}
+.cb:after{content:"";position:absolute;width:420px;aspect-ratio:1;right:-120px;top:-160px;border-radius:50%;background:rgba(255,255,255,.13)}
+.cb h2{margin:0 0 8px;max-width:560px}.cb p{opacity:.9;max-width:520px}.cb>*{position:relative;z-index:1}
+/* contacts */
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ci{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:32px}
+.row{display:flex;gap:14px;margin-top:20px}.row .ic{flex:0 0 44px;height:44px;border-radius:14px;background:var(--mint);display:grid;place-items:center;font-size:20px}
+.row b{display:block}.row span,.row a.t{color:var(--mut);font-size:15px}.row a.t{color:var(--teal2);font-weight:700}
+.map{border-radius:var(--r);border:1px solid var(--line);min-height:300px;display:grid;place-items:center;text-align:center;padding:20px;background:repeating-linear-gradient(60deg,transparent 0 26px,#12b3a614 26px 28px),linear-gradient(160deg,var(--mint),#fff);transition:.25s}
+.map:hover{border-color:var(--teal);transform:translateY(-4px)}
+footer{padding:36px 0;text-align:center;color:var(--mut);font-size:14px}
+.rv{opacity:0;transform:translateY(30px);transition:.7s}.rv.in{opacity:1;transform:none}
+/* modal + fab */
+.bm{position:fixed;inset:0;z-index:300;display:none;place-items:center;padding:20px;background:rgba(8,28,48,.6);backdrop-filter:blur(6px)}.bm.on{display:grid;animation:bmi .25s}@keyframes bmi{from{opacity:0}}
+.bmc{position:relative;width:min(420px,100%);padding:34px 30px 26px;max-height:92vh;overflow:auto;background:#fff;color:var(--ink);border-radius:28px;font-family:Onest,sans-serif}
+.bmx{position:absolute;top:10px;right:14px;border:0;background:none;font-size:30px;line-height:1;cursor:pointer;color:inherit;opacity:.6}.bmx:hover{opacity:1}
+.bmc h3{font-size:26px;margin-bottom:6px}.bms{opacity:.75;margin-bottom:18px;font-size:15px}.bmc form{display:grid;gap:12px}
+.bmc input{width:100%;padding:14px 16px;font-size:16px;font-family:inherit;border:2px solid var(--line);border-radius:14px;background:var(--bg)}.bmc input:focus{outline:0;border-color:var(--teal)}.bmc input.bad{border-color:#d93a3a}
+.bme{display:none;color:#d93a3a;font-size:13.5px}
+.bmb{cursor:pointer;border:0;font-weight:700;font-size:16px;font-family:inherit;padding:15px;width:100%;background:var(--or);color:#fff;border-radius:99px}.bmb:hover{background:var(--or2)}
+.bmo{text-align:center;font-size:14px;margin-top:14px;opacity:.8}.bmo a,.bms a{font-weight:700;text-decoration:underline;color:var(--teal2)}
+.fab{position:fixed;right:20px;bottom:22px;z-index:55;display:flex;align-items:center;height:58px;min-width:58px;border-radius:99px;background:#25d366;color:#fff;box-shadow:0 10px 26px -6px rgba(0,0,0,.4);padding:0 16px;transition:.3s}
+.fab svg{width:28px;height:28px;flex:0 0 28px}.fab .fl{max-width:0;overflow:hidden;white-space:nowrap;font:600 15px Onest,sans-serif;transition:.35s}.fab:hover .fl{max-width:200px;margin-right:10px}
+.fab:before{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid #25d366;animation:pls 2.4s infinite}@keyframes pls{to{transform:scale(1.35);opacity:0}}
+@media(max-width:1060px){nav ul{display:none;position:absolute;top:72px;left:0;right:0;background:#fff;flex-direction:column;padding:18px 24px;gap:14px;border-bottom:1px solid var(--line)}nav ul.open{display:flex}.burger{display:block}.hr .btn{display:none}}
+@media(max-width:860px){
+ .hero,.res,.ct{grid-template-columns:1fr}.hero{padding-top:34px}.arch{max-width:360px}.g1{left:-2%}.g2{right:-2%}
+ .band .w{grid-template-columns:1fr 1fr}.st:nth-child(2){border-right:0}.st:nth-child(-n+2){border-bottom:1px solid #ffffff1c}
+ .bento{grid-template-columns:1fr}.sv:nth-child(n){grid-column:auto}
+ .steps{grid-template-columns:1fr 1fr}.steps:before{display:none}.faq{grid-template-columns:1fr}.res{padding:24px}.cb{padding:34px 26px}section{padding:50px 0}
+}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<linearGradient id="tw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#eef1ff"/><stop offset="1" stop-color="#c9d1f5"/></linearGradient>
+<linearGradient id="ty" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d8"/><stop offset="1" stop-color="#e8cf8a"/></linearGradient>
+<linearGradient id="ti" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8d99bf"/><stop offset=".45" stop-color="#f4f6ff"/><stop offset="1" stop-color="#7f8bb3"/></linearGradient>
+<linearGradient id="gm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9fab"/><stop offset="1" stop-color="#e5697c"/></linearGradient>
+<linearGradient id="nv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4046b0"/><stop offset="1" stop-color="#1c2060"/></linearGradient>
+<symbol id="tw-tooth" viewBox="0 0 100 110"><path d="M50 18C36 5 12 9 12 36c0 20 8 30 12 50 2 12 10 14 14 2 3-10 8-18 12-18s9 8 12 18c4 12 12 10 14-2 4-20 12-30 12-50C88 9 64 5 50 18z" fill="url(#tw)" stroke="#c4cdea" stroke-width="1.6"/><path d="M20 44c-1 10 3 18 6 28" stroke="#fff" stroke-width="3.4" stroke-linecap="round" fill="none"/><path d="M30 20c4-4 9-5 14-3" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".7"/></symbol>
+<symbol id="ty-tooth" viewBox="0 0 100 110"><path d="M50 18C36 5 12 9 12 36c0 20 8 30 12 50 2 12 10 14 14 2 3-10 8-18 12-18s9 8 12 18c4 12 12 10 14-2 4-20 12-30 12-50C88 9 64 5 50 18z" fill="url(#ty)" stroke="#d9c07a" stroke-width="1.6"/><path d="M20 44c-1 10 3 18 6 28" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8"/></symbol>
+<symbol id="sp" viewBox="0 0 24 24"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z" fill="currentColor"/></symbol>
+
+<symbol id="tooth" viewBox="0 0 100 110"><path d="M50 18C36 5 12 9 12 36c0 20 8 30 12 50 2 12 10 14 14 2 3-10 8-18 12-18s9 8 12 18c4 12 12 10 14-2 4-20 12-30 12-50C88 9 64 5 50 18z" fill="#fff"/><path d="M18 30c2-14 18-20 32-8 14-12 30-6 32 8-8-6-20-4-32 6-12-10-24-12-32-6z" fill="#262a6b"/><path d="M62 4l22-2-8 18z" fill="#f28a1f"/></symbol>
+</defs></svg>
+
+<header><div class="w nav">
+ <a class="logo" href="#"><svg viewBox="0 0 100 110"><use href="#tooth"/></svg><span>Estetic <b>Clinic</b></span></a>
+ <nav><ul id="menu"><li><a href="#services">Услуги</a><li><a href="#process">Как мы работаем</a><li><a href="#team">Специалисты</a><li><a href="#results">Результаты</a><li><a href="#faq">Вопросы</a><li><a href="#contacts">Контакты</a></ul></nav>
+ <div class="hr"><a class="btn or" href="#book">Записаться</a><div class="soc"><a class="s-wa" href="https://wa.me/996999554455" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a><a class="s-ig" href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></div><button class="burger" id="burger" aria-label="Меню">☰</button></div>
+</div></header>
+
+<main>
+<div class="w hero">
+ <div>
+  <span class="pill"><i>★</i> 4.3 на картах <em></em> работаем круглосуточно</span>
+  <h1>Здоровая улыбка начинается <u>здесь</u></h1>
+  <p class="lead">Estetic Clinic — современная стоматология в Бишкеке. Имплантация, виниры, лечение и гигиена в одной клинике. Первая консультация бесплатно.</p>
+  <div class="cta"><a class="btn or" href="#book">Записаться на консультацию</a><a class="btn wh" href="tel:+996999554455">📞 0999 554 455</a></div>
+  <div class="mini"><div><b>5</b>направлений лечения</div><div><b>15K+</b>подписчиков в Instagram</div><div><b>24/7</b>на связи</div></div>
+ </div>
+ <div class="arch">
+  <div class="fr"><div class="rg a"></div><div class="rg b"></div>
+   <svg class="th" viewBox="0 0 100 110"><use href="#tw-tooth"/></svg>
+   <svg class="sp" style="top:20%;right:22%" width="26" height="26"><use href="#sp"/></svg><svg class="sp" style="top:44%;left:14%;animation-delay:1s" width="16" height="16"><use href="#sp"/></svg><svg class="sp" style="bottom:30%;right:16%;animation-delay:2s" width="18" height="18"><use href="#sp"/></svg>
+  </div>
+  <div class="gc g1"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></i><span>Бесплатная консультация<small>первичный осмотр</small></span></div>
+  <div class="gc g2"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></i><span>4.3 на карте<small>рейтинг клиники</small></span></div>
+  <div class="gc g3"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><span>Круглосуточно<small>по данным карт</small></span></div>
+ </div>
+</div>
+
+<div class="band"><div class="w">
+ <div class="st"><b data-t="4.3">0</b><span>рейтинг клиники на карте</span></div>
+ <div class="st"><b data-t="15" data-x="K+">0</b><span>подписчиков в Instagram</span></div>
+ <div class="st"><b data-t="375">0</b><span>публикаций: кейсы и процесс</span></div>
+ <div class="st"><b>24/7</b><span>клиника отмечена как круглосуточная</span></div>
+</div></div>
+
+<section id="services"><div class="w rv">
+ <div class="eb">Услуги</div><h2>Всё для здоровья зубов в одном месте</h2><p class="sub">Выберите направление — запишем на консультацию и расскажем, как проходит лечение.</p>
+ <div class="bento" id="bento"></div>
+</div></section>
+
+<section id="process"><div class="w rv">
+ <div class="eb">Как мы работаем</div><h2>Четыре понятных шага</h2><p class="sub">Вы всегда знаете, что будет дальше.</p>
+ <div class="steps">
+  <div class="pr"><div class="n">1</div><b>Запись</b><p>Звонок, WhatsApp или форма на сайте.</p></div>
+  <div class="pr"><div class="n">2</div><b>Осмотр</b><p>Врач осматривает и объясняет ситуацию простыми словами.</p></div>
+  <div class="pr"><div class="n">3</div><b>План лечения</b><p>Обсуждаем варианты и стоимость до начала работы.</p></div>
+  <div class="pr"><div class="n">4</div><b>Лечение и контроль</b><p>Проводим лечение и даём рекомендации по уходу.</p></div>
+ </div>
+</div></section>
+
+<section id="team"><div class="w rv">
+ <div class="eb">Специалисты</div><h2>Наши специалисты</h2><p class="sub">Работы и истории нашей команды — в Instagram клиники.</p>
+ <div class="dg" id="dg"></div>
+</div></section>
+
+<section id="results"><div class="w rv"><div class="res">
+ <div><div class="eb">Результаты</div><h2>Реальные до и после</h2><p class="sub" style="margin-bottom:22px">Потяните ползунок, чтобы увидеть разницу. Больше работ — в Instagram клиники, в разделе «До/После».</p>
+  <a class="btn tl" href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener">Смотреть кейсы</a><p class="note">Реальный кейс клиники. Результат индивидуален.</p></div>
+ <div class="rs" id="rs"><div class="rph" style="background-position:top"></div><div class="rph rafter" id="ra" style="background-position:bottom"></div><span class="rl" style="left:12px">До</span><span class="rl" style="right:12px">После</span><div class="rk" id="rk"></div></div>
+</div></div></section>
+
+<section id="faq"><div class="w rv">
+ <div class="eb">Вопросы</div><h2>Ответы на частые вопросы</h2><p class="sub">Если не нашли ответ — позвоните или напишите нам.</p>
+ <div class="faq">
+  <details><summary>Консультация действительно бесплатная?</summary><p>Да. Первичный осмотр и консультацию мы проводим бесплатно. Если потребуется лечение, врач предложит план и обсудит его с вами.</p></details>
+  <details><summary>Больно ли лечиться?</summary><p>Лечение проводится с обезболиванием. Врач заранее расскажет, что вы будете чувствовать.</p></details>
+  <details><summary>Когда можно прийти?</summary><p>Клиника отмечена на картах как круглосуточная. Чтобы не ждать, запишитесь заранее.</p></details>
+  <details><summary>Как узнать стоимость?</summary><p>Точную стоимость можно назвать после осмотра. Врач озвучит её на консультации, до начала лечения.</p></details>
+  <details><summary>Какие услуги есть?</summary><p>Имплантация, виниры, терапия, ортодонтия и хирургия — полный спектр стоматологической помощи.</p></details>
+  <details><summary>Как вас найти?</summary><p>Ул. Юнусалиева 132, на пересечении с ул. Исы Ахунбаева, Бишкек. Ориентир — синяя вывеска «Estetic Clinic».</p></details>
+ </div>
+</div></section>
+
+<section style="padding-top:20px"><div class="w rv"><div class="cb" id="book">
+ <div><h2>Запишитесь на бесплатную консультацию уже сегодня</h2><p>Оставьте имя и телефон — администратор подтвердит удобное время.</p></div>
+ <a class="btn or" href="#book" style="font-size:18px;padding:18px 34px">Записаться</a>
+</div></div></section>
+
+<section id="contacts" style="padding-top:20px"><div class="w rv"><div class="ct">
+ <div class="ci"><div class="eb">Контакты</div><h2 style="font-size:32px">Приходите в гости</h2>
+  <div class="row"><span class="ic">📍</span><div><b>Адрес</b><span>ул. Юнусалиева 132 (пересекает ул. Ахунбаева), Бишкек</span></div></div>
+  <div class="row"><span class="ic">📞</span><div><b>Телефон</b><a class="t" href="tel:+996999554455">0999 554 455</a></div></div>
+  <div class="row"><span class="ic">🕒</span><div><b>Режим работы</b><span>Круглосуточно (по данным карт)</span></div></div>
+  <div class="row"><span class="ic">📸</span><div><b>Instagram</b><a class="t" href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener">@estetic_clinik</a></div></div>
+ </div>
+ <a class="map" href="https://yandex.com/maps/?text=Estetic%20Clinic%20Бишкек%20Юнусалиева%20132" target="_blank" rel="noopener"><div><div style="font-size:54px">📍</div><b style="font-size:22px">Открыть на карте</b><p style="color:var(--mut)">Юнусалиева 132 · Бишкек</p></div></a>
+</div></div></section>
+</main>
+<footer><div class="w"><b>Estetic Clinic</b> · Стоматология · Бишкек<br>Демонстрационный дизайн. Имеются противопоказания — необходима консультация специалиста.</div></footer>
+<a class="fab" href="https://wa.me/996999554455?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E." target="_blank" rel="noopener" aria-label="Написать в WhatsApp" title="Написать в WhatsApp"><span class="fl">Написать в WhatsApp</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+<div class="bm" id="bm" role="dialog" aria-modal="true" aria-labelledby="bmT"><div class="bmc"><button class="bmx" id="bmx" aria-label="Закрыть">×</button>
+<div id="bmF"><h3 id="bmT">Запись на консультацию</h3><p class="bms">Оставьте имя и номер — отправим заявку в WhatsApp клиники, администратор подтвердит время.</p>
+<form id="bmf" novalidate><input id="bmn" placeholder="Ваше имя" autocomplete="name"><input id="bmp" placeholder="Телефон: 0999 000 000" inputmode="tel" autocomplete="tel"><div class="bme" id="bme">Проверьте имя и номер телефона</div><button class="bmb" type="submit">Записаться</button></form>
+<p class="bmo">или позвоните: <a href="tel:+996999554455">0999 554 455</a></p></div>
+<div id="bmD" style="display:none;text-align:center"><div style="font-size:54px">✅</div><h3>Заявка готова</h3><p class="bms">Откроется WhatsApp — отправьте сообщение. Если не открылось, позвоните <a href="tel:+996999554455">0999 554 455</a>.</p><button class="bmb" id="bmk" type="button">Закрыть</button></div></div></div>
+<script>
+(function(){const $=s=>document.querySelector(s),m=$('#bm');
+const extra=()=>{try{const s=$('#s');if(s&&s.value)return s.value;if(typeof pick!=='undefined')return pick.svc||pick.doc||''}catch(e){}return ''};
+function open(){$('#bmF').style.display='';$('#bmD').style.display='none';$('#bmn').classList.remove('bad');$('#bmp').classList.remove('bad');$('#bme').style.display='none';m.classList.add('on');setTimeout(()=>$('#bmn').focus(),60)}
+function close(){m.classList.remove('on')}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href="#book"]');if(!a)return;e.preventDefault();open()});
+$('#bmx').onclick=close;$('#bmk').onclick=close;m.onclick=e=>{if(e.target===m)close()};
+addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+$('#bmf').onsubmit=e=>{e.preventDefault();const n=$('#bmn'),p=$('#bmp'),bn=n.value.trim().length<2,bp=p.value.replace(/\D/g,'').length<9;
+ n.classList.toggle('bad',bn);p.classList.toggle('bad',bp);$('#bme').style.display=(bn||bp)?'block':'none';if(bn||bp)return;
+ const x=extra(),t=`Здравствуйте! Меня зовут ${n.value.trim()}, тел. ${p.value.trim()}. Хочу записаться на консультацию${x?': '+x:''}.`;
+ $('#bmF').style.display='none';$('#bmD').style.display='block';window.open('https://wa.me/996999554455?text='+encodeURIComponent(t),'_blank')};
+})();
+</script>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const pick={};
+document.addEventListener('click',e=>{const a=e.target.closest('a[href="#book"]');if(a)pick.svc=a.dataset.s||''},true);
+const ART={"Имплантация": "<svg viewBox=\"0 0 260 220\" class=\"art\" role=\"img\" aria-label=\"Имплантат под коронкой\"><circle cx=\"130\" cy=\"112\" r=\"98\" fill=\"#fff\" opacity=\".55\"/>\n<rect x=\"36\" y=\"128\" width=\"188\" height=\"78\" rx=\"18\" fill=\"#f3d3b0\"/>\n<path d=\"M36 142V126Q36 108 56 108H204Q224 108 224 126V142Q130 152 36 142Z\" fill=\"url(#gm)\"/>\n<path d=\"M113 140H147L142 198Q130 207 118 198Z\" fill=\"url(#ti)\"/>\n<g stroke=\"#5d6a96\" stroke-width=\"2\" opacity=\".55\" stroke-linecap=\"round\"><path d=\"M114 150H146\"/><path d=\"M115 160H145\"/><path d=\"M116 170H144\"/><path d=\"M117 180H143\"/><path d=\"M119 190H141\"/></g>\n<rect x=\"119\" y=\"110\" width=\"22\" height=\"32\" rx=\"4\" fill=\"url(#ti)\"/>\n<g fill=\"#f28a1f\"><circle cx=\"96\" cy=\"168\" r=\"3.5\"/><circle cx=\"82\" cy=\"182\" r=\"2.5\"/><circle cx=\"164\" cy=\"170\" r=\"3.5\"/><circle cx=\"178\" cy=\"186\" r=\"2.5\"/></g>\n<use class=\"bob\" href=\"#tw-tooth\" x=\"82\" y=\"12\" width=\"96\" height=\"106\"/>\n<use class=\"sp\" href=\"#sp\" x=\"186\" y=\"28\" width=\"24\" height=\"24\" style=\"color:#f28a1f;animation-delay:0s\"/><use class=\"sp\" href=\"#sp\" x=\"50\" y=\"58\" width=\"15\" height=\"15\" style=\"color:#f28a1f;animation-delay:1s\"/><use class=\"sp\" href=\"#sp\" x=\"204\" y=\"92\" width=\"12\" height=\"12\" style=\"color:#f28a1f;animation-delay:2s\"/></svg>", "Виниры": "<svg viewBox=\"0 0 260 220\" class=\"art\" role=\"img\" aria-label=\"Винир на зубе\"><circle cx=\"130\" cy=\"112\" r=\"98\" fill=\"#fff\" opacity=\".55\"/>\n<use href=\"#ty-tooth\" x=\"44\" y=\"62\" width=\"106\" height=\"116\"/>\n<g class=\"bob\"><path transform=\"translate(108 14) scale(1.06)\" d=\"M50 18C36 5 12 9 12 36c0 20 8 30 12 50 2 12 10 14 14 2 3-10 8-18 12-18s9 8 12 18c4 12 12 10 14-2 4-20 12-30 12-50C88 9 64 5 50 18z\" fill=\"#fff\" fill-opacity=\".78\" stroke=\"#f28a1f\" stroke-width=\"2.4\" stroke-dasharray=\"6 5\"/></g>\n<path d=\"M146 130Q182 134 186 100\" stroke=\"#f28a1f\" stroke-width=\"3.2\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M178 106l8-14 8 14z\" fill=\"#f28a1f\"/>\n<g stroke=\"#fff\" stroke-width=\"2.5\"><circle cx=\"96\" cy=\"200\" r=\"9\" fill=\"#fffdf8\"/><circle cx=\"120\" cy=\"200\" r=\"9\" fill=\"#fbf1dc\"/><circle cx=\"144\" cy=\"200\" r=\"9\" fill=\"#f3e3b9\"/><circle cx=\"168\" cy=\"200\" r=\"9\" fill=\"#e8d098\"/></g>\n<circle cx=\"96\" cy=\"200\" r=\"13\" fill=\"none\" stroke=\"#f28a1f\" stroke-width=\"2.2\"/>\n<use class=\"sp\" href=\"#sp\" x=\"200\" y=\"30\" width=\"22\" height=\"22\" style=\"color:#f28a1f;animation-delay:0s\"/><use class=\"sp\" href=\"#sp\" x=\"40\" y=\"40\" width=\"14\" height=\"14\" style=\"color:#f28a1f;animation-delay:1s\"/><use class=\"sp\" href=\"#sp\" x=\"214\" y=\"150\" width=\"12\" height=\"12\" style=\"color:#f28a1f;animation-delay:2s\"/></svg>", "Терапия": "<svg viewBox=\"0 0 260 220\" class=\"art\" role=\"img\" aria-label=\"Лечение зуба\"><circle cx=\"130\" cy=\"112\" r=\"98\" fill=\"#fff\" opacity=\".55\"/>\n<use class=\"bob\" href=\"#tw-tooth\" x=\"74\" y=\"26\" width=\"112\" height=\"123\"/>\n<circle cx=\"108\" cy=\"76\" r=\"7\" fill=\"#b98a5b\"/><circle cx=\"108\" cy=\"76\" r=\"15\" fill=\"none\" stroke=\"#f28a1f\" stroke-width=\"2.2\" stroke-dasharray=\"4 4\"/>\n<g transform=\"translate(176 140)\"><path d=\"M0-34L28-23V6Q28 26 0 38Q-28 26-28 6V-23Z\" fill=\"url(#nv)\" stroke=\"#fff\" stroke-width=\"3\"/><path d=\"M-12 4l9 9 16-18\" stroke=\"#fff\" stroke-width=\"5.5\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></g>\n<g transform=\"translate(30 186) rotate(-30)\"><rect x=\"0\" y=\"0\" width=\"92\" height=\"13\" rx=\"6.5\" fill=\"#262a6b\"/><rect x=\"70\" y=\"-9\" width=\"42\" height=\"9\" rx=\"3\" fill=\"#f28a1f\"/><g fill=\"#fff\" stroke=\"#262a6b\" stroke-width=\"1\"><rect x=\"73\" y=\"-20\" width=\"5\" height=\"11\" rx=\"2\"/><rect x=\"82\" y=\"-20\" width=\"5\" height=\"11\" rx=\"2\"/><rect x=\"91\" y=\"-20\" width=\"5\" height=\"11\" rx=\"2\"/><rect x=\"100\" y=\"-20\" width=\"5\" height=\"11\" rx=\"2\"/></g></g>\n<g fill=\"none\" stroke=\"#fff\" stroke-width=\"2.5\" opacity=\".95\"><circle cx=\"64\" cy=\"108\" r=\"7\"/><circle cx=\"48\" cy=\"130\" r=\"4.5\"/><circle cx=\"82\" cy=\"140\" r=\"5\"/></g>\n<use class=\"sp\" href=\"#sp\" x=\"200\" y=\"34\" width=\"22\" height=\"22\" style=\"color:#f28a1f;animation-delay:0s\"/><use class=\"sp\" href=\"#sp\" x=\"214\" y=\"92\" width=\"12\" height=\"12\" style=\"color:#f28a1f;animation-delay:1.4s\"/></svg>", "Ортодонтия": "<svg viewBox=\"0 0 260 220\" class=\"art\" role=\"img\" aria-label=\"Брекеты\"><circle cx=\"130\" cy=\"112\" r=\"98\" fill=\"#fff\" opacity=\".55\"/>\n<rect x=\"42\" y=\"86\" width=\"32\" height=\"84\" rx=\"12\" fill=\"url(#tw)\" stroke=\"#c4cdea\" stroke-width=\"1.6\"/><rect x=\"78\" y=\"72\" width=\"32\" height=\"84\" rx=\"12\" fill=\"url(#tw)\" stroke=\"#c4cdea\" stroke-width=\"1.6\"/><rect x=\"114\" y=\"66\" width=\"32\" height=\"84\" rx=\"12\" fill=\"url(#tw)\" stroke=\"#c4cdea\" stroke-width=\"1.6\"/><rect x=\"150\" y=\"72\" width=\"32\" height=\"84\" rx=\"12\" fill=\"url(#tw)\" stroke=\"#c4cdea\" stroke-width=\"1.6\"/><rect x=\"186\" y=\"86\" width=\"32\" height=\"84\" rx=\"12\" fill=\"url(#tw)\" stroke=\"#c4cdea\" stroke-width=\"1.6\"/>\n<path d=\"M26 150Q130 112 234 150V204H26Z\" fill=\"url(#gm)\"/>\n<path d=\"M30 119L58 115L94 101L130 95L166 101L202 115L230 119\" stroke=\"#f28a1f\" stroke-width=\"3.2\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n<g><rect x=\"49\" y=\"106\" width=\"18\" height=\"15\" rx=\"4\" fill=\"url(#nv)\"/><circle cx=\"58\" cy=\"113.5\" r=\"2.6\" fill=\"#ffb25c\"/></g><g><rect x=\"85\" y=\"92\" width=\"18\" height=\"15\" rx=\"4\" fill=\"url(#nv)\"/><circle cx=\"94\" cy=\"99.5\" r=\"2.6\" fill=\"#ffb25c\"/></g><g><rect x=\"121\" y=\"86\" width=\"18\" height=\"15\" rx=\"4\" fill=\"url(#nv)\"/><circle cx=\"130\" cy=\"93.5\" r=\"2.6\" fill=\"#ffb25c\"/></g><g><rect x=\"157\" y=\"92\" width=\"18\" height=\"15\" rx=\"4\" fill=\"url(#nv)\"/><circle cx=\"166\" cy=\"99.5\" r=\"2.6\" fill=\"#ffb25c\"/></g><g><rect x=\"193\" y=\"106\" width=\"18\" height=\"15\" rx=\"4\" fill=\"url(#nv)\"/><circle cx=\"202\" cy=\"113.5\" r=\"2.6\" fill=\"#ffb25c\"/></g>\n<path d=\"M70 52Q130 20 190 52\" stroke=\"#262a6b\" stroke-width=\"2.6\" fill=\"none\" stroke-dasharray=\"2 7\" stroke-linecap=\"round\"/><path d=\"M184 40l14 10-17 5z\" fill=\"#262a6b\"/>\n<use class=\"sp\" href=\"#sp\" x=\"208\" y=\"32\" width=\"22\" height=\"22\" style=\"color:#f28a1f;animation-delay:0s\"/><use class=\"sp\" href=\"#sp\" x=\"42\" y=\"40\" width=\"14\" height=\"14\" style=\"color:#f28a1f;animation-delay:1s\"/></svg>", "Хирургия": "<svg viewBox=\"0 0 260 220\" class=\"art\" role=\"img\" aria-label=\"Хирургическая стоматология\"><circle cx=\"130\" cy=\"112\" r=\"98\" fill=\"#fff\" opacity=\".55\"/>\n<path d=\"M26 172Q130 150 234 172V208H26Z\" fill=\"url(#gm)\"/>\n<path transform=\"translate(80 112) scale(.96)\" d=\"M50 18C36 5 12 9 12 36c0 20 8 30 12 50 2 12 10 14 14 2 3-10 8-18 12-18s9 8 12 18c4 12 12 10 14-2 4-20 12-30 12-50C88 9 64 5 50 18z\" fill=\"#c64a62\" fill-opacity=\".35\" stroke=\"#fff\" stroke-width=\"2.4\" stroke-dasharray=\"5 5\"/>\n<use class=\"bob\" href=\"#tw-tooth\" x=\"78\" y=\"14\" width=\"104\" height=\"114\"/>\n<path d=\"M214 150V84\" stroke=\"#f28a1f\" stroke-width=\"3.2\" stroke-linecap=\"round\" stroke-dasharray=\"1 8\"/><path d=\"M204 94l10-16 10 16z\" fill=\"#f28a1f\"/>\n<g transform=\"translate(206 44)\"><circle r=\"26\" fill=\"url(#nv)\" stroke=\"#fff\" stroke-width=\"3\"/><rect x=\"-4.5\" y=\"-14\" width=\"9\" height=\"28\" rx=\"2\" fill=\"#fff\"/><rect x=\"-14\" y=\"-4.5\" width=\"28\" height=\"9\" rx=\"2\" fill=\"#fff\"/></g>\n<use class=\"sp\" href=\"#sp\" x=\"44\" y=\"50\" width=\"18\" height=\"18\" style=\"color:#f28a1f;animation-delay:0s\"/><use class=\"sp\" href=\"#sp\" x=\"60\" y=\"100\" width=\"12\" height=\"12\" style=\"color:#f28a1f;animation-delay:1.2s\"/></svg>"};
+
+const ICO={tooth:'<path d="M12 5.5C10 3 6 4 6 8c0 3 1.2 4.5 1.8 7.5.3 1.7 1.6 1.9 2.1.3.4-1.3 1-2.3 2.1-2.3s1.7 1 2.1 2.3c.5 1.6 1.8 1.4 2.1-.3.6-3 1.8-4.5 1.8-7.5 0-4-4-5-6-2.5z"/>',spark:'<path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',shield:'<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',cross:'<path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z"/>'};
+const ICON=(k,s=44)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICO[k]}</svg>`;
+const AV=(ic,ph,nm,s)=>ph?`<img src="${ph}" alt="${nm}">`:ICON(ic,s);
+const SV=[["Имплантация","Восстановление зубов с опорой на импланты — надёжно и эстетично.",["Диагностика","Установка","Протезирование"]],["Виниры","Меняем форму, цвет и пропорции улыбки.",["Дизайн улыбки","Керамика","Отбеливание"]],["Терапия","Лечение кариеса и каналов, гигиена.",["Кариес","Каналы","Чистка"]],["Ортодонтия","Выравнивание зубов и исправление прикуса.",["Брекеты","Прикус"]],["Хирургия","Удаление зубов и лечение воспалений.",["Удаление","Костная пластика"]]];
+$('#bento').innerHTML=SV.map(s=>`<a class="sv" href="#book" data-s="${s[0]}">${ART[s[0]]}<h3>${s[0]}</h3><p>${s[1]}</p><div class="tags">${s[2].map(t=>`<span>${t}</span>`).join('')}</div><span class="go">Записаться <span>→</span></span></a>`).join('');
+/* ВРАЧИ: впишите имя в name и путь к фото в photo (например "img/doctor1.jpg"); пока фото пустое — показывается иконка */
+const D=[["Имплантология","tooth","Имя Фамилия",""],["Эстетика","spark","Имя Фамилия",""],["Терапия","shield","Имя Фамилия",""],["Хирургия","cross","Имя Фамилия",""]];
+$('#dg').innerHTML=D.map(d=>`<a class="dc" href="#book" data-s="${d[0]}"><div class="av">${AV(d[1],d[3],d[2],52)}</div><b>${d[2]}</b><small>${d[0]}</small><em>Записаться →</em></a>`).join('');
+$('#burger').onclick=()=>$('#menu').classList.toggle('open');$$('#menu a').forEach(a=>a.onclick=()=>$('#menu').classList.remove('open'));
+/* before/after */
+(function(){const sl=$('#rs'),af=$('#ra'),kn=$('#rk');let d=false;
+function mv(x){const r=sl.getBoundingClientRect(),p=Math.max(0,Math.min(100,(x-r.left)/r.width*100));af.style.clipPath='inset(0 0 0 '+p+'%)';kn.style.left=p+'%'}
+sl.addEventListener('pointerdown',e=>{d=true;mv(e.clientX)});addEventListener('pointerup',()=>d=false);addEventListener('pointermove',e=>d&&mv(e.clientX))})();
+/* reveal + counters */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target)}),{threshold:.1});$$('.rv').forEach(e=>io.observe(e));
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;co.unobserve(e.target);const el=e.target,to=+el.dataset.t,x=el.dataset.x||'';let p=0;const t=setInterval(()=>{p=Math.min(1,p+.04);const v=to*p;el.textContent=(to%1?v.toFixed(1):Math.round(v))+(p==1?x:'');if(p==1)clearInterval(t)},30)}),{threshold:.5});$$('[data-t]').forEach(e=>co.observe(e));
+</script>
+</body>
+</html>
