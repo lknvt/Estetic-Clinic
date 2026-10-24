@@ -55,12 +55,10 @@ label.t{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(-
 .seg{display:flex;gap:8px;margin:12px 0 30px;flex-wrap:wrap}
 .seg button{background:none;border:1px solid var(--line);color:var(--tx);padding:10px 20px;border-radius:99px;cursor:pointer;font:400 14px var(--sans);transition:.2s}
 .seg button.on{background:var(--gold);color:var(--bg);border-color:var(--gold)}
-.docs a{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding:26px 0;font-family:var(--serif);font-size:clamp(34px,6vw,84px);line-height:1;transition:.35s}
-.docs a:last-child{border-bottom:1px solid var(--line)}
-.docs a small{font:300 13px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}.dav{color:var(--gold);width:56px;height:56px;border-radius:50%;overflow:hidden;display:grid;place-items:center;border:1px solid var(--line)}.dav img,.float img{width:100%;height:100%;object-fit:cover}.float{overflow:hidden}
-.docs a:hover{color:var(--or);padding-left:24px}
-.float{color:#fff;position:fixed;pointer-events:none;width:200px;height:250px;border-radius:120px;z-index:40;opacity:0;transition:opacity .25s;display:grid;place-items:center;font-family:var(--serif);font-size:90px;background:linear-gradient(135deg,var(--or),#8a4bd6);color:#fff;transform:translate(-50%,-50%) scale(.9)}
-.float.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.docs a{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;border:1px solid var(--line);border-radius:26px;padding:34px 20px;background:linear-gradient(160deg,var(--bg2),transparent);font-family:var(--serif);font-size:30px;line-height:1.1;transition:.4s}
+.docs a small{font:300 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}.docs a small.dav{color:var(--gold)}.dav{width:110px;height:110px;border-radius:50%;overflow:hidden;display:grid;place-items:center;border:1px solid var(--gold);background:#fff;box-shadow:0 14px 30px -18px rgba(42,45,77,.5)}.dav svg{width:48px;height:48px}.dav img{width:100%;height:100%;object-fit:cover}
+.docs a:hover{border-color:var(--or);transform:translateY(-8px);background:linear-gradient(160deg,#fff,transparent);box-shadow:0 24px 40px -28px rgba(42,45,77,.5)}
 .book{display:grid;grid-template-columns:1fr 1fr;gap:60px;background:var(--bg2);border-radius:40px;margin:0 5vw;padding:70px;position:relative;z-index:1}
 .dots{display:flex;gap:8px;margin-bottom:26px}.dots i{height:3px;flex:1;background:var(--line);border-radius:3px;transition:.4s}.dots i.on{background:var(--or)}
 .stp{display:none;animation:in .5s}.stp.on{display:block}
@@ -84,7 +82,7 @@ footer{padding:40px 5vw;color:var(--mut);font-size:13px;display:flex;justify-con
 @media(max-width:860px){
  nav{position:fixed;inset:0;background:var(--bg);flex-direction:column;justify-content:center;align-items:center;font-size:20px;display:none}
  nav.open{display:flex}.menuBtn{display:block;z-index:60}header .pill{display:none}
- .design,.book,.ct{grid-template-columns:1fr;gap:34px}.book{padding:34px 24px}.float{display:none}
+ .design,.book,.ct{grid-template-columns:1fr;gap:34px}.book{padding:34px 24px}
 }
 </style>
 </head>
@@ -137,7 +135,6 @@ footer{padding:40px 5vw;color:var(--mut);font-size:13px;display:flex;justify-con
  <p><small>Instagram</small><a href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener">@estetic_clinik</a></p></div>
  <a class="mapbox" href="https://yandex.com/maps/?text=Estetic%20Clinic%20Бишкек%20Юнусалиева%20132" target="_blank" rel="noopener"><div><div style="font-size:50px">📍</div><div style="font-family:var(--serif);font-size:34px">Открыть на карте</div><small style="color:var(--mut)">★ 4.3 · Круглосуточно</small></div></a></div></section>
 <footer><span>© Estetic Clinic</span><span>Демонстрационный дизайн · требуется консультация специалиста</span></footer>
-<div class="float" id="fl"></div>
 
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -165,8 +162,8 @@ const ICON=(k,s=44)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="
 /* ВРАЧИ: впишите имя в name и путь к фото в photo (например "img/doctor1.jpg"); пока фото пустое — показывается иконка */
 const AV=(ic,ph,nm,s)=>ph?`<img src="${ph}" alt="${nm}">`:ICON(ic,s);
 const D=[["Имплантология","tooth","Имя Фамилия",""],["Эстетика","spark","Имя Фамилия",""],["Терапия","shield","Имя Фамилия",""],["Хирургия","cross","Имя Фамилия",""]];
-$('#docs').innerHTML=D.map((d,i)=>`<a href="#book" data-i="${i}"><span>${d[2]}<small style="display:block;margin-top:10px">${d[0]}</small></span><small class="dav">${AV(d[1],d[3],d[2],40)}</small></a>`).join('');
-const fl=$('#fl');$$('#docs a').forEach(a=>{a.onmouseenter=()=>{const d=D[a.dataset.i];fl.innerHTML=AV(d[1],d[3],d[2],96);fl.classList.add('on')};a.onmouseleave=()=>fl.classList.remove('on');a.onmousemove=e=>{fl.style.left=e.clientX+160+'px';fl.style.top=e.clientY+'px'};a.onclick=()=>pick.doc=D[a.dataset.i][0]});
+$('#docs').innerHTML=D.map((d,i)=>`<a href="#book" data-i="${i}"><small class="dav">${AV(d[1],d[3],d[2],48)}</small><span>${d[2]}</span><small>${d[0]}</small></a>`).join('');
+$$('#docs a').forEach(a=>a.onclick=()=>pick.doc=D[a.dataset.i][0]);
 // booking
 const pick={},slots=["Утро · 9–12","День · 12–17","Вечер · 17–21","Ночь · по договорённости"];
 $('#o1').innerHTML=[...SV.map(s=>s[0]),"Бесплатная консультация"].map(x=>`<button>${x}</button>`).join('');
