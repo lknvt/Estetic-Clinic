@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Estetic Clinic — Вариант 1 · Bold Brand</title>
+<meta name="description" content="Estetic Clinic — стоматология в Бишкеке: имплантация, виниры, лечение. Бесплатная консультация.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#262a6b;--navy2:#1a1d4d;--orange:#f28a1f;--orange2:#ffb15c;--bg:#f6f7fc;--ink:#14163a;--mut:#5b5f86;--card:#fff;--r:22px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:700 16px Manrope;padding:15px 26px;border-radius:999px;transition:.25s}
+.btn.pri{background:var(--orange);color:#fff;box-shadow:0 10px 24px -8px rgba(242,138,31,.7)}
+.btn.pri:hover{transform:translateY(-3px);box-shadow:0 16px 30px -8px rgba(242,138,31,.8)}
+.btn.ghost{background:#fff;color:var(--navy);border:2px solid #e1e3f3}
+.btn.ghost:hover{border-color:var(--navy)}
+header{position:sticky;top:0;z-index:50;background:rgba(246,247,252,.85);backdrop-filter:blur(14px);border-bottom:1px solid #e6e8f5}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:var(--navy)}
+.logo b{color:var(--orange)}
+.logo svg{width:34px}
+nav ul{display:flex;gap:26px;list-style:none;padding:0;font-weight:600;color:var(--mut)}
+nav a:hover{color:var(--orange)}
+.burger{display:none;background:none;border:0;font-size:28px;cursor:pointer;color:var(--navy)}
+.hero{padding:56px 0 30px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.tag{display:inline-block;background:#fff;border:1px solid #e1e3f3;color:var(--navy);font-weight:700;font-size:14px;padding:7px 14px;border-radius:99px}
+.tag i{color:var(--orange);font-style:normal}
+h1{font-size:clamp(36px,5.4vw,64px);line-height:1.05;letter-spacing:-.03em;margin:18px 0;color:var(--navy2);font-weight:800}
+h1 em{font-style:normal;color:var(--orange);position:relative}
+.lead{font-size:19px;color:var(--mut);max-width:520px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}
+.facts{display:flex;gap:26px;flex-wrap:wrap}
+.facts div{font-size:14px;color:var(--mut)}.facts strong{display:block;font-size:26px;color:var(--navy)}
+.visual{position:relative;aspect-ratio:1;background:linear-gradient(145deg,var(--navy),#4a4fb0);border-radius:44% 56% 52% 48%/48% 44% 56% 52%;display:grid;place-items:center;animation:morph 10s ease-in-out infinite;overflow:hidden}
+@keyframes morph{50%{border-radius:56% 44% 46% 54%/54% 56% 44% 46%}}
+.visual svg{width:62%;filter:drop-shadow(0 30px 30px rgba(0,0,0,.3));animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-14px) rotate(2deg)}}
+.chip{position:absolute;background:#fff;border-radius:16px;padding:10px 14px;font-weight:700;font-size:14px;box-shadow:0 14px 30px -10px rgba(0,0,0,.35);color:var(--navy)}
+.c1{top:12%;left:4%}.c2{bottom:14%;right:5%}
+section{padding:70px 0}
+.eyebrow{color:var(--orange);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
+h2{font-size:clamp(28px,3.8vw,44px);letter-spacing:-.02em;color:var(--navy2);margin:8px 0 28px;line-height:1.1}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tabs button{border:2px solid #e1e3f3;background:#fff;font:700 15px Manrope;padding:11px 20px;border-radius:99px;cursor:pointer;color:var(--mut);transition:.2s}
+.tabs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.panel{background:#fff;border-radius:var(--r);padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:30px;box-shadow:0 20px 50px -30px rgba(38,42,107,.4);animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+.panel h3{font-size:28px;color:var(--navy)}
+.panel ul{padding-left:0;list-style:none;margin:16px 0}
+.panel li{padding:8px 0 8px 30px;position:relative}
+.panel li:before{content:"✓";position:absolute;left:0;color:#fff;background:var(--orange);width:20px;height:20px;border-radius:50%;font-size:12px;display:grid;place-items:center;top:11px}
+.pbox{background:linear-gradient(135deg,#fff4e6,#ffe6c7);border-radius:18px;display:grid;place-items:center;font-size:90px;min-height:220px}
+.ba{background:var(--navy2);color:#fff;border-radius:30px;margin:0 20px}
+.ba .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:center}
+.ba h2{color:#fff}.ba p{color:#b9bce6}
+.slider{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/10;user-select:none;touch-action:none;cursor:ew-resize;background:#e9e4da}
+.slider svg{position:absolute;inset:0;width:100%;height:100%}
+.slider .after{clip-path:inset(0 0 0 50%)}
+.knob{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%)}
+.knob:after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;font-size:20px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.lbl{position:absolute;top:12px;padding:5px 12px;border-radius:99px;background:rgba(0,0,0,.55);font-size:13px;font-weight:700;color:#fff}
+.note{font-size:12px;color:#9c9fd0;margin-top:8px}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.doc{background:#fff;border-radius:var(--r);padding:26px;text-align:center;transition:.3s;border:2px solid transparent;cursor:pointer}
+.doc:hover{transform:translateY(-8px);border-color:var(--orange)}
+.ava{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--navy),var(--orange));display:grid;place-items:center;color:#fff;font-weight:800;font-size:34px;border:4px solid #fff;box-shadow:0 0 0 3px var(--orange2)}
+.doc small{color:var(--mut)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:s}
+.step{background:#fff;border-radius:var(--r);padding:26px;position:relative;counter-increment:s}
+.step:before{content:counter(s);display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;margin-bottom:12px}
+.book{background:linear-gradient(135deg,var(--navy),#3d429b);color:#fff;border-radius:34px;padding:50px;display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:0 20px}
+.book h2{color:#fff}
+form{display:grid;gap:12px}
+input,select{font:500 16px Manrope;padding:15px 18px;border-radius:14px;border:2px solid transparent;width:100%;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:0;border-color:var(--orange)}
+input.bad{border-color:#ff5b5b}
+.ok{display:none;background:#fff;color:var(--navy);border-radius:18px;padding:24px;font-weight:700}
+details{background:#fff;border-radius:16px;padding:18px 22px;margin-bottom:10px;cursor:pointer}
+summary{font-weight:700;list-style:none;display:flex;justify-content:space-between}
+summary:after{content:"+";color:var(--orange);font-size:22px;line-height:1;transition:.2s}
+details[open] summary:after{transform:rotate(45deg)}
+details p{color:var(--mut);margin-top:10px}
+.contacts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cbox{background:#fff;border-radius:var(--r);padding:30px}
+.cbox p{margin:10px 0}
+.map{background:#e9ecf8 repeating-linear-gradient(45deg,transparent 0 22px,rgba(38,42,107,.06) 22px 24px);border-radius:var(--r);min-height:260px;display:grid;place-items:center;text-align:center;padding:20px}
+.pin{font-size:46px;animation:float 2.5s infinite}
+footer{padding:36px 0;text-align:center;color:var(--mut);font-size:14px}
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;background:#25d366;color:#fff;border-radius:99px;padding:14px 20px;font-weight:800;box-shadow:0 10px 25px -6px rgba(0,0,0,.4)}
+.modal{position:fixed;inset:0;background:rgba(10,12,40,.7);display:none;place-items:center;z-index:100;padding:20px}
+.modal.on{display:grid}.mc{background:#fff;border-radius:26px;padding:34px;max-width:420px;text-align:center}
+.rv{opacity:0;transform:translateY(26px);transition:.7s}.rv.in{opacity:1;transform:none}
+@media(max-width:860px){
+ nav ul{display:none;position:absolute;top:72px;left:0;right:0;background:#fff;flex-direction:column;padding:20px;gap:14px;border-bottom:1px solid #e1e3f3}
+ nav ul.open{display:flex}.burger{display:block}
+ .hero,.panel,.ba .wrap,.book,.contacts{grid-template-columns:1fr}
+ .book{padding:28px}.visual{max-width:380px;margin:auto}.nav>.btn{display:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="tooth" viewBox="0 0 100 110"><path d="M50 18C36 5 12 9 12 36c0 20 8 30 12 50 2 12 10 14 14 2 3-10 8-18 12-18s9 8 12 18c4 12 12 10 14-2 4-20 12-30 12-50C88 9 64 5 50 18z" fill="#fff"/><path d="M18 30c2-14 18-20 32-8 14-12 30-6 32 8-8-6-20-4-32 6-12-10-24-12-32-6z" fill="#262a6b"/><path d="M62 4l22-2-8 18z" fill="#f28a1f"/></symbol>
+</defs></svg>
+
+<header><div class="wrap nav">
+ <a href="#top" class="logo"><svg viewBox="0 0 100 110"><use href="#tooth"/></svg>Estetic <b>Clinic</b></a>
+ <nav><ul id="menu"><li><a href="#services">Услуги</a><li><a href="#results">Результаты</a><li><a href="#doctors">Врачи</a><li><a href="#faq">Вопросы</a><li><a href="#contacts">Контакты</a></ul></nav>
+ <a class="btn pri" href="#book">Записаться</a>
+ <button class="burger" id="burger" aria-label="Меню">☰</button>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+ <div>
+  <span class="tag"><i>★</i> 4.3 на карте · работаем круглосуточно</span>
+  <h1>Создаём <em>красивую</em> улыбку в Бишкеке</h1>
+  <p class="lead">Весь спектр стоматологических услуг: от имплантации и виниров до лечения и гигиены. Первая консультация — бесплатно.</p>
+  <div class="cta"><a class="btn pri" href="#book">Бесплатная консультация →</a><a class="btn ghost" href="tel:+996999554455">📞 0999 554 455</a></div>
+  <div class="facts"><div><strong data-n="375">0</strong>публикаций с кейсами</div><div><strong data-n="15">0</strong>тыс. подписчиков</div><div><strong data-n="4">0</strong>врача в Instagram-сториз*</div></div>
+ </div>
+ <div class="visual"><svg viewBox="0 0 100 110"><use href="#tooth"/></svg><span class="chip c1">🦷 Имплантация</span><span class="chip c2">✨ Виниры</span></div>
+</div>
+
+<section id="services"><div class="wrap rv">
+ <div class="eyebrow">Услуги</div><h2>Всё для здоровья зубов в одном месте</h2>
+ <div class="tabs" id="tabs"></div><div id="panel"></div>
+</div></section>
+
+<section id="results" class="ba rv"><div class="wrap">
+ <div><div class="eyebrow">До / После</div><h2>Потяните и увидьте разницу</h2><p>Реальные кейсы клиники — в нашем Instagram в разделе «До/После». Ниже — иллюстрация того, как работает отбеливание и виниры.</p><br><a class="btn pri" href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener">Смотреть кейсы →</a></div>
+ <div><div class="slider" id="slider"><div id="sBefore"></div><div class="after" id="sAfter"></div><span class="lbl" style="left:12px">До</span><span class="lbl" style="right:12px">После</span><div class="knob" id="knob"></div></div><div class="note">Иллюстрация. Результат зависит от клинической ситуации.</div></div>
+</div></section>
+
+<section id="doctors"><div class="wrap rv">
+ <div class="eyebrow">Команда</div><h2>Врачи, которым доверяют</h2>
+ <div class="docs" id="docs"></div>
+ <p class="note" style="color:var(--mut);margin-top:14px">* Список врачей — как в Instagram клиники; специализации уточняйте у администратора.</p>
+</div></section>
+
+<section><div class="wrap rv">
+ <div class="eyebrow">Как это работает</div><h2>Четыре шага к улыбке</h2>
+ <div class="steps"><div class="step"><b>Запись</b><p>Звонок, WhatsApp или форма ниже.</p></div><div class="step"><b>Консультация</b><p>Осмотр и план лечения — бесплатно.</p></div><div class="step"><b>Лечение</b><p>Комфортно, с современным оборудованием.</p></div><div class="step"><b>Улыбка</b><p>Рекомендации и контроль результата.</p></div></div>
+</div></section>
+
+<section id="book" class="book rv">
+ <div><div class="eyebrow">Запись</div><h2>Запишитесь на бесплатную консультацию уже сегодня</h2><p style="color:#c9cbf0">Оставьте данные — отправим заявку в WhatsApp клиники, администратор подтвердит время.</p></div>
+ <div><form id="form" novalidate>
+  <input id="name" placeholder="Ваше имя" autocomplete="name">
+  <input id="phone" placeholder="Телефон: 0999 000 000" inputmode="tel" autocomplete="tel">
+  <select id="svc"></select>
+  <button class="btn pri" type="submit">Отправить заявку</button>
+ </form><div class="ok" id="ok">✅ Спасибо! Открываем WhatsApp, чтобы отправить заявку. Если не открылось — позвоните: 0999 554 455.</div></div>
+</section>
+
+<section id="faq"><div class="wrap rv">
+ <div class="eyebrow">FAQ</div><h2>Частые вопросы</h2>
+ <details><summary>Консультация правда бесплатная?</summary><p>Да, первичная консультация и осмотр — бесплатно. Стоимость лечения врач озвучивает после составления плана.</p></details>
+ <details><summary>Больно ли ставить имплант?</summary><p>Процедура проводится под местной анестезией. Врач подробно расскажет об этапах и реабилитации.</p></details>
+ <details><summary>Вы работаете круглосуточно?</summary><p>На картах клиника отмечена как круглосуточная. Для записи на удобное время позвоните или напишите нам.</p></details>
+ <details><summary>Где вы находитесь?</summary><p>Ул. Юнусалиева 132, на пересечении с ул. Исы Ахунбаева.</p></details>
+</div></section>
+
+<section id="contacts"><div class="wrap contacts rv">
+ <div class="cbox"><div class="eyebrow">Контакты</div><h2 style="font-size:30px">Приходите в гости</h2>
+  <p>📍 ул. Юнусалиева 132 <small>(пересекает Ахунбаева)</small>, Бишкек</p><p>📞 <a href="tel:+996999554455"><b>0999 554 455</b></a></p><p>📸 <a href="https://instagram.com/estetic_clinik" target="_blank" rel="noopener">@estetic_clinik</a></p><p>🔗 <a href="https://taplink.cc/estetic_clinik" target="_blank" rel="noopener">taplink.cc/estetic_clinik</a></p></div>
+ <a class="map" href="https://yandex.com/maps/?text=Estetic%20Clinic%20Бишкек%20Юнусалиева%20132" target="_blank" rel="noopener"><div><div class="pin">📍</div><b>Открыть на карте</b><br><small>Юнусалиева 132 · Бишкек</small></div></a>
+</div></section>
+</main>
+<footer>© Estetic Clinic · Стоматология · Бишкек<br>Демонстрационный дизайн. Есть противопоказания — необходима консультация специалиста.</footer>
+<a class="wa" href="https://wa.me/996999554455" target="_blank" rel="noopener">💬 WhatsApp</a>
+<div class="modal" id="modal"><div class="mc"><div class="ava" id="mAva"></div><h3 id="mName"></h3><p id="mRole" style="color:var(--mut);margin:8px 0 18px"></p><a class="btn pri" href="#book" onclick="closeM()">Записаться к врачу</a></div></div>
+
+<script>
+const S=[
+ {k:"Имплантация",i:"🦷",t:"Имплантация зубов",p:["Консультация и план лечения","Установка имплантов под анестезией","Восстановление одного и нескольких зубов","Протезирование на имплантах"]},
+ {k:"Виниры",i:"✨",t:"Виниры и эстетика",p:["Подбор формы и цвета улыбки","Керамические виниры","Профессиональное отбеливание","Реставрация эстетики"]},
+ {k:"Терапия",i:"🪥",t:"Лечение и гигиена",p:["Лечение кариеса","Эндодонтия — лечение каналов","Профессиональная чистка","Пломбирование"]},
+ {k:"Ортодонтия",i:"😁",t:"Ортодонтия",p:["Консультация ортодонта","Брекет-системы","Исправление прикуса","Ретейнеры"]},
+ {k:"Хирургия",i:"🩺",t:"Хирургическая стоматология",p:["Удаление зубов","Удаление зубов мудрости","Костная пластика","Лечение воспалений"]}];
+const D=[["Dr. Kuban","Врач-стоматолог"],["Dr. Almaz","Врач-стоматолог"],["Dr. Alina","Врач-стоматолог"],["Dr. Zhumga","Врач-стоматолог"]];
+const $=s=>document.querySelector(s);
+$('#burger').onclick=()=>$('#menu').classList.toggle('open');
+document.querySelectorAll('#menu a').forEach(a=>a.onclick=()=>$('#menu').classList.remove('open'));
+// tabs
+const tabs=$('#tabs');
+function show(n){[...tabs.children].forEach((b,i)=>b.classList.toggle('on',i===n));const s=S[n];
+ $('#panel').innerHTML=`<div class="panel"><div><h3>${s.t}</h3><ul>${s.p.map(x=>`<li>${x}</li>`).join('')}</ul><a class="btn pri" href="#book" onclick="$('#svc').value='${s.k}'">Записаться на ${s.k.toLowerCase()}</a></div><div class="pbox">${s.i}</div></div>`}
+S.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s.k;b.onclick=()=>show(i);tabs.append(b)});show(0);
+$('#svc').innerHTML='<option value="">Что вас интересует?</option>'+S.map(s=>`<option>${s.k}</option>`).join('')+'<option>Бесплатная консультация</option>';
+// doctors
+$('#docs').innerHTML=D.map((d,i)=>`<div class="doc" onclick="openM(${i})"><div class="ava">${d[0].split(' ')[1][0]}</div><b>${d[0]}</b><br><small>${d[1]}</small></div>`).join('');
+function openM(i){$('#mAva').textContent=D[i][0].split(' ')[1][0];$('#mName').textContent=D[i][0];$('#mRole').textContent=D[i][1]+' · Estetic Clinic';$('#modal').classList.add('on')}
+function closeM(){$('#modal').classList.remove('on')}$('#modal').onclick=e=>{if(e.target.id==='modal')closeM()};
+// before/after art
+function row(good){const w=good?'#fffefa':'#d8c27a',g=good?'#f3d9d3':'#c98a82',tilt=good?[0,0,0,0,0,0]:[-8,5,-3,9,-6,4];
+ let t='';for(let i=0;i<6;i++){const x=70+i*100,y=good?0:(i%2?10:-6);t+=`<g transform="translate(${x} ${150+y}) rotate(${tilt[i]} 45 80)"><path d="M0 20Q0 0 25 0H65Q90 0 90 20V90Q90 140 45 140Q0 140 0 90Z" fill="${w}" stroke="#0002"/></g>`}
+ return `<svg viewBox="0 0 700 400" preserveAspectRatio="xMidYMid slice"><rect width="700" height="400" fill="#f1b9ae"/><path d="M0 130Q350 60 700 130V160H0Z" fill="${g}"/><rect y="130" width="700" height="190" fill="#7a2d33"/>${t}<path d="M0 300Q350 250 700 300V400H0Z" fill="${g}"/></svg>`}
+$('#sBefore').outerHTML=`<div style="position:absolute;inset:0">${row(false)}</div>`;
+$('#sAfter').innerHTML=row(true);
+const sl=$('#slider'),af=$('#sAfter'),kn=$('#knob');
+function mv(x){const r=sl.getBoundingClientRect();let p=Math.max(0,Math.min(100,(x-r.left)/r.width*100));af.style.clipPath=`inset(0 0 0 ${p}%)`;kn.style.left=p+'%'}
+let drag=false;sl.addEventListener('pointerdown',e=>{drag=true;mv(e.clientX)});addEventListener('pointerup',()=>drag=false);addEventListener('pointermove',e=>drag&&mv(e.clientX));
+// form → WhatsApp
+$('#form').onsubmit=e=>{e.preventDefault();const n=$('#name'),p=$('#phone');
+ n.classList.toggle('bad',n.value.trim().length<2);p.classList.toggle('bad',p.value.replace(/\D/g,'').length<9);
+ if(document.querySelector('input.bad'))return;
+ const msg=`Здравствуйте! Меня зовут ${n.value.trim()}, тел. ${p.value.trim()}. Интересует: ${$('#svc').value||'консультация'}.`;
+ $('#form').style.display='none';$('#ok').style.display='block';
+ window.open('https://wa.me/996999554455?text='+encodeURIComponent(msg),'_blank')};
+// reveal + counters
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('[data-n]').forEach(el=>{const to=+el.dataset.n;let c=0;const t=setInterval(()=>{c+=Math.ceil(to/40);if(c>=to){c=to;clearInterval(t)}el.textContent=c},30)});
+</script>
+</body>
+</html>
