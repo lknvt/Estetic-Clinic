@@ -102,6 +102,8 @@ footer{padding:36px 0;text-align:center;color:var(--mut);font-size:14px}
  .book{padding:28px}.visual{max-width:380px;margin:auto}.hr .btn{display:none}
 }
 .soc{display:flex;gap:8px}.soc a{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;transition:.2s}.soc svg{width:20px;height:20px}.soc a:hover{transform:translateY(-2px)}.soc .s-wa{background:#25d366;color:#fff}.soc .s-ig{background:linear-gradient(45deg,#f9ce34,#ee2a7b 55%,#6228d7);color:#fff}.hr{display:flex;align-items:center;gap:14px}
+.bm{position:fixed;inset:0;z-index:300;display:none;place-items:center;padding:20px;background:rgba(10,14,40,.62);backdrop-filter:blur(6px)}.bm.on{display:grid;animation:bmi .25s}@keyframes bmi{from{opacity:0}}.bmc{position:relative;width:min(420px,100%);padding:34px 30px 26px;max-height:92vh;overflow:auto}.bmx{position:absolute;top:10px;right:14px;border:0;background:none;font-size:30px;line-height:1;cursor:pointer;color:inherit;opacity:.6}.bmx:hover{opacity:1}.bmc h3{font-size:26px;margin-bottom:6px}.bms{opacity:.75;margin-bottom:18px;font-size:15px}.bmc form{display:grid;gap:12px}.bmc input{width:100%;padding:14px 16px;font-size:16px;font-family:inherit}.bme{display:none;color:#d93a3a;font-size:13.5px}.bmc input.bad{border-color:#d93a3a!important}.bmb{cursor:pointer;border:0;font-weight:600;font-size:16px;font-family:inherit;padding:15px;width:100%}.bmo{text-align:center;font-size:14px;margin-top:14px;opacity:.8}.bmo a,.bms a{font-weight:700;text-decoration:underline}
+.bmc{background:#fff;color:var(--ink);border-radius:26px;font-family:Manrope,sans-serif}.bmc h3{color:var(--navy)}.bmc input{border:2px solid #e1e3f3;border-radius:14px;background:#f6f7fc}.bmc input:focus{outline:0;border-color:var(--orange)}.bmb{background:var(--orange);color:#fff;border-radius:999px;box-shadow:0 10px 24px -8px rgba(242,138,31,.7)}.bmb:hover{filter:brightness(.95)}
 </style>
 </head>
 <body>
@@ -221,6 +223,25 @@ $('#form').onsubmit=e=>{e.preventDefault();const n=$('#name'),p=$('#phone');
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 document.querySelectorAll('[data-n]').forEach(el=>{const to=+el.dataset.n;let c=0;const t=setInterval(()=>{c+=Math.ceil(to/40);if(c>=to){c=to;clearInterval(t)}el.textContent=c},30)});
+</script>
+<div class="bm" id="bm" role="dialog" aria-modal="true" aria-labelledby="bmT"><div class="bmc"><button class="bmx" id="bmx" aria-label="Закрыть">×</button>
+<div id="bmF"><h3 id="bmT">Запись на консультацию</h3><p class="bms">Оставьте имя и номер — отправим заявку в WhatsApp клиники, администратор подтвердит время.</p>
+<form id="bmf" novalidate><input id="bmn" placeholder="Ваше имя" autocomplete="name"><input id="bmp" placeholder="Телефон: 0999 000 000" inputmode="tel" autocomplete="tel"><div class="bme" id="bme">Проверьте имя и номер телефона</div><button class="bmb" type="submit">Записаться</button></form>
+<p class="bmo">или позвоните: <a href="tel:+996999554455">0999 554 455</a></p></div>
+<div id="bmD" style="display:none;text-align:center"><div style="font-size:54px">✅</div><h3>Заявка готова</h3><p class="bms">Откроется WhatsApp — отправьте сообщение. Если не открылось, позвоните <a href="tel:+996999554455">0999 554 455</a>.</p><button class="bmb" id="bmk" type="button">Закрыть</button></div></div></div>
+<script>
+(function(){const $=s=>document.querySelector(s),m=$('#bm');
+const extra=()=>{try{const s=$('#s');if(s&&s.value)return s.value;if(typeof pick!=='undefined')return pick.svc||pick.doc||''}catch(e){}return ''};
+function open(){$('#bmF').style.display='';$('#bmD').style.display='none';$('#bmn').classList.remove('bad');$('#bmp').classList.remove('bad');$('#bme').style.display='none';m.classList.add('on');setTimeout(()=>$('#bmn').focus(),60)}
+function close(){m.classList.remove('on')}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href="#book"]');if(!a)return;e.preventDefault();open()});
+$('#bmx').onclick=close;$('#bmk').onclick=close;m.onclick=e=>{if(e.target===m)close()};
+addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+$('#bmf').onsubmit=e=>{e.preventDefault();const n=$('#bmn'),p=$('#bmp'),bn=n.value.trim().length<2,bp=p.value.replace(/\D/g,'').length<9;
+ n.classList.toggle('bad',bn);p.classList.toggle('bad',bp);$('#bme').style.display=(bn||bp)?'block':'none';if(bn||bp)return;
+ const x=extra(),t=`Здравствуйте! Меня зовут ${n.value.trim()}, тел. ${p.value.trim()}. Хочу записаться на консультацию${x?': '+x:''}.`;
+ $('#bmF').style.display='none';$('#bmD').style.display='block';window.open('https://wa.me/996999554455?text='+encodeURIComponent(t),'_blank')};
+})();
 </script>
 </body>
 </html>
