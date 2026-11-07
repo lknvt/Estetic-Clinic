@@ -67,22 +67,20 @@ header{position:sticky;top:0;z-index:40;background:rgba(247,241,233,.92);backdro
 .burger .ic{width:28px;height:28px}
 .telm{display:none}
 /* hero */
-.hero{padding:22px 0 48px;position:relative;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:54px;align-items:center}
-.hero h1{font-size:clamp(40px,4.8vw,64px);margin-bottom:16px}
-.hero p{font-size:19px;color:#6d5546;max-width:500px}
-.cta{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 26px}
-.perks{list-style:none;display:flex;gap:18px;flex-wrap:wrap;margin:-8px 0 22px;font-weight:800;font-size:14.5px}
+.hero{padding:56px 0 80px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero .kick{margin-bottom:20px}
+.hero h1{font-size:clamp(38px,4vw,56px);line-height:1.12;margin-bottom:24px;max-width:600px}
+.hero p{font-size:18px;line-height:1.65;color:#6d5546;max-width:460px}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin:40px 0 28px}
+.perks{list-style:none;display:flex;gap:22px;flex-wrap:wrap;font-weight:700;font-size:14.5px;color:#6d5546}
 .perks li{display:flex;align-items:center;gap:7px}
 .perks .ic{width:22px;height:22px;padding:4px;border-radius:50%;background:var(--green-l);color:var(--green-d)}
-.rooms{display:flex;gap:8px;flex-wrap:wrap}
-.rooms a{background:var(--white);border:1.5px solid var(--sand);padding:7px 12px;border-radius:99px;font-weight:800;font-size:14px;transition:background .2s,border-color .2s,color .2s}
-.rooms a:hover,.rooms a:focus-visible{background:var(--green);border-color:var(--green);color:#fff}
-.trust{display:flex;align-items:center;gap:14px;margin-top:20px;font-size:14px;font-weight:700;color:var(--mut)}
+.trust{display:flex;align-items:center;gap:14px;margin-top:32px;padding-top:28px;border-top:1px solid var(--sand);width:fit-content;font-size:14px;font-weight:700;color:var(--mut)}
 .faces{display:flex}
 .faces span{width:36px;height:36px;border-radius:50%;border:3px solid var(--cream);display:grid;place-items:center;color:#fff;font-weight:900;font-size:14px;margin-left:-10px}
 .faces span:first-child{margin-left:0}
-.hv{position:relative;height:min(560px,calc(100vh - 210px));min-height:430px}
+.hv{position:relative;height:min(540px,calc(100vh - 230px));min-height:430px}
 .hv .bg{position:absolute;right:-6%;top:6%;width:78%;height:92%;border-radius:50% 50% var(--r) var(--r);background:var(--sand)}
 .hv .p1{position:absolute;left:0;top:0;width:76%;height:100%;border-radius:var(--r);overflow:hidden;box-shadow:0 40px 70px -40px rgba(74,50,38,.6)}
 .hv .p2{position:absolute;right:0;bottom:8%;width:40%;height:46%;border-radius:var(--r);overflow:hidden;border:7px solid var(--cream);box-shadow:0 24px 50px -24px rgba(74,50,38,.6)}
@@ -90,10 +88,6 @@ header{position:sticky;top:0;z-index:40;background:rgba(247,241,233,.92);backdro
 .promo{position:absolute;left:-26px;bottom:10%;background:var(--cocoa);color:#fff;border-radius:22px;padding:18px 22px;box-shadow:0 24px 40px -20px rgba(58,39,29,.8)}
 .promo b{display:block;font-size:34px;font-weight:900;line-height:1;color:var(--caramel2)}
 .promo span{font-size:14px;font-weight:700;opacity:.9}
-.seal{position:absolute;right:4%;top:2%;width:118px;height:118px;border-radius:50%;background:var(--green);box-shadow:0 16px 30px -14px rgba(62,90,64,.8);color:#fff;display:grid;place-items:center}
-.seal svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 22s linear infinite}
-.seal .ic{width:34px;height:34px}
-@keyframes spin{to{transform:rotate(360deg)}}
 /* advantages band */
 .band{background:var(--cocoa);color:#f3e8dc;border-radius:var(--r);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));overflow:hidden}
 .band article{padding:34px 28px;display:flex;flex-direction:column;gap:10px;position:relative;transition:background .3s}
@@ -224,7 +218,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
  body.menu-open .nav-links{top:64px}
  .nav .ph,.nav .btn,.logo small{display:none}
  .telm{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--cocoa);color:#fff}
- .hero{padding:20px 0 44px}
+ .hero{padding:28px 0 48px}
+ .hero .wrap{gap:40px}
+ .cta{margin:30px 0 22px}
+ .trust{margin-top:24px;padding-top:20px}
  .hero .wrap,.rw,.lead,.ct{grid-template-columns:minmax(0,1fr)}
  .hero .wrap{gap:34px}
  .hero p{font-size:17px}
@@ -232,7 +229,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
  .hv{height:380px;min-height:0}
  .hv .p1{width:82%}
  .promo{left:8px;bottom:6%;padding:12px 16px}.promo b{font-size:26px}
- .seal{width:86px;height:86px;right:0}
  .band{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
  .band article{padding:22px 16px}
  .band h3{font-size:17px}.band p{font-size:13.5px}
@@ -309,7 +305,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
    <a class="btn br" data-href="tel" data-ic="phone"><span data-phone></span></a>
   </div>
   <ul class="perks" id="perks"></ul>
-  <div class="rooms" id="rooms"></div>
   <a class="trust" data-href="gis"><span class="faces" id="faces"></span><span><span class="stars" id="hs"></span><br><span data-i="rev_more"></span></span></a>
  </div>
  <div class="hv rv">
@@ -317,9 +312,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="p1"><img src="img/1615874959474-d609969a20ed.jpg" alt="Уютная спальня La Familia"></div>
   <div class="p2"><img src="img/1567016432779-094069958ea5.jpg" alt="Диван"></div>
   <div class="promo"><b data-i="f3n"></b><span id="promo"></span></div>
-  <div class="seal" aria-hidden="true">
-   <svg viewBox="0 0 120 120"><defs><path id="cp" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text font-family="Nunito" font-weight="800" font-size="11.5" letter-spacing="2.4" fill="#fff"><textPath href="#cp" id="sealtx">МЕБЕЛЬ ДЛЯ ВСЕЙ СЕМЬИ • LA FAMILIA •</textPath></text></svg>
-   <span data-ic="heart"></span>
   </div>
  </div>
 </div></section>
@@ -427,9 +419,7 @@ LF.init(l=>{
  $('hs').innerHTML=$('ss').innerHTML=stars();
  $('faces').innerHTML=D.reviews.map((r,i)=>`<span style="background:${AV[i]}">${r.n[0]}</span>`).join('');
  $('promo').textContent=ky?'бөлүп төлөө — үстөк төлөмсүз':'рассрочка без переплат';
- $('sealtx').textContent=ky?'БҮТ ҮЙ-БҮЛӨ ҮЧҮН ЭМЕРЕК • LA FAMILIA • ':'МЕБЕЛЬ ДЛЯ ВСЕЙ СЕМЬИ • LA FAMILIA • ';
  $('perks').innerHTML=(ky?['Эртең жеткирүү','Акысыз куроо','2 жыл кепилдик']:['Доставка завтра','Сборка бесплатно','Гарантия 2 года']).map((x,i)=>`<li>${icon(['truck','tool','shield'][i])}${x}</li>`).join('');
- $('rooms').innerHTML=D.cats.map((c,i)=>`<a href="#cat" data-cat="${i}">${c[l][2]}</a>`).join('');
  $('adv').innerHTML=D.adv.map(a=>`<article><div class="ib">${icon(a.ic)}</div><h3>${a[l][0]}</h3><p>${a[l][1]}</p></article>`).join('');
  $('tabs').innerHTML=D.cats.map((c,i)=>`<button role="tab" data-k="${i}"><img src="${img(c.img)}" alt="" loading="lazy"><span>${c[l][0]}<small>${c[l][1]}</small></span>${icon('arrow')}</button>`).join('');
  showCat(cur);
@@ -442,7 +432,6 @@ LF.init(l=>{
  $('room').innerHTML=`<option value="">${t('f_room')}</option>`+D.cats.map(c=>`<option>${c[l][0]}</option>`).join('');
 });
 $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)showCat(+b.dataset.k)});
-$('rooms').addEventListener('click',e=>{const a=e.target.closest('[data-cat]');if(a)showCat(+a.dataset.cat)});
 const step=d=>{const tr=$('trk'),w=tr.querySelector('.rc').offsetWidth+18;tr.scrollBy({left:d*w})};
 $('prev').onclick=()=>step(-1);$('next').onclick=()=>step(1);
 </script>
