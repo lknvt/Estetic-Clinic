@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La Familia — 3 варианта дизайна</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{display:flex;flex-direction:column;font-family:Manrope,system-ui,sans-serif;background:#1d1a17}
+.bar{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#1d1a17;color:#fff;flex-wrap:wrap;border-bottom:1px solid #332e29}
+.bar b{font-size:15px;white-space:nowrap}
+.bar b i{color:#d2a27a;font-style:italic}
+.tabs{display:flex;gap:6px;flex:1;flex-wrap:wrap}
+.tabs button{border:0;cursor:pointer;font:700 14px Manrope,sans-serif;padding:9px 16px;border-radius:99px;background:#ffffff14;color:#e9e2d8;transition:background .2s}
+.tabs button:hover{background:#ffffff2b}
+.tabs button.on{background:#d2a27a;color:#1d1a17}
+.tabs small{opacity:.7;font-weight:600;margin-left:4px}
+.grp{display:flex;gap:4px;background:#ffffff14;border-radius:12px;padding:3px}
+.grp button{border:0;cursor:pointer;background:none;color:#e9e2d8;font:700 13px Manrope,sans-serif;padding:7px 11px;border-radius:9px}
+.grp button.on{background:#fff;color:#1d1a17}
+.stage{flex:1;display:flex;justify-content:center;background:#121010;min-height:0}
+iframe{border:0;width:100%;height:100%;background:#fff;transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.stage.m iframe{width:390px;max-width:100%;border-radius:22px;margin:12px 0;height:calc(100% - 24px);box-shadow:0 0 0 8px #2a2622}
+@media(max-width:760px){
+ .bar{gap:8px;padding:8px 10px}
+ .bar b{display:none}
+ .tabs{flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto}
+ .tabs button{padding:8px 12px;font-size:13px;white-space:nowrap}
+ .tabs small{display:none}
+ #dev{display:none}
+}
+</style>
+</head>
+<body>
+<div class="bar">
+ <b>La <i>Familia</i> · дизайн</b>
+ <div class="tabs" id="tabs">
+  <button data-f="v1-minimal.html">1 · Modern Minimal<small>светлый</small></button>
+  <button data-f="v2-premium.html">2 · Dark Premium<small>тёмный</small></button>
+  <button data-f="v3-instagram.html">3 · Instagram Style<small>в стиле @lafamilia.kg</small></button>
+ </div>
+ <div class="grp" id="lang" role="group" aria-label="Язык"><button data-l="ru">RU</button><button data-l="ky">KG</button></div>
+ <div class="grp" id="dev"><button data-d="d" title="Компьютер">🖥 ПК</button><button data-d="m" title="Телефон">📱 Тел</button></div>
+</div>
+<div class="stage" id="stage"><iframe id="fr" title="Вариант дизайна"></iframe></div>
+<script>
+const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
+const get=(k,d)=>{try{return localStorage.getItem(k)??d}catch(e){return d}},set=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const tabs=qa('#tabs button');
+function show(i){tabs.forEach((b,k)=>b.classList.toggle('on',k===i));q('#fr').src=tabs[i].dataset.f;set('lf-v',i)}
+tabs.forEach((b,i)=>b.onclick=()=>show(i));
+function lang(l){set('lf-lang',l);qa('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
+ try{q('#fr').contentWindow.LF&&q('#fr').contentWindow.LF.setLang(l)}catch(e){}}
+qa('#lang button').forEach(b=>b.onclick=()=>lang(b.dataset.l));
+function dev(d){q('#stage').classList.toggle('m',d==='m');qa('#dev button').forEach(b=>b.classList.toggle('on',b.dataset.d===d));set('lf-dev',d)}
+qa('#dev button').forEach(b=>b.onclick=()=>dev(b.dataset.d));
+// keep the switcher's language buttons in sync when the language is changed inside a page
+addEventListener('storage',e=>{if(e.key==='lf-lang')qa('#lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===e.newValue))});
+q('#fr').addEventListener('load',()=>{try{const w=q('#fr').contentWindow;w.document.addEventListener('click',e=>{if(e.target.closest('[data-lang]'))setTimeout(()=>lang(w.LF.lang),0)})}catch(e){}});
+lang(get('lf-lang','ru'));dev(get('lf-dev','d'));show(+get('lf-v',0)||0);
+</script>
+</body>
+</html>
