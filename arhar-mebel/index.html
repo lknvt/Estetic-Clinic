@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Архар Мебель — 3 варианта дизайна</title>
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{display:flex;flex-direction:column;font-family:system-ui,sans-serif;background:#2a1f18}
+.bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#2a1f18;color:#fff;flex-wrap:wrap}
+.bar b{font-size:15px;margin-right:6px;white-space:nowrap}
+.tabs{display:flex;gap:6px;flex:1;flex-wrap:wrap}
+.tabs button{border:0;cursor:pointer;font:600 14px system-ui;padding:9px 16px;border-radius:99px;background:#ffffff1c;color:#fff;transition:background .2s}
+.tabs button:hover{background:#ffffff33}
+.tabs button.on{background:#d9a74a;color:#24180f}
+.dev{display:flex;gap:4px}
+.dev button{border:0;cursor:pointer;background:#ffffff1c;color:#fff;font:600 13px system-ui;padding:8px 12px;border-radius:10px}
+.dev button.on{background:#fff;color:#2a1f18}
+.stage{flex:1;display:flex;justify-content:center;background:#19120d;min-height:0}
+iframe{border:0;width:100%;height:100%;background:#fff}
+.stage.m iframe{width:390px;max-width:100%;border-radius:22px;margin:10px 0;height:calc(100% - 20px)}
+@media(max-width:700px){.dev{display:none}.bar b{display:none}.tabs button{padding:8px 12px;font-size:13px;flex:1}}
+</style>
+</head>
+<body>
+<div class="bar">
+ <b>Архар Мебель</b>
+ <div class="tabs" id="tabs">
+  <button data-f="v1-chertezh.html">1 · Чертёж</button>
+  <button data-f="v2-shourum.html">2 · Шоурум</button>
+  <button data-f="v3-insta.html">3 · Instagram</button>
+ </div>
+ <div class="dev"><button id="d" class="on">Компьютер</button><button id="m">Телефон</button></div>
+</div>
+<div class="stage" id="stage"><iframe id="fr" title="Вариант дизайна"></iframe></div>
+<script>
+const $=s=>document.querySelector(s),btns=[...document.querySelectorAll('#tabs button')];
+function show(i){btns.forEach((b,k)=>b.classList.toggle('on',k===i));$('#fr').src=btns[i].dataset.f;try{localStorage.setItem('am-v',i)}catch(e){}}
+btns.forEach((b,i)=>b.onclick=()=>show(i));
+$('#d').onclick=()=>{$('#stage').classList.remove('m');$('#d').classList.add('on');$('#m').classList.remove('on')};
+$('#m').onclick=()=>{$('#stage').classList.add('m');$('#m').classList.add('on');$('#d').classList.remove('on')};
+let s=0;try{s=+localStorage.getItem('am-v')||0}catch(e){}
+show(s);
+</script>
+</body>
+</html>
