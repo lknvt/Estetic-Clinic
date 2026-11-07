@@ -7,7 +7,7 @@
 <meta name="description" content="Мебель на заказ в Бишкеке: кухни, шкафы-купе, гардеробные, спальни. Бесплатный замер и 3D-проект.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Geologica:wght@400;500;600;700;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#EDF0EC; --card:#F8FAF7; --pine:#1E3A32; --pine2:#2B5146; --walnut:#6B4430;
@@ -37,7 +37,7 @@ h1,h2,h3,.disp{font-family:Geologica,system-ui,sans-serif;letter-spacing:-.02em;
 header{position:sticky;top:0;z-index:50;background:rgba(237,240,236,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .hd{display:flex;align-items:center;gap:22px;height:68px}
 .logo{display:flex;align-items:center;gap:10px;font:800 19px Geologica;color:var(--pine)}
-.logo svg{width:36px;height:36px}
+.wm{font:400 28px/1 Comfortaa,sans-serif;letter-spacing:-.02em;color:var(--ink)}.logo small{font:500 11px/1.15 'Golos Text';color:var(--mut);border-left:1px solid var(--line);padding-left:10px}
 .nav{display:flex;gap:22px;margin-left:12px;font-size:15px;color:var(--mut)}
 .nav a:hover{color:var(--pine)}
 .hd-r{margin-left:auto;display:flex;align-items:center;gap:10px}
@@ -222,7 +222,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media (max-width:700px){
   .w{padding:0 16px}
   section{padding:52px 0}
-  .hd{gap:10px;height:62px}.logo{font-size:17px}.logo svg{width:30px;height:30px}
+  .hd{gap:10px;height:62px}.wm{font-size:24px}
   .hphone,.hd-r .ibtn.gis{display:none}
   html{scroll-padding-top:66px}
   body.menu-open .nav{top:62px}
@@ -257,9 +257,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <body>
 <header>
  <div class="w hd">
-  <a class="logo" href="#top" aria-label="Архар Мебель">
-   <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M20 15c-2-7-11-9-14-3-2.5 5 2 10 7 8 3.5-1.5 2.5-6-1-6"/><path d="M20 15c2-7 11-9 14-3 2.5 5-2 10-7 8-3.5-1.5-2.5-6 1-6"/><path d="M15.5 19 20 33l4.5-14"/></svg>
-   Архар Мебель
+  <a class="logo" href="#top" aria-label="Архар Мебель"><span class="wm">arhar</span><small>мебельная<br>компания</small>
   </a>
   <nav class="nav">
    <a href="#catalog" data-t="nav.catalog"></a><a href="#works" data-t="nav.works"></a><a href="#process" data-t="nav.process"></a>

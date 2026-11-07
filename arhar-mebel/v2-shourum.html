@@ -7,7 +7,7 @@
 <meta name="description" content="Премиальная мебель на заказ в Бишкеке: кухни, гардеробные, спальни. Шпон, эмаль, фурнитура Blum.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Cormorant:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#231B16; --bg2:#2D231D; --bg3:#382C24; --bone:#EEE7DB; --mut:#AD9F8E; --line:#4B3C31;
@@ -35,7 +35,7 @@ header{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s}
 header.solid{background:rgba(35,27,22,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .hd{display:flex;align-items:center;gap:28px;height:72px}
 .logo{display:flex;align-items:center;gap:11px;font:700 24px Cormorant;letter-spacing:.02em}
-.logo svg{width:34px;height:34px;color:var(--brass)}
+.wm{font:300 30px/1 Comfortaa,sans-serif;letter-spacing:-.01em}
 .nav{display:flex;gap:26px;font-size:14.5px;color:#d7cdbf}
 .nav a:hover{color:var(--brass)}
 .hd-r{margin-left:auto;display:flex;align-items:center;gap:12px}
@@ -209,7 +209,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media (max-width:700px){
   .w{padding:0 16px}
   section{padding:60px 0}
-  .hd{height:62px;gap:10px}.logo{font-size:21px}.logo svg{width:28px;height:28px}
+  .hd{height:62px;gap:10px}.wm{font-size:25px}
   .hd-r .ib.g{display:none}
   body.menu-open .nav{top:62px}
   .hero{padding:96px 0 26px;min-height:auto}
@@ -243,9 +243,7 @@ footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <body>
 <header id="hdr">
  <div class="w hd">
-  <a class="logo" href="#top" aria-label="Архар Мебель">
-   <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 15c-2-7-11-9-14-3-2.5 5 2 10 7 8 3.5-1.5 2.5-6-1-6"/><path d="M20 15c2-7 11-9 14-3 2.5 5-2 10-7 8-3.5-1.5-2.5-6 1-6"/><path d="M15.5 19 20 33l4.5-14"/></svg>
-   Архар
+  <a class="logo" href="#top" aria-label="Архар Мебель"><span class="wm">arhar</span>
   </a>
   <nav class="nav">
    <a href="#catalog" data-t="nav.catalog"></a><a href="#works" data-t="nav.works"></a><a href="#process" data-t="nav.process"></a>
