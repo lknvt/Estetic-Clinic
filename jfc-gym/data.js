@@ -61,6 +61,9 @@
       res3_n: 'WAKO', res3_t: 'Призёры турниров по кикбоксингу',
       res4_n: '71,6K', res4_t: 'человек следят за нами в Instagram',
       hl_fight: 'FIGHT', hl_coaches: 'Тренеры', hl_bar: 'Фитобар', hl_group: 'Групповые', hl_sched: 'Расписание', hl_gym: 'GYM', hl_kids: 'Детские группы',
+      timer_kicker: 'Раундовый таймер', timer_title: 'Попробуйте раунд прямо сейчас', timer_sub: '3 минуты работы и 1 минута отдыха, как на тренировке в JFC. Включите таймер, сделайте бой с тенью и почувствуйте темп.', round: 'Раунд', work: 'Работа', rest: 'Отдых', start: 'Старт', pause: 'Пауза', reset: 'Сброс', timer_cta: 'Понравилось? Приходите на пробную с тренером',
+      kc_kicker: 'Калькулятор', kc_title: 'Сколько калорий вы сожжёте', kc_sub: 'Выберите направление и длительность. Посчитаем расход за тренировку и за месяц.', kc_min: 'мин', kc_per: 'ккал за тренировку', kc_month: 'ккал за месяц при 3 тренировках в неделю', kc_eq: 'Это примерно', kc_burgers: 'бургеров', kc_cta: 'Начать сжигать',
+      game_kicker: 'Мини-игра', game_title: 'Проверь силу удара', game_sub: 'Бейте по груше: 10 ударов, и вы получите промокод на скидку.', hits: 'Удары', power: 'Сила', best: 'Рекорд', game_tap: 'Жмите на грушу', game_win: 'Отличная серия! Ваш промокод', game_code_cta: 'Использовать в WhatsApp', game_again: 'Ещё раз', combo: 'Комбо',
       promo: 'Акция недели: первая тренировка бесплатно и −10% на первый абонемент', promo_till: 'до', promo_btn: 'Забрать скидку',
       cta_micro: 'Без оплаты и обязательств · ответим за 15 минут',
       guar_t: 'Гарантия первой недели', guar_d: 'Если в первую неделю поймёте, что это не ваше, вернём деньги за абонемент.',
@@ -125,6 +128,9 @@
       res3_n: 'WAKO', res3_t: 'Кикбоксинг турнирлеринин призёрлору',
       res4_n: '71,6K', res4_t: 'адам Instagramда бизди ээрчийт',
       hl_fight: 'FIGHT', hl_coaches: 'Машыктыруучулар', hl_bar: 'Фитобар', hl_group: 'Топтук', hl_sched: 'Жадыбал', hl_gym: 'GYM', hl_kids: 'Балдар топтору',
+      timer_kicker: 'Раунд таймери', timer_title: 'Раундду азыр эле сынап көрүңүз', timer_sub: '3 мүнөт иш жана 1 мүнөт эс алуу, JFCдеги машыгуудагыдай. Таймерди күйгүзүп, көлөкө менен мушташып, темпти сезиңиз.', round: 'Раунд', work: 'Иш', rest: 'Эс алуу', start: 'Баштоо', pause: 'Тыным', reset: 'Кайра', timer_cta: 'Жактыбы? Машыктыруучу менен сыноого келиңиз',
+      kc_kicker: 'Калькулятор', kc_title: 'Канча калория күйгүзөсүз', kc_sub: 'Багытты жана узактыгын тандаңыз. Бир машыгууга жана айга кеткен чыгымды эсептейбиз.', kc_min: 'мүн', kc_per: 'ккал бир машыгууда', kc_month: 'ккал айына, жумасына 3 машыгуу менен', kc_eq: 'Бул болжол менен', kc_burgers: 'бургер', kc_cta: 'Күйгүзүүнү баштоо',
+      game_kicker: 'Мини-оюн', game_title: 'Соккуңдун күчүн текшер', game_sub: 'Грушаны уруңуз: 10 сокку, жана арзандатуу промокодун аласыз.', hits: 'Соккулар', power: 'Күч', best: 'Рекорд', game_tap: 'Грушаны басыңыз', game_win: 'Сонун серия! Промокодуңуз', game_code_cta: 'WhatsAppта колдонуу', game_again: 'Дагы бир жолу', combo: 'Комбо',
       promo: 'Жуманын акциясы: биринчи машыгуу акысыз жана биринчи абонементке −10%', promo_till: 'чейин', promo_btn: 'Арзандатууну алуу',
       cta_micro: 'Төлөмсүз жана милдеттенмесиз · 15 мүнөттө жооп беребиз',
       guar_t: 'Биринчи жуманын кепилдиги', guar_d: 'Биринчи жумада сизге туура келбей калса, абонементтин акчасын кайтарабыз.',
@@ -296,6 +302,50 @@
     return lang === 'ky' ? `${dd}.${mm} ${t('promo_till')}` : `${t('promo_till')} ${dd}.${mm}`;
   }
 
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Счётчики: элементы с data-cu анимируются от 0 до своего значения при появлении
+  let cio;
+  function countUps() {
+    const els = document.querySelectorAll('[data-cu]');
+    if (reduce || !('IntersectionObserver' in window)) return;
+    cio = cio || new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { cio.unobserve(e.target); runCount(e.target); } }), { threshold: 0.5 });
+    els.forEach((el) => { if (el.children.length) return; el.dataset.cu = el.textContent; cio.observe(el); });
+  }
+  function runCount(el) {
+    const raw = el.dataset.cu, m = raw.match(/^(\D*?)(\d+(?:[.,]\d+)?)(.*)$/);
+    if (!m) return;
+    const num = parseFloat(m[2].replace(',', '.')), dec = (m[2].split(/[.,]/)[1] || '').length, sep = m[2].includes(',') ? ',' : '.';
+    const t0 = performance.now(), dur = 1200;
+    const step = (now) => { const k = Math.min(1, (now - t0) / dur), v = num * (1 - Math.pow(1 - k, 3));
+      el.textContent = m[1] + v.toFixed(dec).replace('.', sep) + m[3]; if (k < 1) requestAnimationFrame(step); else el.textContent = raw; };
+    requestAnimationFrame(step);
+  }
+  // Прогресс прокрутки → CSS-переменная --sp (0..1), для «шкалы здоровья»
+  const sp = () => { const h = document.documentElement; const v = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight); h.style.setProperty('--sp', v.toFixed(4)); };
+  addEventListener('scroll', sp, { passive: true }); addEventListener('resize', sp);
+  // Лёгкий 3D-наклон карточек с data-tilt
+  if (!reduce) {
+    document.addEventListener('pointermove', (e) => {
+      const el = e.target.closest && e.target.closest('[data-tilt]'); if (!el || e.pointerType !== 'mouse') return;
+      const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      el.style.transform = `perspective(700px) rotateX(${(-y * 7).toFixed(2)}deg) rotateY(${(x * 9).toFixed(2)}deg) translateY(-3px)`;
+    });
+    document.addEventListener('pointerout', (e) => { const el = e.target.closest && e.target.closest('[data-tilt]'); if (el && !el.contains(e.relatedTarget)) el.style.transform = ''; });
+  }
+  // Короткий звук гонга (только после действия пользователя)
+  let actx;
+  function bell(times = 1) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      for (let i = 0; i < times; i++) {
+        const t = actx.currentTime + i * .35, o = actx.createOscillator(), g = actx.createGain();
+        o.type = 'sine'; o.frequency.setValueAtTime(880, t); o.frequency.exponentialRampToValueAtTime(660, t + .8);
+        g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.35, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + 1.1);
+        o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 1.2);
+      }
+    } catch (e) {}
+  }
+
   function apply() {
     document.documentElement.lang = lang === 'ky' ? 'ky' : 'ru';
     document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = t(el.dataset.t); });
@@ -312,7 +362,7 @@
       const o = isOpen(); el.textContent = t(o ? 'open_now' : 'closed_now'); el.classList.toggle('closed', !o);
     });
     if (typeof window.render === 'function') window.render();
-    revealInit();
+    revealInit(); countUps(); sp();
   }
 
   function setLang(l) {
@@ -347,6 +397,6 @@
     document.body.appendChild(a); a.click(); a.remove();
   });
 
-  window.JFC = { C, T, goals, faq, promoDate, hl, highlights, logo, days, daysFull, dirs, coaches, prices, schedule, reviews, icon, portrait, t, L, waLink, isOpen, nextClass, bishkekNow, setLang, get lang() { return lang; } };
+  window.JFC = { C, T, goals, faq, promoDate, bell, reduce, countUps, hl, highlights, logo, days, daysFull, dirs, coaches, prices, schedule, reviews, icon, portrait, t, L, waLink, isOpen, nextClass, bishkekNow, setLang, get lang() { return lang; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
 })();

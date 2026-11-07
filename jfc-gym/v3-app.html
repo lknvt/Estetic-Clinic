@@ -56,6 +56,62 @@ h1,h2,h3{font-weight:800;letter-spacing:-.035em;line-height:1.08;text-wrap:balan
 .guar{display:flex;gap:12px;align-items:flex-start;background:var(--dk2);border-radius:14px;padding:14px;margin-top:14px}
 .guar .ic{width:26px;height:26px;color:var(--ne)}
 .guar b{display:block;font-size:14px}.guar span{font-size:13px;color:#a6abbe}
+/* animations & fun */
+.hp{position:fixed;left:0;right:0;top:0;height:3px;z-index:70;pointer-events:none}
+.hp i{display:block;height:100%;width:calc(var(--sp,0)*100%);background:var(--ne);box-shadow:0 0 10px var(--ne)}
+.hero h1{animation:rise .8s cubic-bezier(.2,.8,.2,1) both}
+.hero h1 span:after{transform-origin:left;animation:line .7s .6s cubic-bezier(.6,0,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+@keyframes line{from{transform:scaleX(0)}}
+.kpi{animation:rise .6s both}.kpi:nth-child(2){animation-delay:.1s}.kpi:nth-child(3){animation-delay:.2s}
+.book{animation:rise .8s .15s both}
+.step{animation:stepin .35s ease-out}
+@keyframes stepin{from{opacity:0;transform:translateX(14px)}}
+.opt,.day,.slot{transition:transform .12s,background .15s,box-shadow .15s}
+.opt:active,.day:active,.slot:active{transform:scale(.96)}
+.story span.r{transition:transform .25s,background .2s}.story:hover span.r{transform:scale(1.06)}
+.story.on span.r{animation:ringpulse 2s infinite}
+@keyframes ringpulse{50%{box-shadow:0 0 26px #ff2d55cc}}
+.dir,.r4{transition:transform .15s ease-out,box-shadow .2s}
+.btn-rd{position:relative;overflow:hidden}
+.btn-rd:after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,#ffffff55,transparent);animation:shine 3.2s infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+/* punch bag game */
+.game{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch}
+.arena{background:var(--dk);border-radius:28px;position:relative;overflow:hidden;min-height:440px;display:flex;justify-content:center;touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer}
+.arena:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 45% at 50% 60%,#ff2d5522,transparent 70%),linear-gradient(#ffffff06 1px,transparent 1px) 0 0/32px 32px,linear-gradient(90deg,#ffffff06 1px,transparent 1px) 0 0/32px 32px}
+.bagw{position:relative;transform-origin:50% 0;height:90%;aspect-ratio:150/400;margin-top:-6px}
+.bagw.hit{animation:swing .55s cubic-bezier(.3,1.6,.5,1)}
+.bagw.hit2{animation:swing2 .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes swing{20%{transform:rotate(-9deg)}55%{transform:rotate(4deg)}80%{transform:rotate(-1.5deg)}}
+@keyframes swing2{20%{transform:rotate(9deg)}55%{transform:rotate(-4deg)}80%{transform:rotate(1.5deg)}}
+.bagw svg{width:100%;height:100%;display:block;filter:drop-shadow(0 30px 30px #0008)}
+.pow{position:absolute;font:900 italic 30px/1 Montserrat,sans-serif;color:#fff;text-shadow:0 0 14px var(--ne),0 0 2px var(--ne);pointer-events:none;animation:pow .8s ease-out forwards;z-index:3}
+@keyframes pow{from{opacity:1;transform:translate(-50%,-50%) scale(.6)}30%{transform:translate(-50%,-80%) scale(1.15)}to{opacity:0;transform:translate(-50%,-160%) scale(1)}}
+.boom{position:absolute;width:90px;height:90px;border-radius:50%;border:3px solid var(--ne);box-shadow:0 0 18px var(--ne);pointer-events:none;animation:boom .45s ease-out forwards;z-index:2}
+@keyframes boom{from{opacity:1;transform:translate(-50%,-50%) scale(.2)}to{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}
+.tapme{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#a6abbe;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.tapme i{width:8px;height:8px;border-radius:50%;background:var(--ne);box-shadow:0 0 8px var(--ne);animation:bl 1.2s infinite}
+.gpanel{padding:28px;display:flex;flex-direction:column;gap:18px}
+.gpanel h2{font-size:clamp(28px,3vw,40px)}
+.gpanel p{color:var(--mu)}
+.gstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gs{background:var(--sf2);border-radius:16px;padding:14px 16px}
+.gs small{display:block;color:var(--mu);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.gs b{font-size:30px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.meter{height:14px;border-radius:99px;background:var(--sf2);overflow:hidden;position:relative}
+.meter i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,#ff8aa0,var(--ne),#e30613);box-shadow:0 0 12px var(--ne);border-radius:99px;transition:width .25s cubic-bezier(.2,.8,.2,1)}
+.mlab{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--mu)}
+.mlab b{color:var(--ne)}
+.win{background:var(--dk);color:#fff;border-radius:18px;padding:20px;display:none;flex-direction:column;gap:12px;box-shadow:0 0 0 1px var(--ne),0 0 30px -8px var(--ne);animation:rise .5s both}
+.win.on{display:flex}
+.win .code{font:900 italic 38px/1 Montserrat,sans-serif;letter-spacing:.04em;color:#fff;text-shadow:0 0 18px var(--ne);background:#ffffff0a;border:1.5px dashed #ff2d5588;border-radius:12px;padding:12px 16px;align-self:flex-start;user-select:all}
+.win .row{display:flex;gap:8px;flex-wrap:wrap}
+.win .btn{height:46px;font-size:14px}
+.conf{position:absolute;width:8px;height:14px;top:-20px;z-index:4;pointer-events:none;animation:fall 1.6s linear forwards}
+@keyframes fall{to{transform:translateY(480px) rotate(540deg);opacity:.2}}
+@media (prefers-reduced-motion:reduce){.hero h1,.hero h1 span:after,.kpi,.book,.step,.story.on span.r,.btn-rd:after,.bagw.hit,.bagw.hit2,.tapme i{animation:none}}
+@media(max-width:960px){.game{grid-template-columns:1fr}.arena{min-height:380px}.bagw{height:340px}}
 /* header */
 .hd{position:sticky;top:0;z-index:50;padding:12px 0;background:linear-gradient(var(--bg) 60%,transparent)}
 .hd .bar{display:flex;align-items:center;gap:20px;height:62px;padding:0 10px 0 20px;background:#ffffffe6;backdrop-filter:blur(14px);border-radius:20px;box-shadow:0 1px 0 var(--ln),0 12px 30px -24px #0f122055}
@@ -266,6 +322,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
+<div class="hp" aria-hidden="true"><i></i></div>
 <div class="promo" id="promo"></div>
 <header class="hd"><div class="wrap"><div class="bar">
  <a href="#top" id="lg" aria-label="JFC GYM"></a>
@@ -297,6 +354,30 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 <section class="sec" id="results" style="padding-top:20px"><div class="wrap">
  <div class="sh rv"><div><span class="tag"><i></i><span data-t="res_kicker"></span></span><h2 data-t="res_title"></h2></div><a class="btn btn-k" data-link="ig" id="igb"></a></div>
  <div class="res4" id="res4"></div>
+</div></section>
+
+<section class="sec" id="game" style="padding-top:20px"><div class="wrap">
+ <div class="game rv">
+  <div class="arena" id="arena" role="button" tabindex="0" aria-label="Груша">
+   <div class="bagw" id="bag"><svg viewBox="0 0 150 400" aria-hidden="true">
+    <defs><linearGradient id="bg1" x1="0" x2="1"><stop offset="0" stop-color="#0a0a0c"/><stop offset=".42" stop-color="#2d3040"/><stop offset=".6" stop-color="#1a1c26"/><stop offset="1" stop-color="#060607"/></linearGradient></defs>
+    <path d="M75 0V70" stroke="#6c7286" stroke-width="3" stroke-dasharray="6 3"/>
+    <path d="M75 70L42 108M75 70L108 108" stroke="#6c7286" stroke-width="2.5"/>
+    <rect x="30" y="104" width="90" height="270" rx="30" fill="url(#bg1)"/>
+    <rect x="30" y="140" width="90" height="12" fill="#ff2d55" style="filter:drop-shadow(0 0 6px #ff2d55)"/>
+    <rect x="30" y="326" width="90" height="12" fill="#ff2d55" style="filter:drop-shadow(0 0 6px #ff2d55)"/>
+    <text x="75" y="250" text-anchor="middle" font-family="Montserrat,'Arial Black'" font-weight="900" font-style="italic" font-size="34" fill="#fff" letter-spacing="-2" transform="rotate(-90 75 240)">JFC</text>
+   </svg></div>
+   <span class="tapme"><i></i><span data-t="game_tap"></span></span>
+  </div>
+  <div class="card gpanel">
+   <div><span class="tag"><i></i><span data-t="game_kicker"></span></span><h2 style="margin-top:12px" data-t="game_title"></h2></div>
+   <p data-t="game_sub"></p>
+   <div class="gstats"><div class="gs"><small data-t="hits"></small><b id="gh">0</b></div><div class="gs"><small data-t="combo"></small><b id="gc">×1</b></div><div class="gs"><small data-t="best"></small><b id="gb">0</b></div></div>
+   <div><div class="mlab"><span data-t="power"></span><b id="gp">0</b></div><div class="meter"><i id="gm"></i></div></div>
+   <div class="win" id="gwin"></div>
+  </div>
+ </div>
 </div></section>
 
 <section class="sec" id="dirs"><div class="wrap">
@@ -341,6 +422,27 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 const $=id=>document.getElementById(id);
 const B={step:0,dir:0,day:null,time:null,name:'',phone:''};let coach=0,plan=2,wday=null;
 const DC={0:0,1:1,2:5,3:2,4:4,5:4,6:5,7:3};
+// Мини-игра «груша»: 10 ударов → промокод
+const G={hits:0,combo:1,last:0,best:0,side:0,won:false};
+try{G.best=+localStorage.getItem('jfc-best')||0}catch(e){}
+function gPaint(){$('gh').textContent=G.hits;$('gc').textContent='×'+G.combo;$('gb').textContent=G.best;}
+function punch(x,y){const J=window.JFC,t=J.t,a=$('arena'),bag=$('bag');const now=performance.now();
+ G.combo=now-G.last<650?Math.min(G.combo+1,5):1;G.last=now;G.hits++;
+ const p=Math.round(55+Math.random()*30+G.combo*3);const score=p*G.combo;if(score>G.best){G.best=score;try{localStorage.setItem('jfc-best',G.best)}catch(e){}}
+ bag.classList.remove('hit','hit2');void bag.offsetWidth;G.side^=1;bag.classList.add(G.side?'hit':'hit2');
+ $('gp').textContent=p+(G.combo>1?' ×'+G.combo:'');$('gm').style.width=Math.min(100,p)+'%';
+ const r=a.getBoundingClientRect(),px=x-r.left,py=y-r.top;
+ const b=document.createElement('span');b.className='boom';b.style.left=px+'px';b.style.top=py+'px';a.appendChild(b);setTimeout(()=>b.remove(),500);
+ const w=document.createElement('span');w.className='pow';w.style.left=px+'px';w.style.top=py+'px';w.textContent=G.combo>2?(['BAM!','POW!','KO!'][G.combo%3]):'+'+p;a.appendChild(w);setTimeout(()=>w.remove(),850);
+ try{navigator.vibrate&&navigator.vibrate(18)}catch(e){}
+ gPaint();
+ if(G.hits>=10&&!G.won){G.won=true;J.bell(2);
+  for(let i=0;i<28;i++){const c=document.createElement('span');c.className='conf';c.style.left=Math.random()*100+'%';c.style.background=['#ff2d55','#fff','#e30613','#ff8aa0'][i%4];c.style.animationDelay=(Math.random()*.4)+'s';a.appendChild(c);setTimeout(()=>c.remove(),2200)}
+  $('gwin').classList.add('on');$('gwin').innerHTML=`<b>${t('game_win')}</b><span class="code">JFC10</span><div class="row"><a class="btn btn-wa" href="${J.waLink(t('wa_msg')+' '+t('game_win')+': JFC10')}" target="_blank" rel="noopener">${J.icon('wa')}<span>${t('game_code_cta')}</span></a><button class="btn btn-s" id="gagain">${t('game_again')}</button></div>`;}
+}
+document.addEventListener('pointerdown',e=>{if(e.target.closest('#arena')){punch(e.clientX,e.clientY)}});
+document.addEventListener('keydown',e=>{if(document.activeElement&&document.activeElement.id==='arena'&&(e.key===' '||e.key==='Enter')){e.preventDefault();const r=$('arena').getBoundingClientRect();punch(r.left+r.width/2,r.top+r.height*.55)}});
+document.addEventListener('click',e=>{if(e.target.closest('#gagain')){G.hits=0;G.combo=1;G.won=false;$('gwin').classList.remove('on');$('gp').textContent='0';$('gm').style.width='0';gPaint()}});
 window.render=function(){
  const J=window.JFC,{t,L,icon,dirs,coaches,prices,schedule,reviews,days,daysFull,portrait}=J;
  const ib=(k,x)=>icon(k)+'<span>'+x+'</span>';
@@ -352,7 +454,7 @@ window.render=function(){
  $('kpis').innerHTML=`<div class="card kpi dk ${o?'':'closed'}"><b><i></i>${o?'07–23':'—'}</b><span>${t(o?'open_now':'closed_now')}</span></div><div class="card kpi"><b>71,6K</b><span>Instagram</span></div><a class="card kpi" href="${J.C.gis}" target="_blank" rel="noopener"><b>4.9 ★</b><span>2ГИС</span></a>`;
  $('promo').innerHTML=`<div class="wrap">${icon('fire')}<span>${t('promo')} <em>${J.promoDate()}</em></span><a href="${J.waLink(t('wa_msg')+' '+t('promo'))}" target="_blank" rel="noopener">${t('promo_btn')}</a></div>`;
  $('igb').innerHTML=ib('ig','@jfc_gym.kg');
- $('res4').innerHTML=[['level',1],['medal',2],['kick',3],['ig',4]].map(([k,i])=>`<div class="card r4 ${i===1?'dk':''}"><span class="ib">${icon(k)}</span><b>${t('res'+i+'_n')}${i===1?'<small>'+t('res1_u')+'</small>':''}</b><p>${t('res'+i+'_t')}</p></div>`).join('');
+ $('res4').innerHTML=[['level',1],['medal',2],['kick',3],['ig',4]].map(([k,i])=>`<div class="card r4 ${i===1?'dk':''}" data-tilt><span class="ib">${icon(k)}</span><b>${t('res'+i+'_n')}${i===1?'<small>'+t('res1_u')+'</small>':''}</b><p>${t('res'+i+'_t')}</p></div>`).join('');
  $('h2').innerHTML=ib('phone',J.C.phone);$('h3').innerHTML=ib('pin',t('cta_route_s'));
  // booking wizard
  const drawB=()=>{
@@ -387,7 +489,7 @@ window.render=function(){
   $('cod').innerHTML=`<div class="pic">${portrait(coach,'#f5f6f9','#d9dce5','#0f1220')}</div><div class="tx"><span class="tag" style="align-self:flex-start;background:var(--sf2)"><i></i>${t('coach_sel')}</span><h3>${c.n}</h3><div class="rl">${L(c)}</div><div class="meta"><span class="e">${c.exp} ${t('exp')}</span><span>${L(c.tag)}</span></div><div class="ts">${ts.join('')||`<span>${t('loc_hours')}</span>`}</div><a class="btn btn-rd" href="${J.waLink(t('wa_msg')+' '+t('coach_sel')+': '+c.n)}" target="_blank" rel="noopener">${ib('wa',t('cta_trial'))}</a></div>`;
  };
  drawC();$('stories').onclick=e=>{const b=e.target.closest('.story');if(b){coach=+b.dataset.i;drawC();}};
- $('dirsg').innerHTML=dirs.map((d,i)=>`<a class="card dir" href="#book" data-bdir="${i}"><span class="ib">${icon(d.ic)}</span><h3>${L(d)[0]}</h3><p>${L(d)[1]}</p></a>`).join('');
+ $('dirsg').innerHTML=dirs.map((d,i)=>`<a class="card dir" href="#book" data-bdir="${i}" data-tilt><span class="ib">${icon(d.ic)}</span><h3>${L(d)[0]}</h3><p>${L(d)[1]}</p></a>`).join('');
  $('dirsg').onclick=e=>{const a=e.target.closest('[data-bdir]');if(a){B.dir=+a.dataset.bdir;B.step=1;B.time=null;drawB();}};
  // plans
  const drawP=()=>{
@@ -405,6 +507,7 @@ window.render=function(){
  drawS();$('wk').onclick=e=>{const b=e.target.closest('button');if(b){wday=+b.dataset.d;drawS();}};
  $('slist').onclick=e=>{const a=e.target.closest('[data-sd]');if(a){B.dir=+a.dataset.sd;B.day=+a.dataset.sday;B.time=a.dataset.st;B.step=2;drawB();}};
  $('chat').innerHTML=[0,1,2].map(col=>`<div style="display:grid;gap:14px">${reviews.filter((_,i)=>i%3===col).map((r,k)=>`<div class="bub ${(col+k)%2?'me':''}"><span class="av">${r.n[0]}</span><div class="m"><p>${L(r)}</p><div class="meta"><span>${r.n} · ${L(r.s)}</span><span class="st">★★★★★</span></div></div></div>`).join('')}</div>`).join('');
+ gPaint();
  $('mpin').innerHTML=icon('pin');$('mgis').innerHTML=ib('pin','2ГИС');
  $('acts').innerHTML=`<a class="act" href="tel:${J.C.tel}"><span class="ib">${icon('phone')}</span><span><small>${t('loc_phone_l')}</small><span class="big">${J.C.phone}</span></span>${icon('arrow','ch')}</a>
   <a class="act wa" href="${J.waLink()}" target="_blank" rel="noopener"><span class="ib">${icon('wa')}</span><span><b>WhatsApp</b><small>${t('form_sub').split('—')[1]||t('cta_wa')}</small></span>${icon('arrow','ch')}</a>

@@ -244,6 +244,55 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .oct .tag{font-size:11px;padding:5px 8px}
  .dir p{display:none}.dir{min-height:130px}
 }
+/* animations & fun */
+.hp{position:fixed;left:0;right:0;top:0;height:3px;z-index:70;background:#ffffff0a;pointer-events:none}
+.hp i{display:block;height:100%;width:calc(var(--sp,0)*100%);background:linear-gradient(90deg,#ff2a44,#ff8a96);box-shadow:0 0 10px #ff2a44,0 0 2px #fff}
+.hero h1 em{animation:flick 7s infinite}
+@keyframes flick{0%,18%,22%,25%,53%,57%,100%{opacity:1;text-shadow:0 0 24px #ff2a4499}20%,24%,55%{opacity:.35;text-shadow:none}}
+.oct svg{animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-10px)}}
+.oct .run{stroke-dasharray:90 1050;animation:run 4.5s linear infinite;filter:drop-shadow(0 0 6px #fff) drop-shadow(0 0 14px #ff2a44)}
+@keyframes run{to{stroke-dashoffset:-1140}}
+.oct .spin{transform-origin:200px 200px;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.oct .tag{animation:pop .6s both}.t2{animation-delay:.15s!important}.t3{animation-delay:.3s!important}.t4{animation-delay:.45s!important}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.9)}}
+.hero{--mx:70%;--my:40%}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),#ff2a441c,transparent 60%);pointer-events:none;transition:background .1s}
+.hero h1 .w{display:inline-block;animation:up .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes up{from{opacity:0;transform:translateY(40px) skewY(4deg)}}
+.hero h1 em.w{display:block;animation:up .8s cubic-bezier(.2,.8,.2,1) both,flick 7s 1.2s infinite}
+.btn-rd{position:relative;overflow:hidden}
+.btn-rd:after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,#ffffff55,transparent);animation:shine 3.2s infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.co[data-tilt],.r4{transition:transform .15s ease-out,box-shadow .25s}
+/* round timer */
+.tm-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:20px;align-items:center;background:var(--s1);border-radius:22px;box-shadow:inset 0 0 0 1px var(--ln);padding:34px;position:relative;overflow:hidden}
+.tm-wrap:before{content:"";position:absolute;inset:auto -10% -60% 40%;height:120%;background:radial-gradient(#ff2a4422,transparent 60%);pointer-events:none}
+.tm-wrap h2{font-size:clamp(28px,3vw,42px);margin:14px 0 12px}
+.tm-wrap p{color:var(--mu);max-width:440px;margin-bottom:22px}
+.clock{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;justify-self:center}
+.ring{width:230px;height:230px;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .bg{stroke:#ffffff10}
+.ring:before{content:"";position:absolute;inset:8px;border-radius:50%;box-shadow:0 0 34px -4px #ff2a4477,inset 0 0 24px -6px #ff2a4455;pointer-events:none}
+.ring.rest:before{box-shadow:none}
+.ring .fg{stroke:var(--ne);stroke-linecap:round;transition:stroke-dashoffset 1s linear,stroke .3s}
+.ring.rest .fg{stroke:#8d939e;filter:none}
+.ring .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .c b{font:900 italic 56px/1 var(--fd);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.ring .c span{font:700 12px var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--ne2);margin-top:6px}
+.ring.rest .c span{color:var(--mu)}
+.ring.go{animation:beat 1s infinite}
+@keyframes beat{50%{transform:scale(1.015)}}
+.rounds{display:flex;gap:6px;margin-bottom:16px}
+.rounds i{width:28px;height:6px;border-radius:3px;background:#ffffff14}
+.rounds i.on{background:var(--ne);box-shadow:0 0 8px var(--ne)}
+.tbtns{display:flex;gap:8px;flex-wrap:wrap}
+.tbtns .btn{height:48px;padding:0 18px;font-size:14px}
+.tlink{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--ne2);font-weight:700;font-size:14px}
+@media (prefers-reduced-motion:reduce){.hero h1 em,.oct svg,.oct .run,.oct .spin,.btn-rd:after,.ring.go,.hero h1 .w{animation:none}}
+@media(max-width:900px){.tm-wrap{grid-template-columns:1fr;padding:22px}.clock{grid-template-columns:1fr;justify-items:center;gap:16px}.ring{width:200px;height:200px}}
 .dtabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px}
 .dtabs button{flex:1 0 auto;min-width:46px;height:44px;border:0;border-radius:10px;background:var(--s1);box-shadow:inset 0 0 0 1px var(--ln);font-weight:700;cursor:pointer;color:var(--tx)}
 .dtabs button.on{box-shadow:inset 0 0 0 1px var(--ne),0 0 16px -6px var(--ne);color:var(--ne2)}
@@ -254,6 +303,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
+<div class="hp" aria-hidden="true"><i></i></div>
 <div class="promo" id="promo"></div>
 <header class="hd"><div class="wrap">
  <a href="#top" id="lg" aria-label="JFC GYM"></a>
@@ -270,7 +320,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  <div class="hgrid">
   <div class="rv">
    <span class="live" id="live"><i></i><span></span></span>
-   <h1><span data-t="hero_title_1"></span> <span data-t="hero_title_2"></span><em data-t="hero_title_3"></em></h1>
+   <h1 id="ht"></h1>
    <p data-t="hero_sub"></p>
    <div class="ctas"><a class="btn btn-rd" data-link="wa" id="h1"></a><a class="btn btn-gh" href="#quiz" id="h2"></a></div>
    <p class="micro" id="micro"></p>
@@ -281,7 +331,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
     <clipPath id="oc"><polygon points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125"/></clipPath></defs>
     <g clip-path="url(#oc)"><rect width="400" height="400" fill="#101217"/><rect width="400" height="400" fill="url(#nt)"/></g>
     <polygon class="glow" points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125" fill="none" stroke="#ff2a44" stroke-width="2.5"/>
-    <polygon points="140,66 260,66 334,140 334,260 260,334 140,334 66,260 66,140" fill="none" stroke="#ffffff1c" stroke-width="1" stroke-dasharray="3 7"/>
+    <polygon class="spin" points="140,66 260,66 334,140 334,260 260,334 140,334 66,260 66,140" fill="none" stroke="#ffffff1c" stroke-width="1" stroke-dasharray="3 7"/>
+    <polygon class="run" points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
     <g fill="#ff2a44" class="glow"><circle cx="125" cy="30" r="3.5"/><circle cx="275" cy="30" r="3.5"/><circle cx="370" cy="125" r="3.5"/><circle cx="370" cy="275" r="3.5"/><circle cx="275" cy="370" r="3.5"/><circle cx="125" cy="370" r="3.5"/><circle cx="30" cy="275" r="3.5"/><circle cx="30" cy="125" r="3.5"/></g>
     <text x="200" y="218" text-anchor="middle" font-family="Montserrat,'Arial Black'" font-weight="900" font-style="italic" font-size="96" fill="#eef0f3" letter-spacing="-5">JFC</text>
     <rect x="236" y="196" width="34" height="7" fill="#e30613" transform="skewX(-18) translate(66 0)"/>
@@ -301,6 +352,16 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 <section class="sec" id="results" style="padding-top:10px"><div class="wrap">
  <div class="sh rv"><div><span class="eb" data-t="res_kicker"></span><h2 data-t="res_title"></h2></div><a class="btn btn-ne" data-link="ig" id="igb"></a></div>
  <div class="res4" id="res4"></div>
+</div></section>
+
+<section class="sec" id="timer" style="padding-top:10px"><div class="wrap">
+ <div class="tm-wrap rv">
+  <div><span class="eb" data-t="timer_kicker"></span><h2 data-t="timer_title"></h2><p data-t="timer_sub"></p>
+   <div class="rounds" id="rnds"></div>
+   <div class="tbtns"><button class="btn btn-rd" id="tgo"></button><button class="btn btn-gh" id="trs"></button></div>
+   <a class="tlink" data-link="wa" id="tcta"></a></div>
+  <div class="clock"><div class="ring" id="ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="54" fill="none" stroke-width="6"/><circle class="fg" id="rfg" cx="60" cy="60" r="54" fill="none" stroke-width="6" stroke-dasharray="339.3" stroke-dashoffset="0"/></svg><div class="c"><b id="tt">3:00</b><span id="tph"></span></div></div></div>
+ </div>
 </div></section>
 
 <section class="sec" id="dirs" style="padding-top:20px"><div class="wrap">
@@ -372,6 +433,23 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 <script>
 (function(){
 const $=id=>document.getElementById(id);let goal=1,selDay=null;
+// Раундовый таймер: 3 раунда по 3:00, отдых 1:00
+const TM={R:3,W:180,P:60,r:1,ph:'work',left:180,run:false,id:null,
+ paint(){const J=window.JFC,t=J.t,tot=this.ph==='work'?this.W:this.P;
+  $('tt').textContent=Math.floor(this.left/60)+':'+String(this.left%60).padStart(2,'0');
+  $('tph').textContent=(this.ph==='work'?t('work'):t('rest'))+' · '+t('round')+' '+this.r+'/'+this.R;
+  $('rfg').style.strokeDashoffset=(339.3*(1-this.left/tot)).toFixed(1);
+  $('ring').classList.toggle('rest',this.ph==='rest');$('ring').classList.toggle('go',this.run&&this.ph==='work');
+  $('rnds').innerHTML=Array.from({length:this.R},(_,i)=>`<i class="${i<this.r-(this.ph==='work'?1:0)||(i===this.r-1&&this.run)?'on':''}"></i>`).join('');
+  $('tgo').innerHTML=J.icon(this.run?'clock':'arrow')+'<span>'+(this.run?t('pause'):t('start'))+'</span>';
+  $('trs').textContent=t('reset');$('tcta').innerHTML=t('timer_cta')+' →';},
+ tick(){this.left--;if(this.left<=0){if(this.ph==='work'){if(this.r>=this.R){window.JFC.bell(3);this.stop();this.r=1;this.ph='work';this.left=this.W;this.paint();return}window.JFC.bell(1);this.ph='rest';this.left=this.P}else{window.JFC.bell(2);this.ph='work';this.r++;this.left=this.W}}this.paint()},
+ toggle(){if(this.run)this.stop();else{this.run=true;window.JFC.bell(1);this.id=setInterval(()=>this.tick(),1000)}this.paint()},
+ stop(){this.run=false;clearInterval(this.id)},
+ reset(){this.stop();this.r=1;this.ph='work';this.left=this.W;this.paint()}};
+document.addEventListener('click',e=>{if(e.target.closest('#tgo'))TM.toggle();if(e.target.closest('#trs'))TM.reset();});
+// подсветка за курсором в первом экране
+document.addEventListener('pointermove',e=>{const h=document.querySelector('.hero');if(!h)return;const r=h.getBoundingClientRect();if(e.clientY>r.bottom)return;h.style.setProperty('--mx',(e.clientX-r.left)+'px');h.style.setProperty('--my',(e.clientY-r.top)+'px');},{passive:true});
 const PT={ru:['Тренажёрный зал','Групповые тренировки','Единоборства','Персональные','Заморозка'],ky:['Машыгуу залы','Топтук машыгуулар','Мушташ түрлөрү','Жеке машыгуулар','Тоңдуруу']};
 const PV={ru:[['y','y','y','y'],['-','-','12','∞'],['-','-','1 направление','все'],['-','-','-','2'],['-','7 дней','-','14 дней']],ky:[['y','y','y','y'],['-','-','12','∞'],['-','-','1 багыт','баары'],['-','-','-','2'],['-','7 күн','-','14 күн']]};
 window.render=function(){
@@ -384,11 +462,14 @@ window.render=function(){
  $('promo').innerHTML=`<div class="wrap">${icon('fire')}<span><b>${t('promo')}</b> <em>${J.promoDate()}</em></span><a href="${J.waLink(t('wa_msg')+' '+t('promo'))}" target="_blank" rel="noopener">${t('promo_btn')} →</a></div>`;
  $('micro').innerHTML=icon('shield')+t('cta_micro');
  $('igb').innerHTML=ib('ig','@jfc_gym.kg');
- $('res4').innerHTML=[['level',1],['medal',2],['kick',3],['ig',4]].map(([k,i])=>`<div class="r4">${icon(k)}<b>${t('res'+i+'_n')}${i===1?'<small>'+t('res1_u')+'</small>':''}</b><p>${t('res'+i+'_t')}</p></div>`).join('');
+ $('res4').innerHTML=[['level',1],['medal',2],['kick',3],['ig',4]].map(([k,i])=>`<div class="r4" data-tilt>${icon(k)}<b>${t('res'+i+'_n')}${i===1?'<small>'+t('res1_u')+'</small>':''}</b><p>${t('res'+i+'_t')}</p></div>`).join('');
  $('guar').innerHTML=icon('shield')+`<div><b>${t('guar_t')}</b><span>${t('guar_d')}</span></div>`;
- $('h1').innerHTML=ib('wa',t('cta_trial'));$('h2').innerHTML=ib('arrow',t('quiz_title'));
+ const wds=(t('hero_title_1')+' '+t('hero_title_2')).split(' ');
+ $('ht').innerHTML=wds.map((w,i)=>`<span class="w" style="animation-delay:${i*.09}s">${w}</span>`).join(' ')+`<em class="w" style="animation-delay:${wds.length*.09}s">${t('hero_title_3')}</em>`;
+ $('h1').innerHTML=ib('wa',t('cta_trial'));
+ TM.paint();$('h2').innerHTML=ib('arrow',t('quiz_title'));
  [0,1,2,7].forEach((d,i)=>$('tg'+(i+1)).innerHTML=(i===0&&nx?`<b>${nx.time}</b> · `:'')+L(dirs[d])[0]);
- $('stats').innerHTML=[1,2,3].map(i=>`<div><b>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('')+`<a href="${J.C.gis}" target="_blank" rel="noopener"><b>4.9 ★</b><span>${t('gis_reviews')}</span></a>`;
+ $('stats').innerHTML=[1,2,3].map(i=>`<div><b data-cu>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('')+`<a href="${J.C.gis}" target="_blank" rel="noopener"><b>4.9 ★</b><span>${t('gis_reviews')}</span></a>`;
  const drawQ=()=>{
   $('goals').innerHTML=goals.map((g,i)=>`<button class="goal ${i===goal?'on':''}" role="tab" aria-selected="${i===goal}" data-i="${i}"><span class="gi">${icon(g.ic)}</span>${t(g.k)}<span class="ar">${icon('arrow')}</span></button>`).join('');
   const g=goals[goal],d0=dirs[g.d[0]],c=coaches[g.c[0]];
@@ -403,7 +484,7 @@ window.render=function(){
  };
  drawQ();$('goals').onclick=e=>{const b=e.target.closest('.goal');if(b){goal=+b.dataset.i;drawQ();}};
  $('dirsg').innerHTML=dirs.map(d=>`<a class="dir" href="${J.waLink(t('wa_msg')+' '+L(d)[0])}" target="_blank" rel="noopener">${icon(d.ic)}<h3>${L(d)[0]}</h3><p>${L(d)[1]}</p></a>`).join('');
- $('coachg').innerHTML=coaches.map((c,i)=>`<div class="co rv"><div class="pic">${portrait(i,'#2a2e36','#14161b','#4a505b')}</div><div><h3>${c.n}</h3><div class="rl">${L(c)}</div><div class="tg">${L(c.tag)}</div><div class="bar"><span>${t('exp')}</span><span>${c.exp}</span></div><div class="bar" style="margin-top:0"><i style="--w:${c.exp/12*100}%;width:100%"></i></div></div></div>`).join('');
+ $('coachg').innerHTML=coaches.map((c,i)=>`<div class="co rv" data-tilt><div class="pic">${portrait(i,'#2a2e36','#14161b','#4a505b')}</div><div><h3>${c.n}</h3><div class="rl">${L(c)}</div><div class="tg">${L(c.tag)}</div><div class="bar"><span>${t('exp')}</span><span>${c.exp}</span></div><div class="bar" style="margin-top:0"><i style="--w:${c.exp/12*100}%;width:100%"></i></div></div></div>`).join('');
  const pv=PV[J.lang];
  $('pt').innerHTML=`<tr><th></th>${prices.map((p,i)=>`<th class="${p.hit?'hit':''}">${p.hit?`<span class="hb">${t('popular')}</span>`:''}<span class="n">${L(p)[0]}</span><span class="p">${p.p}<small>${t('som')} ${L(p.u)}</small></span></th>`).join('')}</tr>`+
   PT[J.lang].map((r,ri)=>`<tr><td>${r}</td>${pv[ri].map((v,ci)=>`<td class="${prices[ci].hit?'hit':''}">${v==='y'?`<span class="y">${icon('check')}</span>`:v==='-'?'<span class="no">—</span>':v}</td>`).join('')}</tr>`).join('')+
