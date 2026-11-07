@@ -6,7 +6,7 @@
   const GIS = 'https://2gis.kg/bishkek/firm/70000001027848239';
   const IG = 'https://instagram.com/lafamilia.kg';
 
-  const img = (id, w = 900) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+  const img = id => `img/${id}.jpg`;
 
   const T = {
     ru: {
@@ -194,7 +194,12 @@
       e.preventDefault();
       const d = new FormData(f);
       const msg = `${t('wa_hi')}\n${t('f_name')}: ${d.get('name') || ''}\n${t('f_phone')}: ${d.get('phone') || ''}${d.get('room') ? `\n${t('f_room')} ${d.get('room')}` : ''}`;
-      window.open(wa(msg), '_blank', 'noopener');
+      const url = wa(msg);
+      let w = null;
+      try { w = window.open(url, '_blank', 'noopener'); } catch (err) {}
+      let link = f.querySelector('.wa-go');
+      if (!link) { link = document.createElement('a'); link.className = 'btn wa wa-go'; link.target = '_blank'; link.rel = 'noopener'; f.appendChild(link); }
+      link.href = url; link.textContent = '→ WhatsApp';
     });
     // when opened inside the switcher, follow its language changes
     window.addEventListener('storage', e => { if (e.key === 'lf-lang' && e.newValue && e.newValue !== lang) { lang = e.newValue; apply(); } });
