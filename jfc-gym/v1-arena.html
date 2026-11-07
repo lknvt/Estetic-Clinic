@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>JFC Gym — Night Arena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;0,800;0,900;1,800;1,900&family=Golos+Text:wght@400;500;600;700&family=Montserrat:ital,wght@1,900&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
+<style>
+/* Концепция A «Night Arena»: ночной зал, графит, тонкие LED-линии бирюзового неона как подсветка клетки.
+   Красный — только логотип и точечные метки. Главный UX — подбор направления по цели. */
+:root{--bg:#0c0d10;--s1:#13151a;--s2:#1a1d24;--ln:#ffffff14;--ln2:#ffffff24;--tx:#eef0f3;--mu:#8d939e;--ne:#3ef2ff;--ne2:#9ffaff;--neg:0 0 6px #3ef2ffcc,0 0 22px #3ef2ff55;--red:#e30613;--wa:#25d366;
+ --fd:"Exo 2",system-ui,sans-serif;--fb:"Golos Text",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.6 var(--fb);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}
+.ic{width:22px;height:22px;flex:none}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+h1,h2,h3{font-family:var(--fd);font-weight:800;letter-spacing:-.01em;line-height:1.05;text-wrap:balance}
+.jlogo{height:36px;width:auto;display:block}
+.eb{display:inline-flex;align-items:center;gap:10px;font:600 12px/1 var(--fd);letter-spacing:.24em;text-transform:uppercase;color:var(--ne)}
+.eb:before{content:"";width:22px;height:1px;background:var(--ne);box-shadow:var(--neg)}
+.sec{padding:76px 0;position:relative}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.sh h2{font-size:clamp(30px,3.6vw,48px);margin-top:14px}
+.sh p{color:var(--mu);max-width:420px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 24px;border-radius:10px;border:0;cursor:pointer;font:700 15px var(--fb);transition:.2s;white-space:nowrap}
+.btn:focus-visible{outline:2px solid var(--ne);outline-offset:3px}
+.btn-wa{background:var(--wa);color:#04210f}.btn-wa:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-ne{background:transparent;color:var(--ne2);box-shadow:inset 0 0 0 1px var(--ne),0 0 18px -6px var(--ne)}.btn-ne:hover{background:#3ef2ff14;box-shadow:inset 0 0 0 1px var(--ne),0 0 26px -4px var(--ne)}
+.btn-gh{background:var(--s2);color:var(--tx);box-shadow:inset 0 0 0 1px var(--ln2)}.btn-gh:hover{box-shadow:inset 0 0 0 1px #ffffff55}
+/* header */
+.hd{position:sticky;top:0;z-index:50;background:#0c0d10d9;backdrop-filter:blur(14px);border-bottom:1px solid var(--ln)}
+.hd .wrap{display:flex;align-items:center;gap:26px;height:72px}
+nav{display:flex;gap:22px}
+nav a{font-size:14px;font-weight:500;color:#c4c8cf;transition:.2s}
+nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
+.hr{margin-left:auto;display:flex;align-items:center;gap:14px}
+.ph{display:flex;align-items:center;gap:8px;font:700 16px var(--fd);white-space:nowrap}
+.ph .ic{width:18px;height:18px;color:var(--ne)}
+.lang{display:flex;border-radius:8px;box-shadow:inset 0 0 0 1px var(--ln2);padding:3px}
+.lang button{border:0;background:none;color:var(--mu);font:700 12px var(--fb);padding:6px 9px;border-radius:6px;cursor:pointer}
+.lang button.on{background:var(--tx);color:var(--bg)}
+.hd .btn{height:42px;padding:0 16px;font-size:14px}
+.burger{display:none;width:42px;height:42px;border-radius:10px;border:0;background:var(--s2);cursor:pointer;place-items:center}
+/* hero */
+.hero{padding:40px 0 0;min-height:calc(100svh - 72px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 60% at 75% 45%,#3ef2ff14,transparent 70%),radial-gradient(40% 50% at 10% 100%,#e306130d,transparent 70%);pointer-events:none}
+.hgrid{flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative}
+.live{display:inline-flex;align-items:center;gap:10px;background:var(--s1);box-shadow:inset 0 0 0 1px var(--ln);border-radius:99px;padding:7px 14px 7px 10px;font-size:13px;font-weight:600;color:#d8dbe0}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--ne);box-shadow:var(--neg);animation:bl 2s infinite}
+.live.closed i{background:var(--mu);box-shadow:none;animation:none}
+@keyframes bl{50%{opacity:.35}}
+.hero h1{font-size:clamp(46px,6.4vw,100px);font-weight:900;font-style:italic;text-transform:uppercase;line-height:.94;margin:26px 0 24px}
+.hero h1 em{display:block;font-style:italic;color:transparent;-webkit-text-stroke:1.5px var(--ne);text-shadow:0 0 24px #3ef2ff66}
+.hero p{font-size:18px;color:#b9bec7;max-width:520px;margin-bottom:32px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.oct{position:relative;width:100%;max-width:520px;margin-left:auto;aspect-ratio:1}
+.oct svg{width:100%;height:100%;overflow:visible}
+.oct .glow{filter:drop-shadow(0 0 6px #3ef2ff) drop-shadow(0 0 18px #3ef2ff88)}
+.oct .tag{position:absolute;font:600 13px var(--fd);letter-spacing:.08em;text-transform:uppercase;color:#cfd3da;background:#13151ae6;box-shadow:inset 0 0 0 1px var(--ln2);padding:7px 12px;border-radius:8px;white-space:nowrap}
+.oct .tag b{color:var(--ne);font-weight:800}
+.t1{left:2%;top:18%}.t2{right:-2%;top:30%}.t3{left:6%;bottom:16%}.t4{right:4%;bottom:10%}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ln);margin-top:30px}
+.hstats>*{padding:22px 24px 26px;border-right:1px solid var(--ln)}
+.hstats>*:first-child{padding-left:0}.hstats>*:last-child{border:0}
+.hstats b{display:block;font:900 italic 38px/1 var(--fd);font-variant-numeric:tabular-nums}
+.hstats span{color:var(--mu);font-size:14px}
+.hstats a b{color:var(--ne2);text-shadow:0 0 14px #3ef2ff66}
+/* quiz */
+.quiz{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:stretch}
+.goals{display:grid;gap:10px}
+.goal{display:flex;align-items:center;gap:16px;text-align:left;background:var(--s1);border:0;border-radius:14px;padding:18px 20px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--ln);transition:.2s;font-weight:600;font-size:16px}
+.goal .gi{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--s2);color:#c4c8cf;transition:.2s}
+.goal .ar{margin-left:auto;opacity:.3;transition:.2s}
+.goal:hover{box-shadow:inset 0 0 0 1px var(--ln2)}
+.goal.on{box-shadow:inset 0 0 0 1px var(--ne),0 0 30px -12px var(--ne);background:#3ef2ff0a}
+.goal.on .gi{color:var(--bg);background:var(--ne);box-shadow:var(--neg)}
+.goal.on .ar{opacity:1;color:var(--ne)}
+.res{background:var(--s1);border-radius:18px;box-shadow:inset 0 0 0 1px var(--ln);padding:28px;display:grid;grid-template-columns:1fr 210px;gap:24px;position:relative;overflow:hidden}
+.res:after{content:"";position:absolute;left:28px;right:28px;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--ne),transparent);box-shadow:var(--neg)}
+.res h3{font-size:28px;margin:10px 0 6px}
+.res .rd{color:var(--mu);font-size:15px;margin-bottom:18px}
+.res .lbl{font:600 11px var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--mu);margin:18px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--s2);border-radius:8px;padding:8px 12px;font-size:14px;font-weight:600}
+.chip b{font-family:var(--fd);color:var(--ne2)}
+.chip .ic{width:16px;height:16px;color:var(--ne)}
+.rco{border-radius:14px;overflow:hidden;background:var(--s2);align-self:start}
+.rco .pic{aspect-ratio:1/1.05}.rco .pic svg{width:100%;height:100%;display:block}
+.rco div.tx{padding:12px 14px 14px}.rco b{display:block;font-size:15px}.rco small{color:var(--ne2);font-size:13px}
+.res .foot{grid-column:1/-1;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--ln);padding-top:20px}
+.res .pr{font:800 italic 30px var(--fd)}.res .pr small{font:500 14px var(--fb);color:var(--mu);margin-left:6px}
+/* dirs */
+.dirs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px var(--ln)}
+.dir{background:var(--bg);padding:26px 24px;min-height:200px;display:flex;flex-direction:column;gap:10px;transition:.25s;position:relative}
+.dir .ic{width:34px;height:34px;color:#c4c8cf;margin-bottom:auto;transition:.25s}
+.dir h3{font-size:21px}
+.dir p{color:var(--mu);font-size:14px;line-height:1.5}
+.dir:hover{background:var(--s1)}
+.dir:hover .ic{color:var(--ne);filter:drop-shadow(0 0 8px #3ef2ff)}
+.dir:after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ne);box-shadow:var(--neg);transition:.35s}
+.dir:hover:after{width:100%}
+/* coaches */
+.coaches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.co{display:grid;grid-template-columns:118px 1fr;gap:18px;background:var(--s1);border-radius:16px;padding:12px;box-shadow:inset 0 0 0 1px var(--ln);transition:.25s}
+.co:hover{box-shadow:inset 0 0 0 1px var(--ln2);transform:translateY(-3px)}
+.co .pic{border-radius:12px;overflow:hidden;aspect-ratio:1/1.15}.co .pic svg{width:100%;height:100%;display:block;filter:grayscale(1) contrast(1.1)}
+.co:hover .pic svg{filter:none}
+.co h3{font-size:17px;margin:6px 0 4px}
+.co .rl{color:var(--ne2);font-size:14px;font-weight:600}
+.co .tg{color:var(--mu);font-size:13px;margin-top:2px}
+.bar{margin-top:12px;font-size:12px;color:var(--mu);display:flex;justify-content:space-between}
+.bar i{display:block;height:3px;background:var(--s2);border-radius:3px;margin-top:6px;position:relative;overflow:hidden}
+.bar i:after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--ne);box-shadow:var(--neg)}
+/* prices table */
+.tw{overflow-x:auto;border-radius:16px;box-shadow:inset 0 0 0 1px var(--ln)}
+.pt{width:100%;border-collapse:collapse;min-width:760px}
+.pt th,.pt td{padding:16px 18px;text-align:center;border-bottom:1px solid var(--ln)}
+.pt tr:last-child td{border:0}
+.pt th{vertical-align:bottom;padding-top:26px}
+.pt th:first-child,.pt td:first-child{text-align:left;color:#c4c8cf;font-weight:500}
+.pt th .n{display:block;font:700 15px var(--fd);text-transform:uppercase;letter-spacing:.04em;color:#d8dbe0}
+.pt th .p{display:block;font:900 italic 36px/1.1 var(--fd);margin-top:8px;font-variant-numeric:tabular-nums}
+.pt th .p small{font:500 13px var(--fb);color:var(--mu);margin-left:4px}
+.pt td{font-weight:600}
+.pt .y{color:var(--ne)}.pt .no{color:#3a3f48}
+.pt .hit{background:#3ef2ff08;position:relative}
+.pt th.hit{box-shadow:inset 0 2px 0 var(--ne)}
+.pt th .hb{display:inline-block;font:700 10px var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--ne);box-shadow:var(--neg);border-radius:4px;padding:3px 7px;margin-bottom:10px}
+.pt .cta td{padding:18px}
+.pt .cta .btn{height:44px;width:100%;font-size:14px}
+.pnote{color:var(--mu);font-size:14px;margin-top:16px}
+/* schedule */
+.sg{display:grid;grid-template-columns:200px repeat(7,1fr);gap:1px;background:var(--ln);border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px var(--ln)}
+.sg>div{background:var(--bg);padding:12px 10px;text-align:center;font-size:14px;min-height:50px;display:flex;align-items:center;justify-content:center}
+.sg .h{font:700 12px var(--fd);letter-spacing:.12em;text-transform:uppercase;color:var(--mu);background:var(--s1)}
+.sg .n{justify-content:flex-start;padding-left:18px;font-weight:600;gap:10px;text-align:left}
+.sg .n .ic{width:18px;height:18px;color:var(--mu)}
+.sg .tm{font:700 15px var(--fd);font-variant-numeric:tabular-nums}
+.sg .td{background:#3ef2ff0a}
+.sg .h.td{color:var(--ne);text-shadow:0 0 10px #3ef2ff88}
+.sg .td .tm{color:var(--ne2)}
+.sg .off{color:#3a3f48}
+.schm{display:none}
+/* reviews */
+.revs{columns:3;column-gap:14px}
+.rvw{break-inside:avoid;background:var(--s1);border-radius:16px;box-shadow:inset 0 0 0 1px var(--ln);padding:22px;margin-bottom:14px}
+.stars{display:flex;gap:2px;color:#ffd166}.stars .ic{width:15px;height:15px}
+.rvw p{color:#d2d6dc;font-size:15px;margin:12px 0 16px}
+.who{display:flex;align-items:center;gap:12px}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:800 15px var(--fd);background:var(--s2);color:var(--ne2);box-shadow:inset 0 0 0 1px #3ef2ff55}
+.who b{display:block;font-size:14px}.who small{color:var(--mu);font-size:13px}
+.score{display:flex;align-items:center;gap:14px}
+.score b{font:900 italic 48px/1 var(--fd)}
+.score small{display:block;color:var(--mu);font-size:13px}
+/* contacts */
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.map{position:relative;border-radius:18px;overflow:hidden;min-height:440px;background:var(--s1);box-shadow:inset 0 0 0 1px var(--ln)}
+.map>svg{position:absolute;inset:0;width:100%;height:100%}
+.map .info{position:absolute;left:22px;right:22px;bottom:22px;background:#0c0d10e6;backdrop-filter:blur(8px);border-radius:14px;padding:20px;box-shadow:inset 0 0 0 1px var(--ln2);display:grid;gap:12px}
+.map .row{display:flex;gap:12px;align-items:flex-start}.map .row .ic{color:var(--ne);width:20px;height:20px;margin-top:2px}
+.map small{display:block;color:var(--mu);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.map .big{font:800 26px var(--fd)}
+.map .btns{display:flex;gap:10px;flex-wrap:wrap}.map .btns .btn{height:46px;font-size:14px;flex:1}
+.form{background:var(--s1);border-radius:18px;box-shadow:inset 0 0 0 1px var(--ln);padding:32px}
+.form h3{font-size:26px;margin:12px 0 8px}
+.form p{color:var(--mu);font-size:15px;margin-bottom:22px}
+.fld{display:block;margin-bottom:12px}
+.fld span{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:6px}
+.fld input,.fld select{width:100%;height:52px;border-radius:10px;background:var(--bg);border:1px solid var(--ln2);padding:0 16px;outline:0;transition:.2s;appearance:none}
+.fld input:focus,.fld select:focus{border-color:var(--ne);box-shadow:0 0 0 3px #3ef2ff22}
+.form .btn{width:100%;margin-top:6px}
+.form .note{font-size:12px;color:#6b717b;margin-top:12px}
+footer{border-top:1px solid var(--ln);padding:28px 0 32px;color:var(--mu);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.soc{display:flex;gap:8px}.soc a{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:var(--s1);box-shadow:inset 0 0 0 1px var(--ln);transition:.2s}
+.soc a:hover{color:var(--ne);box-shadow:inset 0 0 0 1px var(--ne)}
+.fab{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--wa);color:#04210f;display:grid;place-items:center;box-shadow:0 12px 30px -8px #25d36699}
+.fab .ic{width:28px;height:28px}
+.mbar{display:none}
+.rv{opacity:1;transform:none;transition:opacity .7s,transform .7s}
+.js .rv:not(.in){opacity:0;transform:translateY(18px)}
+@media (prefers-reduced-motion:reduce){.js .rv:not(.in){opacity:1;transform:none}.live i{animation:none}}
+@media(max-width:1180px){nav{display:none}.burger{display:grid}
+ body.nav-open nav{display:flex;position:fixed;top:72px;left:0;right:0;flex-direction:column;gap:16px;background:#0c0d10f7;padding:22px 32px 28px;border-bottom:1px solid var(--ln)}
+ body.nav-open nav a{font-size:20px}
+ .coaches{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){
+ .wrap{padding:0 18px}
+ .ph span,.hd .btn{display:none}
+ .hero{min-height:0;padding-top:28px}
+ .hgrid{grid-template-columns:1fr}
+ .oct{max-width:320px;margin:0 auto}
+ .hstats{grid-template-columns:1fr 1fr}.hstats>*{padding:18px 14px}.hstats>*:nth-child(odd){padding-left:0}.hstats>*:nth-child(2){border-right:0}.hstats>*:nth-child(-n+2){border-bottom:1px solid var(--ln)}
+ .hstats b{font-size:30px}
+ .quiz{grid-template-columns:1fr}
+ .goals{grid-auto-flow:column;grid-auto-columns:minmax(200px,70%);overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:2px 18px 6px}
+ .goal{scroll-snap-align:start}
+ .res{grid-template-columns:1fr;padding:22px}.rco{display:grid;grid-template-columns:90px 1fr;align-items:center}
+ .dirs{grid-template-columns:1fr 1fr}
+ .dir{min-height:170px;padding:20px}
+ .coaches{grid-template-columns:1fr}
+ .sg{display:none}.schm{display:block}
+ .revs{columns:1}
+ .ct{grid-template-columns:1fr}
+ .map{min-height:400px}
+ .sec{padding:56px 0}
+ .fab{display:none}
+ .mbar{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:8px max(8px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));background:#0c0d10f2;backdrop-filter:blur(12px);border-top:1px solid var(--ln)}
+ .mbar a{height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:700;background:var(--s2)}
+ .mbar a.wa{background:var(--wa);color:#04210f}
+ .mbar a .ic{width:18px;height:18px}
+ footer{padding-bottom:100px}
+}
+@media(max-width:560px){
+ .hero h1{font-size:50px}
+ .hero p{font-size:16px}
+ .ctas .btn{flex:1 1 100%}
+ .oct .tag{font-size:11px;padding:5px 8px}
+ .dir p{display:none}.dir{min-height:130px}
+}
+.dtabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px}
+.dtabs button{flex:1 0 auto;min-width:46px;height:44px;border:0;border-radius:10px;background:var(--s1);box-shadow:inset 0 0 0 1px var(--ln);font-weight:700;cursor:pointer;color:var(--tx)}
+.dtabs button.on{box-shadow:inset 0 0 0 1px var(--ne),0 0 16px -6px var(--ne);color:var(--ne2)}
+.dlist{display:grid;gap:8px}
+.dlist div{display:flex;justify-content:space-between;align-items:center;background:var(--s1);border-radius:12px;padding:14px 16px;box-shadow:inset 0 0 0 1px var(--ln)}
+.dlist span{font:700 16px var(--fd);color:var(--ne2)}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="hd"><div class="wrap">
+ <a href="#top" id="lg" aria-label="JFC GYM"></a>
+ <nav><a href="#quiz" data-t="quiz_kicker"></a><a href="#dirs" data-t="nav_dirs"></a><a href="#coaches" data-t="nav_coaches"></a><a href="#prices" data-t="nav_prices"></a><a href="#schedule" data-t="nav_schedule"></a><a href="#contacts" data-t="nav_contacts"></a></nav>
+ <div class="hr">
+  <a class="ph" data-link="tel" id="hph"></a>
+  <div class="lang"><button data-lang="ru">RU</button><button data-lang="ky">KG</button></div>
+  <a class="btn btn-ne" data-link="wa" id="hwa"></a>
+  <button class="burger" data-burger aria-label="Меню" id="hbg"></button>
+ </div>
+</div></header>
+
+<section class="hero" id="top"><div class="wrap" style="display:flex;flex-direction:column;flex:1;width:100%">
+ <div class="hgrid">
+  <div class="rv">
+   <span class="live" id="live"><i></i><span></span></span>
+   <h1><span data-t="hero_title_1"></span> <span data-t="hero_title_2"></span><em data-t="hero_title_3"></em></h1>
+   <p data-t="hero_sub"></p>
+   <div class="ctas"><a class="btn btn-wa" data-link="wa" id="h1"></a><a class="btn btn-gh" href="#quiz" id="h2"></a></div>
+  </div>
+  <div class="oct rv">
+   <svg viewBox="0 0 400 400" aria-hidden="true">
+    <defs><pattern id="nt" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v14M0 0h14" stroke="#ffffff10" stroke-width="1"/></pattern>
+    <clipPath id="oc"><polygon points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125"/></clipPath></defs>
+    <g clip-path="url(#oc)"><rect width="400" height="400" fill="#101217"/><rect width="400" height="400" fill="url(#nt)"/></g>
+    <polygon class="glow" points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125" fill="none" stroke="#3ef2ff" stroke-width="2.5"/>
+    <polygon points="140,66 260,66 334,140 334,260 260,334 140,334 66,260 66,140" fill="none" stroke="#ffffff1c" stroke-width="1" stroke-dasharray="3 7"/>
+    <g fill="#3ef2ff" class="glow"><circle cx="125" cy="30" r="3.5"/><circle cx="275" cy="30" r="3.5"/><circle cx="370" cy="125" r="3.5"/><circle cx="370" cy="275" r="3.5"/><circle cx="275" cy="370" r="3.5"/><circle cx="125" cy="370" r="3.5"/><circle cx="30" cy="275" r="3.5"/><circle cx="30" cy="125" r="3.5"/></g>
+    <text x="200" y="218" text-anchor="middle" font-family="Montserrat,'Arial Black'" font-weight="900" font-style="italic" font-size="96" fill="#eef0f3" letter-spacing="-5">JFC</text>
+    <rect x="236" y="196" width="34" height="7" fill="#e30613" transform="skewX(-18) translate(66 0)"/>
+    <text x="200" y="252" text-anchor="middle" font-family="'Exo 2'" font-weight="700" font-size="14" fill="#8d939e" letter-spacing="8">BISHKEK · ARENA</text>
+   </svg>
+   <span class="tag t1" id="tg1"></span><span class="tag t2" id="tg2"></span><span class="tag t3" id="tg3"></span><span class="tag t4" id="tg4"></span>
+  </div>
+ </div>
+ <div class="hstats" id="stats"></div>
+</div></section>
+
+<section class="sec" id="quiz"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="quiz_kicker"></span><h2 data-t="quiz_title"></h2></div><p data-t="quiz_sub"></p></div>
+ <div class="quiz rv"><div class="goals" id="goals" role="tablist"></div><div class="res" id="res" role="tabpanel"></div></div>
+</div></section>
+
+<section class="sec" id="dirs" style="padding-top:20px"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="dirs_kicker"></span><h2 data-t="dirs_title"></h2></div><p data-t="dirs_sub"></p></div>
+ <div class="dirs rv" id="dirsg"></div>
+</div></section>
+
+<section class="sec" id="coaches"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="coaches_kicker"></span><h2 data-t="coaches_title"></h2></div><p data-t="coaches_sub"></p></div>
+ <div class="coaches" id="coachg"></div>
+</div></section>
+
+<section class="sec" id="prices"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="prices_kicker"></span><h2 data-t="prices_title"></h2></div><p data-t="prices_sub"></p></div>
+ <div class="tw rv"><table class="pt" id="pt"></table></div>
+</div></section>
+
+<section class="sec" id="schedule" style="padding-top:20px"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="sched_kicker"></span><h2 data-t="sched_title"></h2></div><p data-t="sched_sub"></p></div>
+ <div class="sg rv" id="sg"></div>
+ <div class="schm"><div class="dtabs" id="dtabs"></div><div class="dlist" id="dlist"></div></div>
+</div></section>
+
+<section class="sec" id="reviews"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="reviews_kicker"></span><h2 data-t="reviews_title"></h2></div><div class="score"><b>4.9</b><div><div class="stars" id="sst"></div><small data-t="reviews_sub"></small></div></div></div>
+ <div class="revs" id="revg"></div>
+</div></section>
+
+<section class="sec" id="contacts"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="loc_kicker"></span><h2 data-t="loc_title"></h2></div></div>
+ <div class="ct rv">
+  <div class="map">
+   <svg viewBox="0 0 600 440" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#ffffff0d" stroke-width="1">
+     <path d="M0 40H600M0 100H600M0 160H600M0 220H600M0 280H600M0 340H600M0 400H600M60 0V440M140 0V440M220 0V440M300 0V440M380 0V440M460 0V440M540 0V440"/></g>
+    <path d="M-20 185 L620 105" stroke="#262a33" stroke-width="22"/><path d="M250 -20 L330 460" stroke="#262a33" stroke-width="16"/>
+    <path d="M-20 185 L620 105" stroke="#3ef2ff" stroke-width="1.5" opacity=".5" stroke-dasharray="10 12" style="filter:drop-shadow(0 0 4px #3ef2ff)"/>
+    <circle cx="300" cy="140" r="44" fill="#3ef2ff10" stroke="#3ef2ff" stroke-width="1" style="filter:drop-shadow(0 0 8px #3ef2ff)"/>
+    <circle cx="300" cy="140" r="9" fill="#3ef2ff" style="filter:drop-shadow(0 0 8px #3ef2ff)"/>
+    <text x="300" y="80" text-anchor="middle" font-family="Montserrat,'Arial Black'" font-weight="900" font-style="italic" font-size="22" fill="#eef0f3">JFC GYM</text>
+   </svg>
+   <div class="info">
+    <div class="row"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><small data-t="loc_addr_l"></small><b data-t="loc_addr"></b></div></div>
+    <div class="row"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><small data-t="loc_hours_l"></small><b data-t="loc_hours"></b></div></div>
+    <a class="big" data-link="tel" data-phone></a>
+    <div class="btns"><a class="btn btn-wa" data-link="wa" id="cwa"></a><a class="btn btn-ne" data-link="gis" id="cgis"></a></div>
+   </div>
+  </div>
+  <div class="form">
+   <span class="eb" data-t="cta_trial"></span>
+   <h3 data-t="form_title"></h3><p data-t="form_sub"></p>
+   <form data-waform>
+    <label class="fld"><span data-t="form_name"></span><input id="fn" name="name" required data-tp="form_name"></label>
+    <label class="fld"><span data-t="form_phone"></span><input id="fp" name="phone" type="tel" required placeholder="+996"></label>
+    <label class="fld"><span data-t="form_dir"></span><select name="dir" id="fdir"></select></label>
+    <button class="btn btn-wa" type="submit" id="fsend"></button>
+    <p class="note" data-t="form_note"></p>
+   </form>
+  </div>
+ </div>
+</div></section>
+
+<footer><div class="wrap"><a href="#top" id="lg2" aria-label="JFC GYM"></a><span>© 2026 <span data-t="footer"></span></span><div class="soc"><a data-link="ig" aria-label="Instagram"></a><a data-link="wa" aria-label="WhatsApp"></a><a data-link="gis" aria-label="2GIS"></a></div></div></footer>
+<a class="fab" data-link="wa" id="fab" aria-label="WhatsApp"></a>
+<div class="mbar"><a data-link="tel" id="m1"></a><a class="wa" data-link="wa" id="m2"></a><a data-link="gis" id="m3"></a></div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+const $=id=>document.getElementById(id);let goal=1,selDay=null;
+const PT={ru:['Тренажёрный зал','Групповые тренировки','Единоборства','Персональные','Заморозка'],ky:['Машыгуу залы','Топтук машыгуулар','Мушташ түрлөрү','Жеке машыгуулар','Тоңдуруу']};
+const PV={ru:[['y','y','y','y'],['-','-','12','∞'],['-','-','1 направление','все'],['-','-','-','2'],['-','7 дней','-','14 дней']],ky:[['y','y','y','y'],['-','-','12','∞'],['-','-','1 багыт','баары'],['-','-','-','2'],['-','7 күн','-','14 күн']]};
+window.render=function(){
+ const J=window.JFC,{t,L,icon,dirs,coaches,prices,schedule,reviews,days,portrait,goals}=J;
+ const ib=(k,x)=>icon(k)+'<span>'+x+'</span>';
+ $('lg').innerHTML=J.logo('#eef0f3');$('lg2').innerHTML=J.logo('#eef0f3');
+ $('hph').innerHTML=icon('phone')+'<span>'+J.C.phone+'</span>';$('hwa').innerHTML=ib('wa','WhatsApp');$('hbg').innerHTML=icon('menu');
+ const o=J.isOpen(),nx=J.nextClass();
+ $('live').classList.toggle('closed',!o);$('live').querySelector('span').textContent=t(o?'open_now':'closed_now')+' · '+t('loc_hours');
+ $('h1').innerHTML=ib('wa',t('cta_trial'));$('h2').innerHTML=ib('arrow',t('quiz_title'));
+ [0,1,2,7].forEach((d,i)=>$('tg'+(i+1)).innerHTML=(i===0&&nx?`<b>${nx.time}</b> · `:'')+L(dirs[d])[0]);
+ $('stats').innerHTML=[1,2,3].map(i=>`<div><b>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('')+`<a href="${J.C.gis}" target="_blank" rel="noopener"><b>4.9 ★</b><span>${t('gis_reviews')}</span></a>`;
+ const drawQ=()=>{
+  $('goals').innerHTML=goals.map((g,i)=>`<button class="goal ${i===goal?'on':''}" role="tab" aria-selected="${i===goal}" data-i="${i}"><span class="gi">${icon(g.ic)}</span>${t(g.k)}<span class="ar">${icon('arrow')}</span></button>`).join('');
+  const g=goals[goal],d0=dirs[g.d[0]],c=coaches[g.c[0]];
+  const cls=[];schedule.forEach(r=>{if(g.d.includes(r.d))r.t.forEach((x,di)=>{if(x)cls.push({d:r.d,di,x})})});
+  cls.sort((a,b)=>a.di-b.di||a.x.localeCompare(b.x));
+  const hit=g.d.some(d=>d<4||d>5)?prices[2]:prices[1];
+  $('res').innerHTML=`<div><span class="eb">${t('quiz_rec')}</span><h3>${g.d.map(d=>L(dirs[d])[0]).join(' + ')}</h3><p class="rd">${L(d0)[1]}</p>
+   <div class="lbl">${t('nav_schedule')}</div><div class="chips">${cls.slice(0,6).map(x=>`<span class="chip">${days[J.lang][x.di]} <b>${x.x}</b></span>`).join('')||`<span class="chip">${t('sched_sub')}</span>`}</div>
+   <div class="lbl">${t('nav_dirs')}</div><div class="chips">${g.d.map(d=>`<span class="chip">${icon(dirs[d].ic)}${L(dirs[d])[0]}</span>`).join('')}</div></div>
+   <div class="rco"><div class="pic">${portrait(g.c[0],'#1f232b','#0f1115','#3a3f48')}</div><div class="tx"><small>${t('coach_sel')}</small><b>${c.n}</b><small>${L(c)}</small></div></div>
+   <div class="foot"><div class="pr">${t('price_from')} ${hit.p}<small>${t('som')} ${L(hit.u)}</small></div><a class="btn btn-wa" href="${J.waLink(t('wa_msg')+' '+t('quiz_rec')+': '+t(g.k))}" target="_blank" rel="noopener">${ib('wa',t('cta_trial'))}</a></div>`;
+ };
+ drawQ();$('goals').onclick=e=>{const b=e.target.closest('.goal');if(b){goal=+b.dataset.i;drawQ();}};
+ $('dirsg').innerHTML=dirs.map(d=>`<a class="dir" href="${J.waLink(t('wa_msg')+' '+L(d)[0])}" target="_blank" rel="noopener">${icon(d.ic)}<h3>${L(d)[0]}</h3><p>${L(d)[1]}</p></a>`).join('');
+ $('coachg').innerHTML=coaches.map((c,i)=>`<div class="co rv"><div class="pic">${portrait(i,'#2a2e36','#14161b','#4a505b')}</div><div><h3>${c.n}</h3><div class="rl">${L(c)}</div><div class="tg">${L(c.tag)}</div><div class="bar"><span>${t('exp')}</span><span>${c.exp}</span></div><div class="bar" style="margin-top:0"><i style="--w:${c.exp/12*100}%;width:100%"></i></div></div></div>`).join('');
+ const pv=PV[J.lang];
+ $('pt').innerHTML=`<tr><th></th>${prices.map((p,i)=>`<th class="${p.hit?'hit':''}">${p.hit?`<span class="hb">${t('popular')}</span>`:''}<span class="n">${L(p)[0]}</span><span class="p">${p.p}<small>${t('som')} ${L(p.u)}</small></span></th>`).join('')}</tr>`+
+  PT[J.lang].map((r,ri)=>`<tr><td>${r}</td>${pv[ri].map((v,ci)=>`<td class="${prices[ci].hit?'hit':''}">${v==='y'?`<span class="y">${icon('check')}</span>`:v==='-'?'<span class="no">—</span>':v}</td>`).join('')}</tr>`).join('')+
+  `<tr class="cta"><td></td>${prices.map(p=>`<td class="${p.hit?'hit':''}"><a class="btn ${p.hit?'btn-ne':'btn-gh'}" href="${J.waLink(t('wa_msg')+' '+L(p)[0]+' — '+p.p+' '+t('som'))}" target="_blank" rel="noopener">${t('price_cta')}</a></td>`).join('')}</tr>`;
+ const today=J.bishkekNow().day;if(selDay===null)selDay=today;
+ $('sg').innerHTML=`<div class="h"></div>`+days[J.lang].map((d,i)=>`<div class="h ${i===today?'td':''}">${d}</div>`).join('')+
+  schedule.map(r=>`<div class="n">${icon(dirs[r.d].ic)}${L(dirs[r.d])[0]}</div>`+r.t.map((x,i)=>`<div class="${i===today?'td':''}">${x?`<span class="tm">${x}</span>`:`<span class="off">·</span>`}</div>`).join('')).join('');
+ const dd=()=>{$('dtabs').innerHTML=days[J.lang].map((d,i)=>`<button class="${i===selDay?'on':''}" data-d="${i}">${d}</button>`).join('');
+  const l=schedule.filter(r=>r.t[selDay]).sort((a,b)=>a.t[selDay].localeCompare(b.t[selDay]));
+  $('dlist').innerHTML=l.length?l.map(r=>`<div><b>${L(dirs[r.d])[0]}</b><span>${r.t[selDay]}</span></div>`).join(''):`<div>${t('no_classes')}</div>`;};
+ dd();$('dtabs').onclick=e=>{const b=e.target.closest('button');if(b){selDay=+b.dataset.d;dd();}};
+ $('sst').innerHTML=icon('star').repeat(5);
+ $('revg').innerHTML=reviews.map(r=>`<div class="rvw"><div class="stars">${icon('star').repeat(5)}</div><p>${L(r)}</p><div class="who"><span class="av">${r.n[0]}</span><div><b>${r.n}</b><small>${L(r.s)}</small></div></div></div>`).join('');
+ $('cwa').innerHTML=ib('wa','WhatsApp');$('cgis').innerHTML=ib('pin',t('cta_route'));
+ $('fdir').innerHTML=dirs.map(d=>`<option>${L(d)[0]}</option>`).join('');$('fsend').innerHTML=ib('wa',t('form_send'));
+ document.querySelectorAll('.soc a').forEach((a,i)=>a.innerHTML=icon(['ig','wa','pin'][i]));
+ $('fab').innerHTML=icon('wa');$('m1').innerHTML=ib('phone',t('cta_call'));$('m2').innerHTML=ib('wa','WhatsApp');$('m3').innerHTML=ib('pin','2ГИС');
+};
+})();
+</script>
+</body>
+</html>
