@@ -3,36 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>JFC Gym — Family Club</title>
+<title>JFC Gym — Clean Arena</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,800;1,900&family=Manrope:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
 <style>
-:root{--bg:#f5f3ee;--wh:#fff;--ink:#13203b;--ink2:#2b3a5c;--mu:#6b7489;--or:#ff5a1f;--or2:#ff7a45;--orl:#ffe9df;--bl:#dfe8ff;--mn:#d9f5e6;--yl:#fff1c7;--pk:#ffe0ec;--ln:#e7e3da;--r:28px;--sh:0 24px 48px -28px #13203b40}
+/* Чистая арена: белые стены зала, красные треугольники, чёрный шрифт, иконки как в «актуальном» */
+:root{--bg:#f4f4f5;--wh:#fff;--ink:#111113;--ink2:#2b2b30;--mu:#6b6b72;--or:#e30613;--or2:#ff2b36;--orl:#fde6e7;--bl:#ececef;--mn:#f6f6f7;--yl:#ffffff;--pk:#fde6e7;--ln:#e4e4e7;--r:26px;--sh:0 24px 48px -28px #11111340}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{background:var(--bg);color:var(--ink);font:500 16px/1.55 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}button,input,select{font:inherit}
 .ic{width:22px;height:22px;flex:none}
 .wrap{max-width:1260px;margin:0 auto;padding:0 28px}
-h1,h2,h3{font-weight:800;letter-spacing:-.03em;line-height:1.08}
-.pill{display:inline-flex;align-items:center;gap:8px;background:var(--orl);color:var(--or);border-radius:99px;padding:7px 14px;font-size:13px;font-weight:800;letter-spacing:.02em}
+h1,h2{font-family:Montserrat,"Arial Black",sans-serif;font-style:italic;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;line-height:1.04}
+h3{font-family:Montserrat,sans-serif;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+.jlogo{height:40px;width:auto;display:block}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--or);color:#fff;padding:8px 14px 7px;font:italic 900 13px/1 Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.01em;transform:skew(-10deg)}
+.pill>*{transform:skew(10deg)}
 .pill .ic{width:16px;height:16px}
 .sec{padding:64px 0}
 .sh{text-align:center;max-width:720px;margin:0 auto 34px}
 .sh h2{font-size:clamp(30px,3.6vw,46px);margin:14px 0 10px}
 .sh p{color:var(--mu)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:0 26px;border-radius:18px;border:0;cursor:pointer;font-weight:800;font-size:15px;transition:.25s;white-space:nowrap}
-.btn-o{background:var(--or);color:#fff;box-shadow:0 12px 26px -12px #ff5a1fcc}.btn-o:hover{background:var(--or2);transform:translateY(-2px)}
+.btn-o{background:var(--or);color:#fff;box-shadow:0 12px 26px -12px #e30613aa}.btn-o:hover{background:var(--or2);transform:translateY(-2px)}
 .btn-n{background:var(--ink);color:#fff}.btn-n:hover{background:var(--ink2)}
 .btn-w{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ln)}.btn-w:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
 .btn-g{background:#25d366;color:#fff}.btn-g:hover{filter:brightness(1.05)}
 /* top strip */
-.top{background:var(--ink);color:#cfd6e6;font-size:13.5px}
+.top{background:var(--or);color:#ffe1e3;font-size:13.5px}
 .top .wrap{display:flex;justify-content:space-between;align-items:center;height:40px;gap:16px}
 .top div{display:flex;gap:22px;align-items:center}
 .top span{display:flex;align-items:center;gap:7px}
-.top .ic{width:16px;height:16px;color:var(--or2)}
+.top .ic{width:16px;height:16px;color:#fff}
 .top a{color:#fff;font-weight:800}
 /* header */
 .hd{position:sticky;top:0;z-index:50;background:#f5f3eee6;backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:.2s}
@@ -55,12 +59,12 @@ nav a:hover:after{right:0}
 /* hero */
 .hero{padding:28px 0 40px;min-height:calc(100svh - 116px);display:flex;align-items:center}
 .hero .wrap{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;width:100%}
-.hero h1{font-size:clamp(42px,5.3vw,74px);margin:18px 0 18px}
-.hero h1 em{font-style:normal;color:var(--or);position:relative;white-space:nowrap}
-.hero h1 em:after{content:"";position:absolute;left:0;right:0;bottom:4px;height:12px;background:var(--orl);z-index:-1;border-radius:6px}
+.hero h1{font-size:clamp(40px,4.9vw,70px);margin:20px 0 18px}
+.hero h1 em{font-style:italic;color:#fff;background:var(--or);padding:0 .16em;display:inline-block;transform:skew(-6deg);white-space:nowrap}
+
 .hero p{color:var(--mu);font-size:18px;max-width:520px}
 .aud-chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}
-.aud-chips span{display:flex;align-items:center;gap:7px;background:#fff;border-radius:99px;padding:8px 14px;font-weight:700;font-size:14px;box-shadow:0 6px 16px -10px #13203b33}
+.aud-chips span{display:flex;align-items:center;gap:7px;background:#fff;border-radius:99px;padding:8px 14px;font-weight:700;font-size:14px;box-shadow:0 6px 16px -10px #11111333}
 .aud-chips .ic{width:18px;height:18px;color:var(--or)}
 .ctas{display:flex;flex-wrap:wrap;gap:10px}
 .trust{display:flex;align-items:center;gap:14px;margin-top:28px}
@@ -76,19 +80,27 @@ nav a:hover:after{right:0}
 .tile b{font-size:22px;font-weight:800}
 .tile small{display:block;color:var(--ink2);font-weight:600;font-size:13px}
 .t1{background:var(--ink);color:#fff;grid-row:span 2}.t1 .bi{color:var(--or2);width:90px;height:90px}.t1 small{color:#aab4cc}
-.t1 .big{font-size:120px;font-weight:800;line-height:.8;position:absolute;right:-8px;bottom:-14px;color:#ffffff0d}
+.t1 .big{font-family:Montserrat,sans-serif;font-style:italic;font-size:120px;font-weight:900;line-height:.8;position:absolute;right:-8px;bottom:-14px;color:#ffffff0d}
 .t2{background:var(--or);color:#fff}.t2 .bi{color:#fff}.t2 small{color:#ffe1d4}
-.t3{background:var(--mn)}.t4{background:var(--bl);grid-column:span 2;flex-direction:row;align-items:center;gap:18px;justify-content:flex-start}
+.t3{background:#fff;box-shadow:inset 0 0 0 1.5px var(--ln)}
+.tile .tr{position:absolute;right:-30px;top:-30px;width:150px;height:150px;background:var(--or);opacity:.12;clip-path:polygon(0 0,100% 0,50% 86%)}
+.t1 .tr{opacity:.85;width:220px;height:220px;right:-50px;top:-40px}.t2 .tr{background:#000;opacity:.18}.t4{background:var(--bl);grid-column:span 2;flex-direction:row;align-items:center;gap:18px;justify-content:flex-start}
 .float{position:absolute;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:10px;font-weight:800;font-size:14px;z-index:2}
-.f1{left:-22px;bottom:-18px}.f2{right:-14px;top:-14px;background:var(--yl)}
+.f1{left:-22px;bottom:-18px}.f2{right:-14px;top:-14px;background:var(--ink);color:#fff}.f2 .ic{color:var(--or2)}
 .dotg{width:10px;height:10px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 4px #16a34a26}
 .f1.closed .dotg{background:#999;box-shadow:none}
 /* stats */
 .stats{background:var(--ink);color:#fff;border-radius:var(--r);display:grid;grid-template-columns:repeat(4,1fr);padding:10px}
 .stats div{padding:22px 26px;border-right:1px solid #ffffff18}
 .stats div:last-child{border:0}
-.stats b{font-size:42px;font-weight:800;line-height:1;color:var(--or2)}
+.stats b{font:italic 900 40px/1 Montserrat,sans-serif;color:var(--or2)}
 .stats span{display:block;color:#b8c1d6;font-size:14px;margin-top:6px}
+/* highlights */
+.hls{display:flex;gap:18px;justify-content:space-between;overflow-x:auto;background:#fff;border-radius:var(--r);padding:20px 26px;margin-bottom:14px;scrollbar-width:none;box-shadow:0 1px 0 var(--ln)}
+.hl{flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;font-weight:700;width:86px;text-align:center;line-height:1.2}
+.hl span.c{width:76px;height:76px;border-radius:50%;padding:3px;background:#dcdce0;display:block;transition:.25s}
+.hl span.c svg{width:100%;height:100%;display:block;border-radius:50%;border:3px solid #fff}
+.hl:hover span.c{background:var(--or);transform:scale(1.06)}
 /* audience */
 .aud{background:#fff;border-radius:34px;padding:12px;box-shadow:var(--sh)}
 .tabs{display:flex;gap:6px;background:var(--bg);border-radius:22px;padding:6px;width:max-content;max-width:100%;margin:0 auto 12px}
@@ -104,7 +116,7 @@ nav a:hover:after{right:0}
 .ap li .ic{width:16px;height:16px;color:var(--or)}
 .ap .vis{border-radius:26px;display:grid;place-items:center;position:relative;overflow:hidden}
 .ap .vis .ic{width:150px;height:150px;stroke-width:1.2;color:var(--ink)}
-.ap .vis .ring{position:absolute;border-radius:50%;border:2px dashed #13203b22}
+.ap .vis .ring{position:absolute;border-radius:50%;border:2px dashed #11111322}
 /* dirs */
 .dirs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .dir{background:#fff;border-radius:24px;padding:24px;transition:.3s;display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 0 var(--ln)}
@@ -130,17 +142,17 @@ nav a:hover:after{right:0}
 /* steps */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .stp{background:#fff;border-radius:24px;padding:26px;position:relative}
-.stp .n{width:44px;height:44px;border-radius:14px;background:var(--orl);color:var(--or);display:grid;place-items:center;font-weight:800;font-size:18px;margin-bottom:16px}
+.stp .n{width:52px;height:52px;background:var(--or);color:#fff;display:grid;place-items:center;font:italic 900 20px Montserrat,sans-serif;margin-bottom:16px;clip-path:polygon(0 0,100% 0,50% 92%);padding-bottom:14px}
 .stp h3{font-size:19px;margin-bottom:6px}.stp p{color:var(--mu);font-size:14.5px}
 /* prices */
 .prices{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
 .pr{background:#fff;border-radius:26px;padding:28px;display:flex;flex-direction:column;position:relative;box-shadow:0 1px 0 var(--ln)}
 .pr h3{font-size:18px}
-.pr .pp{font-size:44px;font-weight:800;letter-spacing:-.04em;margin:18px 0 0;line-height:1}
+.pr .pp{font-family:Montserrat,sans-serif;font-style:italic;font-size:44px;font-weight:900;letter-spacing:-.04em;margin:18px 0 0;line-height:1}
 .pr .pu{color:var(--mu);font-size:14px;font-weight:600}
 .pr ul{list-style:none;display:grid;gap:10px;margin:20px 0 24px;font-size:14.5px}
 .pr li{display:flex;gap:10px}
-.pr li .ic{width:20px;height:20px;color:#16a34a}
+.pr li .ic{width:20px;height:20px;color:var(--or)}
 .pr .btn{margin-top:auto}
 .pr.hit{background:var(--ink);color:#fff;box-shadow:var(--sh);transform:scale(1.03)}
 .pr.hit .pu{color:#aab4cc}.pr.hit li .ic{color:var(--or2)}
@@ -172,7 +184,7 @@ nav a:hover:after{right:0}
 /* reviews */
 .revs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .rsum{background:var(--or);color:#fff;border-radius:26px;padding:28px;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between}
-.rsum b{font-size:84px;font-weight:800;line-height:.9;letter-spacing:-.05em}
+.rsum b{font-family:Montserrat,sans-serif;font-style:italic;font-size:84px;font-weight:900;line-height:.9;letter-spacing:-.05em}
 .rsum .st{display:flex;margin:10px 0}.rsum .st .ic{width:22px;height:22px}
 .rsum p{color:#ffe1d4}
 .rsum .btn{background:#fff;color:var(--or);width:100%}
@@ -185,14 +197,14 @@ nav a:hover:after{right:0}
 /* contacts */
 .ct{background:var(--ink);color:#fff;border-radius:36px;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ctl{padding:34px 34px 30px}
-.ctl .pill{background:#ffffff14;color:var(--or2)}
+.ctl .pill{background:var(--or);color:#fff}
 .ctl h2{font-size:clamp(30px,3.4vw,44px);margin:14px 0 22px}
 .bph{display:inline-flex;align-items:center;gap:12px;font-size:clamp(28px,3vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:22px}
 .bph .ic{width:34px;height:34px;color:var(--or2)}
 .inf{display:grid;gap:14px;margin-bottom:26px}
 .inf div{display:flex;gap:12px}
 .inf .ic{color:var(--or2);margin-top:2px}
-.inf small{display:block;color:#93a0bd;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.inf small{display:block;color:#a1a1aa;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 .ctl .ctas .btn-w{background:#ffffff12;color:#fff;box-shadow:inset 0 0 0 1.5px #ffffff30}
 .ctr{background:#fff;color:var(--ink);border-radius:26px;padding:32px}
 .ctr h3{font-size:24px;margin-bottom:8px}.ctr p{color:var(--mu);font-size:14.5px;margin-bottom:20px}
@@ -202,7 +214,7 @@ nav a:hover:after{right:0}
 .fld input:focus,.fld select:focus{border-color:var(--or);background:#fff}
 .ctr .btn{width:100%}
 .ctr .note{font-size:12px;color:var(--mu);margin-top:10px;text-align:center}
-.gis{margin-top:14px;grid-column:span 2;height:120px;border-radius:24px;background:linear-gradient(#ffffff0d 1px,transparent 1px) 0 0/26px 26px,linear-gradient(90deg,#ffffff0d 1px,transparent 1px) 0 0/26px 26px,#1b2a4b;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:relative;overflow:hidden}
+.gis{margin-top:14px;grid-column:span 2;height:120px;border-radius:24px;background:linear-gradient(#ffffff0d 1px,transparent 1px) 0 0/26px 26px,linear-gradient(90deg,#ffffff0d 1px,transparent 1px) 0 0/26px 26px,#1e1e21;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:relative;overflow:hidden}
 .gis:before{content:"";position:absolute;left:-5%;right:-5%;top:48%;height:16px;background:#ffffff14;transform:rotate(-4deg)}
 .gis div{position:relative;display:flex;align-items:center;gap:14px;font-weight:800}
 .gis .pinb{width:52px;height:52px;border-radius:16px;background:var(--or);display:grid;place-items:center}
@@ -250,7 +262,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .ctr{padding:24px 18px}
  .sec{padding:52px 0}
  .fab{display:none}
- .mbar{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#fffffff2;backdrop-filter:blur(12px);box-shadow:0 -10px 30px -16px #13203b40}
+ .mbar{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#fffffff2;backdrop-filter:blur(12px);box-shadow:0 -10px 30px -16px #11111340}
  .mbar a{height:52px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:800;font-size:12px;background:var(--bg);color:var(--ink)}
  .mbar a.wa{background:#25d366;color:#fff;flex-direction:row;gap:8px;font-size:14px}
  .mbar a .ic{width:20px;height:20px}
@@ -277,7 +289,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  <div><a data-link="tel" id="tp3"></a></div>
 </div></div>
 <header class="hd"><div class="wrap">
- <a href="#top" class="logo"><span class="mk">JFC</span><span><b>JFC Gym</b><small data-t="brand_sub"></small></span></a>
+ <a href="#top" class="logo" id="lg" aria-label="JFC GYM"></a>
  <nav><a href="#dirs" data-t="nav_dirs"></a><a href="#coaches" data-t="nav_coaches"></a><a href="#prices" data-t="nav_prices"></a><a href="#schedule" data-t="nav_schedule"></a><a href="#reviews" data-t="nav_reviews"></a><a href="#contacts" data-t="nav_contacts"></a></nav>
  <div class="hr">
   <div class="lang"><button data-lang="ru">RU</button><button data-lang="ky">KG</button></div>
@@ -293,52 +305,52 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   <p data-t="hero_sub"></p>
   <div class="aud-chips" id="chips"></div>
   <div class="ctas"><a class="btn btn-o" data-link="wa" id="h1"></a><a class="btn btn-w" data-link="tel" id="h2"></a></div>
-  <div class="trust"><div class="avs"><span style="background:var(--orl)">Т</span><span style="background:var(--bl)">А</span><span style="background:var(--mn)">Д</span><span style="background:var(--yl)">С</span></div><div><b>4.9</b> <span class="st" id="tst" style="display:inline-flex;vertical-align:-2px"></span><small data-t="reviews_sub"></small></div></div>
+  <div class="trust"><div class="avs"><span style="background:#e30613;color:#fff">Т</span><span style="background:#111;color:#fff">А</span><span style="background:#fde6e7">Д</span><span style="background:#fff">С</span></div><div><b>4.9</b> <span class="st" id="tst" style="display:inline-flex;vertical-align:-2px"></span><small data-t="reviews_sub"></small></div></div>
  </div>
  <div class="col rv" id="col"></div>
 </div></section>
 
-<div class="wrap"><div class="stats rv" id="stats"></div></div>
+<div class="wrap"><div class="hls rv" id="hls"></div><div class="stats rv" id="stats"></div></div>
 
 <section class="sec" id="aud"><div class="wrap">
- <div class="sh rv"><span class="pill" data-t="aud_kicker"></span><h2 data-t="adv_title"></h2></div>
+ <div class="sh rv"><span class="pill"><span data-t="aud_kicker"></span></span><h2 data-t="adv_title"></h2></div>
  <div class="aud rv"><div class="tabs" id="atabs"></div><div class="ap" id="apanel"></div></div>
 </div></section>
 
 <section class="sec" id="dirs" style="padding-top:20px"><div class="wrap">
- <div class="sh rv"><span class="pill" data-t="dirs_kicker"></span><h2 data-t="dirs_title"></h2><p data-t="dirs_sub"></p></div>
+ <div class="sh rv"><span class="pill"><span data-t="dirs_kicker"></span></span><h2 data-t="dirs_title"></h2><p data-t="dirs_sub"></p></div>
  <div class="dirs" id="dirsg"></div>
 </div></section>
 
 <section class="sec" id="coaches"><div class="wrap">
- <div class="sh rv"><span class="pill" data-t="coaches_kicker"></span><h2 data-t="coaches_title"></h2><p data-t="coaches_sub"></p></div>
+ <div class="sh rv"><span class="pill"><span data-t="coaches_kicker"></span></span><h2 data-t="coaches_title"></h2><p data-t="coaches_sub"></p></div>
  <div class="coaches" id="coachg"></div>
 </div></section>
 
 <section class="sec" id="start"><div class="wrap">
- <div class="sh rv"><span class="pill" data-t="steps_kicker"></span><h2 data-t="steps_title"></h2></div>
+ <div class="sh rv"><span class="pill"><span data-t="steps_kicker"></span></span><h2 data-t="steps_title"></h2></div>
  <div class="steps" id="steps"></div>
 </div></section>
 <section class="sec" id="prices" style="padding-top:0"><div class="wrap">
- <div class="sh rv" style="margin-bottom:28px"><span class="pill" data-t="prices_kicker"></span><h2 data-t="prices_title"></h2></div>
+ <div class="sh rv" style="margin-bottom:28px"><span class="pill"><span data-t="prices_kicker"></span></span><h2 data-t="prices_title"></h2></div>
  <div class="prices" id="priceg"></div>
  <p class="pnote" id="pnote"></p>
 </div></section>
 
 <section class="sec" id="schedule"><div class="wrap">
- <div class="sh rv"><span class="pill" data-t="sched_kicker"></span><h2 data-t="sched_title"></h2><p data-t="sched_sub"></p></div>
+ <div class="sh rv"><span class="pill"><span data-t="sched_kicker"></span></span><h2 data-t="sched_title"></h2><p data-t="sched_sub"></p></div>
  <div class="sbox rv"><table class="tbl" id="tbl"></table><div class="schm"><div class="dtabs" id="dtabs"></div><div class="dlist" id="dlist"></div></div></div>
 </div></section>
 
 <section class="sec" id="reviews"><div class="wrap">
- <div class="sh rv"><span class="pill" data-t="reviews_kicker"></span><h2 data-t="reviews_title"></h2></div>
+ <div class="sh rv"><span class="pill"><span data-t="reviews_kicker"></span></span><h2 data-t="reviews_title"></h2></div>
  <div class="revs" id="revg"></div>
 </div></section>
 
 <section class="sec" id="contacts"><div class="wrap">
  <div class="ct rv">
   <div class="ctl">
-   <span class="pill" data-t="loc_kicker"></span>
+   <span class="pill"><span data-t="loc_kicker"></span></span>
    <h2 data-t="loc_title"></h2>
    <a class="bph" data-link="tel" id="cph"></a>
    <div class="inf" id="cinf"></div>
@@ -354,11 +366,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
     <p class="note" data-t="form_note"></p>
    </form>
   </div>
-  <a class="gis" data-link="gis"><div><span class="pinb" id="gpin"></span><span><span data-t="loc_addr"></span><br><small style="color:#93a0bd;font-weight:600" data-open></small></span></div><span class="btn btn-o" data-t="cta_route"></span></a>
+  <a class="gis" data-link="gis"><div><span class="pinb" id="gpin"></span><span><span data-t="loc_addr"></span><br><small style="color:#a1a1aa;font-weight:600" data-open></small></span></div><span class="btn btn-o" data-t="cta_route"></span></a>
  </div>
 </div></section>
 
-<footer><div class="wrap"><a href="#top" class="logo"><span class="mk">JFC</span><span><b>JFC Gym</b></span></a><span>© 2026 <span data-t="footer"></span></span><div class="soc"><a data-link="ig" aria-label="Instagram"></a><a data-link="wa" aria-label="WhatsApp"></a><a data-link="gis" aria-label="2GIS"></a></div></div></footer>
+<footer><div class="wrap"><a href="#top" class="logo" id="lg2" aria-label="JFC GYM"></a><span>© 2026 <span data-t="footer"></span></span><div class="soc"><a data-link="ig" aria-label="Instagram"></a><a data-link="wa" aria-label="WhatsApp"></a><a data-link="gis" aria-label="2GIS"></a></div></div></footer>
 <a class="fab" data-link="wa" id="fab" aria-label="WhatsApp"></a>
 <div class="mbar"><a data-link="tel" id="m1"></a><a class="wa" data-link="wa" id="m2"></a><a data-link="gis" id="m3"></a></div>
 
@@ -366,25 +378,27 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 <script>
 (function(){
 const $=id=>document.getElementById(id);let aud=0,selDay=null;
-const tint=['var(--orl)','var(--bl)','var(--mn)','var(--yl)','var(--pk)','var(--bl)','var(--mn)','var(--pk)'];
-const tcol=['#ff5a1f','#3b5bdb','#16a34a','#b7791f','#d6336c','#3b5bdb','#16a34a','#d6336c'];
+const tint=['#fde6e7','#ececef','#fde6e7','#ececef','#fde6e7','#ececef','#fde6e7','#ececef'];
+const tcol=['#e30613','#111113','#e30613','#111113','#e30613','#111113','#e30613','#111113'];
 window.render=function(){
  const J=window.JFC,{t,L,icon,dirs,coaches,prices,schedule,reviews,days,portrait}=J;
  const ib=(k,x)=>icon(k)+'<span>'+x+'</span>';
  $('tp1').innerHTML=icon('pin')+t('loc_addr');$('tp2').innerHTML=icon('clock')+t('loc_hours');$('tp3').innerHTML=icon('phone')+' '+J.C.phone;
  $('hwa').innerHTML=ib('wa',t('cta_wa'));$('hbg').innerHTML=icon('menu');
- $('hk').innerHTML=icon('medal')+t('hero_kicker');
+ $('hk').innerHTML='<span>'+t('hero_kicker')+'</span>';
+ $('lg').innerHTML=J.logo('#111');$('lg2').innerHTML=J.logo('#111');
+ $('hls').innerHTML=J.highlights.map(([k,l,h])=>`<a class="hl" href="${h}"><span class="c">${J.hl(k)}</span>${t(l)}</a>`).join('');
  $('chips').innerHTML=[['team','aud_adult'],['kids','aud_kids'],['women','aud_women']].map(([k,x])=>`<span>${icon(k)}${t(x)}</span>`).join('');
  $('h1').innerHTML=ib('wa',t('cta_trial'));$('h2').innerHTML=ib('phone',J.C.phone);
  $('tst').innerHTML=icon('star').repeat(5);
- $('col').innerHTML=`<div class="tile t1"><span class="big">MMA</span>${icon('mma','bi')}<div><b>${L(dirs[0])[0]}</b><small>${t('cage_chip')}</small></div></div>
-  <div class="tile t2">${icon('box','bi')}<div><b>${L(dirs[1])[0]}</b></div></div>
-  <div class="tile t3">${icon('kids','bi')}<div><b>${L(dirs[6])[0]}</b><small>${t('kids_chip')}</small></div></div>
+ $('col').innerHTML=`<div class="tile t1"><span class="tr"></span><span class="big">MMA</span>${icon('mma','bi')}<div><b>${L(dirs[0])[0]}</b><small>${t('cage_chip')}</small></div></div>
+  <div class="tile t2"><span class="tr"></span>${icon('box','bi')}<div><b>${L(dirs[1])[0]}</b></div></div>
+  <div class="tile t3"><span class="tr"></span>${icon('kids','bi')}<div><b>${L(dirs[6])[0]}</b><small>${t('kids_chip')}</small></div></div>
   <div class="tile t4">${icon('gym','bi')}<div><b>${L(dirs[4])[0]}</b><small>${t('loc_hours')}</small></div></div>
   <div class="float f1 ${J.isOpen()?'':'closed'}"><span class="dotg"></span>${t(J.isOpen()?'open_now':'closed_now')}</div>
-  <div class="float f2">🎁 ${t('trial_badge')}</div>`;
+  <div class="float f2">${icon('medal')}${t('trial_badge')}</div>`;
  $('stats').innerHTML=[1,2,3,4].map(i=>`<div><b>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('');
- const A=[['team','aud_adult',[0,1,2,4,5],'var(--orl)'],['kids','aud_kids',[6,2,1],'var(--mn)'],['women','aud_women',[7,5,4],'var(--pk)']];
+ const A=[['team','aud_adult',[0,1,2,3,4,5],'#fde6e7'],['kids','aud_kids',[6,3,2],'#ececef'],['women','aud_women',[7,4,5],'#fde6e7']];
  const keys=['adult','kids','women'];
  const drawA=()=>{
   $('atabs').innerHTML=A.map((a,i)=>`<button class="${i===aud?'on':''}" data-i="${i}">${icon(a[0])}${t(a[1])}</button>`).join('');
@@ -394,8 +408,8 @@ window.render=function(){
  };
  drawA();$('atabs').onclick=e=>{const b=e.target.closest('button');if(b){aud=+b.dataset.i;drawA();}};
  $('dirsg').innerHTML=dirs.map((d,i)=>`<a class="dir rv" href="${J.waLink(t('wa_msg')+' '+L(d)[0])}" target="_blank" rel="noopener"><span class="ib" style="background:${tint[i]};color:${tcol[i]}">${icon(d.ic)}</span><h3>${L(d)[0]}</h3><p>${L(d)[1]}</p><span class="more">${t('cta_trial_s')}${icon('arrow')}</span></a>`).join('');
- const pc=[['#ffd2bf','#ff5a1f'],['#c9d6ff','#3b5bdb'],['#c6eed8','#16a34a'],['#ffd0e1','#d6336c'],['#ffe7a8','#b7791f'],['#c9d6ff','#13203b']];
- $('coachg').innerHTML=coaches.map((c,i)=>`<div class="co rv"><div class="pic">${portrait(i,pc[i][0],pc[i][1],'#13203b')}</div><div><h3>${c.n}</h3><div class="rl">${L(c)}</div><div class="meta"><span class="e">${c.exp} ${t('exp')}</span><span>${L(c.tag)}</span></div></div></div>`).join('');
+ const pc=[['#fde6e7','#e30613'],['#f1f1f3','#bdbdc3'],['#fde6e7','#e30613'],['#f1f1f3','#bdbdc3'],['#fde6e7','#e30613'],['#f1f1f3','#bdbdc3']];
+ $('coachg').innerHTML=coaches.map((c,i)=>`<div class="co rv"><div class="pic">${portrait(i,pc[i][0],pc[i][1],'#111113')}</div><div><h3>${c.n}</h3><div class="rl">${L(c)}</div><div class="meta"><span class="e">${c.exp} ${t('exp')}</span><span>${L(c.tag)}</span></div></div></div>`).join('');
  $('steps').innerHTML=[1,2,3].map(i=>`<div class="stp rv"><span class="n">${i}</span><h3>${t('step'+i+'_t')}</h3><p>${t('step'+i+'_d')}</p></div>`).join('');
  $('priceg').innerHTML=prices.map(p=>`<div class="pr rv ${p.hit?'hit':''}">${p.hit?`<span class="hb">★ ${t('popular')}</span>`:''}<h3>${L(p)[0]}</h3><div class="pp">${p.p}</div><div class="pu">${t('som')} ${L(p.u)}</div><ul>${L(p)[1].map(f=>`<li>${icon('check')}${f}</li>`).join('')}</ul><a class="btn ${p.hit?'btn-o':'btn-w'}" href="${J.waLink(t('wa_msg')+' '+L(p)[0]+' — '+p.p+' '+t('som'))}" target="_blank" rel="noopener">${t('price_cta')}</a></div>`).join('');
  $('pnote').innerHTML=t('prices_sub').replace(/^([^.]+\.)/,'<b>$1</b>');
