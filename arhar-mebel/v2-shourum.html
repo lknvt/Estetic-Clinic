@@ -141,7 +141,8 @@ section{padding:88px 0}
 .tm>span{position:absolute;inset:0;display:grid;place-items:center;font:600 120px Cormorant;color:rgba(203,166,94,.25)}
 .tm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.35) contrast(1.05)}
 .tm .tx{position:absolute;left:0;right:0;bottom:0;padding:60px 20px 20px;background:linear-gradient(0deg,rgba(35,27,22,.95) 30%,transparent)}
-.tm h3{font-size:27px}
+.tm>span .face{width:40%;height:auto;color:rgba(203,166,94,.22)}
+.tm .nm{display:block;height:26px;width:75%;border-bottom:1px dashed rgba(238,231,219,.35);margin-bottom:8px}
 .tm p{color:#d4c9bb;font-size:14px}
 .tm .xp{color:var(--brass);font-size:13px;font-weight:600;margin-top:6px;display:block}
 
@@ -425,8 +426,8 @@ AM.onLang(() => {
   $('why').innerHTML = DATA.why.map(w => `<div class="wi">${ico(w.i)}<h3>${w[L][0]}</h3><p>${w[L][1]}</p></div>`).join('');
   $('worksG').innerHTML = DATA.works.map(w => `<figure class="wk"><img src="${U(w.img, 900)}" alt="${esc(w[L])}" loading="lazy"><figcaption>${w[L]}</figcaption></figure>`).join('');
   $('proc').innerHTML = DATA.process.map((p, i) => `<div class="st"><div class="n">${i + 1}</div><h3>${p[L][0]}</h3><p>${p[L][1]}</p></div>`).join('');
-  $('teamG').innerHTML = DATA.team.map(m => `<article class="tm"><span>${m.name[0]}</span><img src="${U(m.img, 600)}" alt="${esc(m.name)}" loading="lazy">
-    <div class="tx"><h3>${m.name}</h3><p>${m[L]}</p><span class="xp">${AM.t('exp')}: ${m.exp} ${L === 'ky' ? 'жыл' : 'лет'}</span></div></article>`).join('');
+  $('teamG').innerHTML = DATA.team.map(m => `<article class="tm"><span>${FACE}</span>
+    <div class="tx"><span class="nm" aria-label="Имя сотрудника"></span><p>${m[L]}</p></div></article>`).join('');
   $('track').innerHTML = DATA.reviews.map(r => `<article class="rv"><q>${r[L]}</q><div class="who"><div class="av">${r.name[0]}</div><div><b>${r.name}</b><span>${AM.L(r.where)} · ★★★★★</span></div></div></article>`).join('');
   $('chips').innerHTML = DATA.catalog.map(c => `<button type="button" class="chip" aria-pressed="false">${c[L][0]}</button>`).join('');
 });

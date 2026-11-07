@@ -113,7 +113,9 @@ section{padding:76px 0}
 /* команда */
 .team-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .tm .ph{aspect-ratio:4/4.6;border-radius:22px}
-.tm h3{font-size:17px;margin-top:14px}
+.ph.empty{display:grid;place-items:center;color:#d9d2c8}.ph.empty .face{width:42%;height:auto}
+.tm .nm{display:block;height:22px;margin-top:14px;width:72%;border-bottom:1.5px dashed var(--line)}
+.tm p{margin-top:8px}
 .tm p{color:var(--mut);font-size:14px}
 .tm .xp{display:inline-block;margin-top:8px;background:var(--stone);border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:600;color:var(--walnut)}
 .note{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--stone);border-radius:18px;padding:16px 20px}
@@ -359,7 +361,7 @@ AM.onLang(() => {
     <div class="tx"><h3>${c[L][0]}</h3><p>${c[L][1]}</p><span class="go">${ico('wa')}${AM.t('cta.calc')}</span></div></a>`).join('');
   $('proc').innerHTML = DATA.process.map((p, i) => `<div class="st"><figure class="ph"><img src="${P(REAL.process[i])}" alt="" loading="lazy"><span class="n">${i + 1}</span></figure><h3>${p[L][0]}</h3><p>${p[L][1]}</p></div>`).join('');
   $('worksG').innerHTML = REAL.works.map(w => fig(w.img, w[L], w[L], 'ph wk')).join('');
-  $('teamG').innerHTML = DATA.team.map((m, i) => `<article class="tm">${fig(REAL.team[i], m.name)}<h3>${m.name}</h3><p>${m[L]}</p><span class="xp">${AM.t('exp')}: ${m.exp} ${L === 'ky' ? 'жыл' : 'лет'}</span></article>`).join('');
+  $('teamG').innerHTML = DATA.team.map(m => `<article class="tm"><div class="ph empty">${FACE}</div><span class="nm" aria-label="Имя сотрудника"></span><p>${m[L]}</p></article>`).join('');
   $('revs').innerHTML = DATA.reviews.map(r => `<article class="rv"><div class="s">★★★★★</div><p>${r[L]}</p><div class="who"><div class="av">${r.name[0]}</div><div><b>${r.name}</b><span>${AM.L(r.where)}</span></div></div></article>`).join('');
   $('chips').innerHTML = C.map(c => `<button type="button" class="chip" aria-pressed="false">${c[L][0]}</button>`).join('');
 });

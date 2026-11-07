@@ -133,7 +133,8 @@ section{padding:76px 0}
 .team{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .tm{text-align:center}
 .tm .arch{aspect-ratio:3/3.9;margin-bottom:14px}
-.tm h3{font-size:16px;letter-spacing:.04em}
+.arch.empty{display:grid;place-items:end center;color:#cdbfae}.arch.empty .face{width:62%;height:auto}
+.tm .nm{display:block;height:22px;width:70%;margin:0 auto 6px;border-bottom:1.5px dashed var(--brass)}
 .tm p{font-size:14px;color:var(--mut)}
 .tm .xp{display:inline-block;margin-top:8px;border:1px solid var(--brass);color:var(--cocoa);border-radius:999px;padding:3px 12px;font-size:12.5px;font-weight:700}
 
@@ -385,7 +386,7 @@ AM.onLang(() => {
   $('stats').innerHTML = DATA.stats.map(([n, k]) => `<div><b>${n}</b><span>${AM.t(k)}</span></div>`).join('');
   $('proc').innerHTML = DATA.process.map((p, i) => `<div class="st"><div class="rnd" style="width:120px;height:120px">${im(REAL.process[i])}</div><span class="n">${i + 1}</span><h3>${p[L][0]}</h3><p>${p[L][1]}</p></div>`).join('');
   $('worksG').innerHTML = REAL.works.slice(0, 8).map(w => `<figure class="wk">${im(w.img, w[L])}<figcaption>${w[L]}</figcaption></figure>`).join('');
-  $('teamG').innerHTML = DATA.team.map((m, i) => `<article class="tm"><div class="arch">${im(REAL.team[i], m.name)}</div><h3>${m.name}</h3><p>${m[L]}</p><span class="xp">${AM.t('exp')}: ${m.exp} ${ky ? 'жыл' : 'лет'}</span></article>`).join('');
+  $('teamG').innerHTML = DATA.team.map(m => `<article class="tm"><div class="arch empty">${FACE}</div><span class="nm" aria-label="Имя сотрудника"></span><p>${m[L]}</p></article>`).join('');
   $('revs').innerHTML = DATA.reviews.map(r => `<article class="rv"><div class="s">★★★★★</div><p>${r[L]}</p><div class="who"><span class="dot">${r.name[0]}</span><div><b>${r.name}</b><span>${AM.L(r.where)}</span></div></div></article>`).join('');
   $('chips').innerHTML = C.map(c => `<button type="button" class="chip" aria-pressed="false">${c[L][0]}</button>`).join('');
 });
