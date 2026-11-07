@@ -11,7 +11,7 @@ body{margin:0;display:flex;flex-direction:column;background:var(--bg);color:var(
 .tabs{display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 .tabs button{flex:none;border:0;cursor:pointer;font:700 13.5px system-ui,sans-serif;padding:9px 14px;border-radius:99px;background:var(--chip);color:var(--fg);transition:background .2s}
 .tabs button:hover{background:var(--chip2)}
-.tabs button.on{background:var(--fg);color:var(--bg)}
+.tabs button.on{background:var(--ac);color:#fff;box-shadow:0 0 16px -2px #ff2a44}
 .tabs button span{opacity:.6;font-weight:600;margin-left:4px}
 .tabs button:focus-visible,.dev button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .dev{display:flex;gap:4px}
@@ -26,12 +26,12 @@ iframe{border:0;width:100%;height:100%;background:var(--bg)}
 <div class="bar">
  <span class="nm"><i>JFC</i>Gym · 3 дизайна</span>
  <div class="tabs" id="tabs">
-  <button data-f="v1-arena.html">A · Night Arena <span>тёмный · подбор по цели</span></button>
-  <button data-f="v2-editorial.html">B · Editorial <span>светлый · журнальный</span></button>
-  <button data-f="v3-app.html">C · JFC App <span>как приложение · запись в 3 шага</span></button>
+  <button data-f="v1-arena.html">A · Night Arena <span>тёмный · красный неон</span></button>
+  <button data-f="v2-editorial.html">B · Editorial <span>светлый · красный маркер</span></button>
+  <button data-f="v3-app.html">C · JFC App <span>приложение · запись в 3 шага</span></button>
  </div>
  <div class="dev"><button id="dd" class="on">Компьютер</button><button id="dm">Телефон</button></div>
- <p class="note">Три разные концепции: красный — только в логотипе, неон — точечно. Адрес, график и направления — по Instagram @jfc_gym.kg. Демо-контент: имена тренеров, цены и отзывы — примеры, замените реальными. Язык RU/KG переключается в шапке каждого сайта.</p>
+ <p class="note">Три разные концепции в фирменном красном с неоновыми красными акцентами; акция недели, гарантия и результаты — маркетинговые предложения, согласуйте с клубом. Адрес, график и направления — по Instagram @jfc_gym.kg. Демо-контент: имена тренеров, цены и отзывы — примеры, замените реальными. Язык RU/KG переключается в шапке каждого сайта.</p>
 </div>
 <div class="stage" id="stage"><iframe id="fr" title="Вариант дизайна"></iframe></div>
 <script>

@@ -61,6 +61,10 @@
       res3_n: 'WAKO', res3_t: 'Призёры турниров по кикбоксингу',
       res4_n: '71,6K', res4_t: 'человек следят за нами в Instagram',
       hl_fight: 'FIGHT', hl_coaches: 'Тренеры', hl_bar: 'Фитобар', hl_group: 'Групповые', hl_sched: 'Расписание', hl_gym: 'GYM', hl_kids: 'Детские группы',
+      promo: 'Акция недели: первая тренировка бесплатно и −10% на первый абонемент', promo_till: 'до', promo_btn: 'Забрать скидку',
+      cta_micro: 'Без оплаты и обязательств · ответим за 15 минут',
+      guar_t: 'Гарантия первой недели', guar_d: 'Если в первую неделю поймёте, что это не ваше, вернём деньги за абонемент.',
+      proof_ig: 'подписчиков', proof_gis: 'рейтинг 2ГИС', proof_wako: 'призёры турниров',
       quiz_kicker: 'Подбор за 10 секунд', quiz_title: 'Какая у вас цель?', quiz_sub: 'Выберите цель — покажем подходящее направление, тренера и ближайшие тренировки.', quiz_rec: 'Подходит вам',
       g1: 'Похудеть и прийти в форму', g2: 'Научиться драться', g3: 'Спорт для ребёнка', g4: 'Для девушек', g5: 'Набрать мышцы',
       book_kicker: 'Онлайн-запись', book_title: 'Запись на пробную за 3 шага', book_s1: 'Направление', book_s2: 'День и время', book_s3: 'Контакты', next: 'Далее', back: 'Назад', book_done: 'Отправить в WhatsApp', book_pick: 'Выберите тренировку',
@@ -121,6 +125,10 @@
       res3_n: 'WAKO', res3_t: 'Кикбоксинг турнирлеринин призёрлору',
       res4_n: '71,6K', res4_t: 'адам Instagramда бизди ээрчийт',
       hl_fight: 'FIGHT', hl_coaches: 'Машыктыруучулар', hl_bar: 'Фитобар', hl_group: 'Топтук', hl_sched: 'Жадыбал', hl_gym: 'GYM', hl_kids: 'Балдар топтору',
+      promo: 'Жуманын акциясы: биринчи машыгуу акысыз жана биринчи абонементке −10%', promo_till: 'чейин', promo_btn: 'Арзандатууну алуу',
+      cta_micro: 'Төлөмсүз жана милдеттенмесиз · 15 мүнөттө жооп беребиз',
+      guar_t: 'Биринчи жуманын кепилдиги', guar_d: 'Биринчи жумада сизге туура келбей калса, абонементтин акчасын кайтарабыз.',
+      proof_ig: 'катталуучу', proof_gis: '2ГИС рейтинги', proof_wako: 'турнир призёрлору',
       quiz_kicker: '10 секундда тандоо', quiz_title: 'Максатыңыз кандай?', quiz_sub: 'Максатты тандаңыз — ылайыктуу багытты, машыктыруучуну жана жакынкы машыгууларды көрсөтөбүз.', quiz_rec: 'Сизге ылайыктуу',
       g1: 'Арыктап, формага келүү', g2: 'Мушташканды үйрөнүү', g3: 'Балага спорт', g4: 'Кыздар үчүн', g5: 'Булчуң топтоо',
       book_kicker: 'Онлайн жазылуу', book_title: 'Сыноо машыгуусуна 3 кадамда жазылуу', book_s1: 'Багыт', book_s2: 'Күн жана убакыт', book_s3: 'Байланыш', next: 'Кийинки', back: 'Артка', book_done: 'WhatsApp аркылуу жөнөтүү', book_pick: 'Машыгууну тандаңыз',
@@ -227,6 +235,8 @@
     medal: `<circle cx="12" cy="15" r="5"/><path d="M8.5 11L6 3h4l2 5 2-5h4l-2.5 8"/>`,
     team: `<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20a6 6 0 0 1 12 0M15 14.5a5 5 0 0 1 6 5.5"/>`,
     level: `<path d="M4 20V14M10 20V9M16 20V4M2 20h20"/>`,
+    shield: `<path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6z"/><path d="M9 12l2.2 2.2L15.5 10"/>`,
+    fire: `<path d="M12 21c-3.9 0-7-2.7-7-6.6 0-3.2 2.2-5.3 3.6-7.4.3 2 1.3 3 2.4 3.4C11 7 12.4 4.6 14.6 3c-.3 2.6.9 4.6 2.4 6.4 1.2 1.4 2 3 2 5 0 3.9-3.1 6.6-7 6.6z"/>`,
     menu: `<path d="M4 7h16M4 12h16M4 17h16"/>`,
     close: `<path d="M6 6l12 12M18 6L6 18"/>`,
     quote: `<path d="M9 7H5v6h4v4H7M19 7h-4v6h4v4h-2" />`,
@@ -276,6 +286,14 @@
       if (list[0]) return { dir: L(dirs[list[0].r.d])[0], time: list[0].tm, day: dd, k };
     }
     return null;
+  }
+
+  // Дедлайн акции: ближайшая суббота (воскресенье — выходной)
+  function promoDate() {
+    const n = bishkekNow(); const add = (5 - n.day + 7) % 7 || 7;
+    const d = new Date(Date.now() + add * 864e5);
+    const dd = String(d.getDate()).padStart(2, '0'), mm = String(d.getMonth() + 1).padStart(2, '0');
+    return lang === 'ky' ? `${dd}.${mm} ${t('promo_till')}` : `${t('promo_till')} ${dd}.${mm}`;
   }
 
   function apply() {
@@ -329,6 +347,6 @@
     document.body.appendChild(a); a.click(); a.remove();
   });
 
-  window.JFC = { C, T, goals, faq, hl, highlights, logo, days, daysFull, dirs, coaches, prices, schedule, reviews, icon, portrait, t, L, waLink, isOpen, nextClass, bishkekNow, setLang, get lang() { return lang; } };
+  window.JFC = { C, T, goals, faq, promoDate, hl, highlights, logo, days, daysFull, dirs, coaches, prices, schedule, reviews, icon, portrait, t, L, waLink, isOpen, nextClass, bishkekNow, setLang, get lang() { return lang; } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
 })();

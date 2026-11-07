@@ -8,9 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,600;0,800;0,900;1,800;1,900&family=Golos+Text:wght@400;500;600;700&family=Montserrat:ital,wght@1,900&display=swap&subset=cyrillic,cyrillic-ext" rel="stylesheet">
 <style>
-/* Концепция A «Night Arena»: ночной зал, графит, тонкие LED-линии бирюзового неона как подсветка клетки.
-   Красный — только логотип и точечные метки. Главный UX — подбор направления по цели. */
-:root{--bg:#0c0d10;--s1:#13151a;--s2:#1a1d24;--ln:#ffffff14;--ln2:#ffffff24;--tx:#eef0f3;--mu:#8d939e;--ne:#3ef2ff;--ne2:#9ffaff;--neg:0 0 6px #3ef2ffcc,0 0 22px #3ef2ff55;--red:#e30613;--wa:#25d366;
+/* Концепция A «Night Arena»: ночной зал, графит, тонкие LED-линии красного неона как подсветка клетки, красные CTA. Главный UX — подбор направления по цели. */
+:root{--bg:#0c0d10;--s1:#13151a;--s2:#1a1d24;--ln:#ffffff14;--ln2:#ffffff24;--tx:#eef0f3;--mu:#8d939e;--ne:#ff2a44;--ne2:#ff8a96;--neg:0 0 6px #ff2a44cc,0 0 22px #ff2a4455;--red:#e30613;--wa:#25d366;
  --fd:"Exo 2",system-ui,sans-serif;--fb:"Golos Text",system-ui,sans-serif;color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
@@ -28,15 +27,36 @@ h1,h2,h3{font-family:var(--fd);font-weight:800;letter-spacing:-.01em;line-height
 .sh p{color:var(--mu);max-width:420px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 24px;border-radius:10px;border:0;cursor:pointer;font:700 15px var(--fb);transition:.2s;white-space:nowrap}
 .btn:focus-visible{outline:2px solid var(--ne);outline-offset:3px}
+.btn-rd{background:var(--red);color:#fff;box-shadow:0 0 0 1px #ff4a5f,0 10px 30px -8px #ff2a44aa}.btn-rd:hover{background:#ff2a44;box-shadow:0 0 0 1px #ff8a96,0 0 34px -4px #ff2a44}
 .btn-wa{background:var(--wa);color:#04210f}.btn-wa:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.btn-ne{background:transparent;color:var(--ne2);box-shadow:inset 0 0 0 1px var(--ne),0 0 18px -6px var(--ne)}.btn-ne:hover{background:#3ef2ff14;box-shadow:inset 0 0 0 1px var(--ne),0 0 26px -4px var(--ne)}
+.btn-ne{background:transparent;color:var(--ne2);box-shadow:inset 0 0 0 1px var(--ne),0 0 18px -6px var(--ne)}.btn-ne:hover{background:#ff2a4414;box-shadow:inset 0 0 0 1px var(--ne),0 0 26px -4px var(--ne)}
 .btn-gh{background:var(--s2);color:var(--tx);box-shadow:inset 0 0 0 1px var(--ln2)}.btn-gh:hover{box-shadow:inset 0 0 0 1px #ffffff55}
+/* promo */
+.promo{background:linear-gradient(90deg,#3a0007,#7a000f 50%,#3a0007);color:#fff;font-size:14px;position:relative;overflow:hidden}
+.promo:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ne);box-shadow:var(--neg)}
+.promo .wrap{display:flex;align-items:center;justify-content:center;gap:14px;min-height:44px;flex-wrap:wrap;padding-block:6px}
+.promo .ic{width:18px;height:18px;color:var(--ne2)}
+.promo b{font-weight:700}.promo em{font-style:normal;color:var(--ne2);font-weight:700}
+.promo a{font-weight:700;border-bottom:1px solid var(--ne2);color:var(--ne2)}
+.micro{display:flex;align-items:center;gap:8px;margin-top:14px;color:var(--mu);font-size:13.5px}
+.micro .ic{width:16px;height:16px;color:var(--ne)}
+/* results */
+.res4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.r4{background:var(--s1);border-radius:16px;box-shadow:inset 0 0 0 1px var(--ln);padding:24px;position:relative;overflow:hidden;min-height:190px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;transition:.25s}
+.r4:hover{box-shadow:inset 0 0 0 1px var(--ne),0 0 30px -12px var(--ne)}
+.r4 .ic{position:absolute;top:22px;left:22px;width:30px;height:30px;color:var(--ne);filter:drop-shadow(0 0 6px #ff2a44)}
+.r4 b{font:900 italic 34px/1 var(--fd);color:#fff;text-shadow:0 0 18px #ff2a4466}
+.r4 b small{font-size:.5em;margin-left:4px;color:var(--ne2)}
+.r4 p{color:var(--mu);font-size:14px}
+.guar{display:flex;align-items:center;gap:16px;margin-top:16px;background:linear-gradient(90deg,#ff2a4414,transparent);border-radius:14px;padding:16px 20px;box-shadow:inset 0 0 0 1px #ff2a4440}
+.guar .ic{width:34px;height:34px;color:var(--ne);filter:drop-shadow(0 0 6px #ff2a44)}
+.guar b{display:block}.guar span{color:var(--mu);font-size:14px}
 /* header */
 .hd{position:sticky;top:0;z-index:50;background:#0c0d10d9;backdrop-filter:blur(14px);border-bottom:1px solid var(--ln)}
 .hd .wrap{display:flex;align-items:center;gap:26px;height:72px}
 nav{display:flex;gap:22px}
 nav a{font-size:14px;font-weight:500;color:#c4c8cf;transition:.2s}
-nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
+nav a:hover{color:var(--ne2);text-shadow:0 0 12px #ff2a4488}
 .hr{margin-left:auto;display:flex;align-items:center;gap:14px}
 .ph{display:flex;align-items:center;gap:8px;font:700 16px var(--fd);white-space:nowrap}
 .ph .ic{width:18px;height:18px;color:var(--ne)}
@@ -46,20 +66,20 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .hd .btn{height:42px;padding:0 16px;font-size:14px}
 .burger{display:none;width:42px;height:42px;border-radius:10px;border:0;background:var(--s2);cursor:pointer;place-items:center}
 /* hero */
-.hero{padding:40px 0 0;min-height:calc(100svh - 72px);display:flex;flex-direction:column;position:relative;overflow:hidden}
-.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 60% at 75% 45%,#3ef2ff14,transparent 70%),radial-gradient(40% 50% at 10% 100%,#e306130d,transparent 70%);pointer-events:none}
+.hero{padding:40px 0 0;min-height:calc(100svh - 116px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(50% 60% at 75% 45%,#ff2a4414,transparent 70%),radial-gradient(40% 50% at 10% 100%,#e306130d,transparent 70%);pointer-events:none}
 .hgrid{flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative}
 .live{display:inline-flex;align-items:center;gap:10px;background:var(--s1);box-shadow:inset 0 0 0 1px var(--ln);border-radius:99px;padding:7px 14px 7px 10px;font-size:13px;font-weight:600;color:#d8dbe0}
 .live i{width:8px;height:8px;border-radius:50%;background:var(--ne);box-shadow:var(--neg);animation:bl 2s infinite}
 .live.closed i{background:var(--mu);box-shadow:none;animation:none}
 @keyframes bl{50%{opacity:.35}}
 .hero h1{font-size:clamp(46px,6.4vw,100px);font-weight:900;font-style:italic;text-transform:uppercase;line-height:.94;margin:26px 0 24px}
-.hero h1 em{display:block;font-style:italic;color:transparent;-webkit-text-stroke:1.5px var(--ne);text-shadow:0 0 24px #3ef2ff66}
+.hero h1 em{display:block;font-style:italic;color:transparent;-webkit-text-stroke:1.5px var(--ne);text-shadow:0 0 24px #ff2a4466}
 .hero p{font-size:18px;color:#b9bec7;max-width:520px;margin-bottom:32px}
 .ctas{display:flex;flex-wrap:wrap;gap:12px}
 .oct{position:relative;width:100%;max-width:520px;margin-left:auto;aspect-ratio:1}
 .oct svg{width:100%;height:100%;overflow:visible}
-.oct .glow{filter:drop-shadow(0 0 6px #3ef2ff) drop-shadow(0 0 18px #3ef2ff88)}
+.oct .glow{filter:drop-shadow(0 0 6px #ff2a44) drop-shadow(0 0 18px #ff2a4488)}
 .oct .tag{position:absolute;font:600 13px var(--fd);letter-spacing:.08em;text-transform:uppercase;color:#cfd3da;background:#13151ae6;box-shadow:inset 0 0 0 1px var(--ln2);padding:7px 12px;border-radius:8px;white-space:nowrap}
 .oct .tag b{color:var(--ne);font-weight:800}
 .t1{left:2%;top:18%}.t2{right:-2%;top:30%}.t3{left:6%;bottom:16%}.t4{right:4%;bottom:10%}
@@ -68,7 +88,7 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .hstats>*:first-child{padding-left:0}.hstats>*:last-child{border:0}
 .hstats b{display:block;font:900 italic 38px/1 var(--fd);font-variant-numeric:tabular-nums}
 .hstats span{color:var(--mu);font-size:14px}
-.hstats a b{color:var(--ne2);text-shadow:0 0 14px #3ef2ff66}
+.hstats a b{color:var(--ne2);text-shadow:0 0 14px #ff2a4466}
 /* quiz */
 .quiz{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:stretch}
 .goals{display:grid;gap:10px}
@@ -76,7 +96,7 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .goal .gi{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--s2);color:#c4c8cf;transition:.2s}
 .goal .ar{margin-left:auto;opacity:.3;transition:.2s}
 .goal:hover{box-shadow:inset 0 0 0 1px var(--ln2)}
-.goal.on{box-shadow:inset 0 0 0 1px var(--ne),0 0 30px -12px var(--ne);background:#3ef2ff0a}
+.goal.on{box-shadow:inset 0 0 0 1px var(--ne),0 0 30px -12px var(--ne);background:#ff2a440a}
 .goal.on .gi{color:var(--bg);background:var(--ne);box-shadow:var(--neg)}
 .goal.on .ar{opacity:1;color:var(--ne)}
 .res{background:var(--s1);border-radius:18px;box-shadow:inset 0 0 0 1px var(--ln);padding:28px;display:grid;grid-template-columns:1fr 210px;gap:24px;position:relative;overflow:hidden}
@@ -100,7 +120,7 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .dir h3{font-size:21px}
 .dir p{color:var(--mu);font-size:14px;line-height:1.5}
 .dir:hover{background:var(--s1)}
-.dir:hover .ic{color:var(--ne);filter:drop-shadow(0 0 8px #3ef2ff)}
+.dir:hover .ic{color:var(--ne);filter:drop-shadow(0 0 8px #ff2a44)}
 .dir:after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ne);box-shadow:var(--neg);transition:.35s}
 .dir:hover:after{width:100%}
 /* coaches */
@@ -118,7 +138,7 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 /* prices table */
 .tw{overflow-x:auto;border-radius:16px;box-shadow:inset 0 0 0 1px var(--ln)}
 .pt{width:100%;border-collapse:collapse;min-width:760px}
-.pt th,.pt td{padding:16px 18px;text-align:center;border-bottom:1px solid var(--ln)}
+.pt th,.pt td{padding:13px 18px;text-align:center;border-bottom:1px solid var(--ln)}
 .pt tr:last-child td{border:0}
 .pt th{vertical-align:bottom;padding-top:26px}
 .pt th:first-child,.pt td:first-child{text-align:left;color:#c4c8cf;font-weight:500}
@@ -127,7 +147,7 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .pt th .p small{font:500 13px var(--fb);color:var(--mu);margin-left:4px}
 .pt td{font-weight:600}
 .pt .y{color:var(--ne)}.pt .no{color:#3a3f48}
-.pt .hit{background:#3ef2ff08;position:relative}
+.pt .hit{background:#ff2a4408;position:relative}
 .pt th.hit{box-shadow:inset 0 2px 0 var(--ne)}
 .pt th .hb{display:inline-block;font:700 10px var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--ne);box-shadow:var(--neg);border-radius:4px;padding:3px 7px;margin-bottom:10px}
 .pt .cta td{padding:18px}
@@ -140,8 +160,8 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .sg .n{justify-content:flex-start;padding-left:18px;font-weight:600;gap:10px;text-align:left}
 .sg .n .ic{width:18px;height:18px;color:var(--mu)}
 .sg .tm{font:700 15px var(--fd);font-variant-numeric:tabular-nums}
-.sg .td{background:#3ef2ff0a}
-.sg .h.td{color:var(--ne);text-shadow:0 0 10px #3ef2ff88}
+.sg .td{background:#ff2a440a}
+.sg .h.td{color:var(--ne);text-shadow:0 0 10px #ff2a4488}
 .sg .td .tm{color:var(--ne2)}
 .sg .off{color:#3a3f48}
 .schm{display:none}
@@ -151,7 +171,7 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .stars{display:flex;gap:2px;color:#ffd166}.stars .ic{width:15px;height:15px}
 .rvw p{color:#d2d6dc;font-size:15px;margin:12px 0 16px}
 .who{display:flex;align-items:center;gap:12px}
-.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:800 15px var(--fd);background:var(--s2);color:var(--ne2);box-shadow:inset 0 0 0 1px #3ef2ff55}
+.av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:800 15px var(--fd);background:var(--s2);color:var(--ne2);box-shadow:inset 0 0 0 1px #ff2a4455}
 .who b{display:block;font-size:14px}.who small{color:var(--mu);font-size:13px}
 .score{display:flex;align-items:center;gap:14px}
 .score b{font:900 italic 48px/1 var(--fd)}
@@ -171,7 +191,7 @@ nav a:hover{color:var(--ne2);text-shadow:0 0 12px #3ef2ff88}
 .fld{display:block;margin-bottom:12px}
 .fld span{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:6px}
 .fld input,.fld select{width:100%;height:52px;border-radius:10px;background:var(--bg);border:1px solid var(--ln2);padding:0 16px;outline:0;transition:.2s;appearance:none}
-.fld input:focus,.fld select:focus{border-color:var(--ne);box-shadow:0 0 0 3px #3ef2ff22}
+.fld input:focus,.fld select:focus{border-color:var(--ne);box-shadow:0 0 0 3px #ff2a4422}
 .form .btn{width:100%;margin-top:6px}
 .form .note{font-size:12px;color:#6b717b;margin-top:12px}
 footer{border-top:1px solid var(--ln);padding:28px 0 32px;color:var(--mu);font-size:14px}
@@ -193,6 +213,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .ph span,.hd .btn{display:none}
  .hero{min-height:0;padding-top:28px}
  .hgrid{grid-template-columns:1fr}
+ .res4{grid-template-columns:1fr 1fr}.r4{min-height:150px;padding:18px}.r4 b{font-size:24px}
+ .promo{font-size:12.5px}.promo .wrap{gap:6px 10px}
  .oct{max-width:320px;margin:0 auto}
  .hstats{grid-template-columns:1fr 1fr}.hstats>*{padding:18px 14px}.hstats>*:nth-child(odd){padding-left:0}.hstats>*:nth-child(2){border-right:0}.hstats>*:nth-child(-n+2){border-bottom:1px solid var(--ln)}
  .hstats b{font-size:30px}
@@ -232,6 +254,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 </head>
 <body>
 <script>document.documentElement.classList.add('js')</script>
+<div class="promo" id="promo"></div>
 <header class="hd"><div class="wrap">
  <a href="#top" id="lg" aria-label="JFC GYM"></a>
  <nav><a href="#quiz" data-t="quiz_kicker"></a><a href="#dirs" data-t="nav_dirs"></a><a href="#coaches" data-t="nav_coaches"></a><a href="#prices" data-t="nav_prices"></a><a href="#schedule" data-t="nav_schedule"></a><a href="#contacts" data-t="nav_contacts"></a></nav>
@@ -249,16 +272,17 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
    <span class="live" id="live"><i></i><span></span></span>
    <h1><span data-t="hero_title_1"></span> <span data-t="hero_title_2"></span><em data-t="hero_title_3"></em></h1>
    <p data-t="hero_sub"></p>
-   <div class="ctas"><a class="btn btn-wa" data-link="wa" id="h1"></a><a class="btn btn-gh" href="#quiz" id="h2"></a></div>
+   <div class="ctas"><a class="btn btn-rd" data-link="wa" id="h1"></a><a class="btn btn-gh" href="#quiz" id="h2"></a></div>
+   <p class="micro" id="micro"></p>
   </div>
   <div class="oct rv">
    <svg viewBox="0 0 400 400" aria-hidden="true">
     <defs><pattern id="nt" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v14M0 0h14" stroke="#ffffff10" stroke-width="1"/></pattern>
     <clipPath id="oc"><polygon points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125"/></clipPath></defs>
     <g clip-path="url(#oc)"><rect width="400" height="400" fill="#101217"/><rect width="400" height="400" fill="url(#nt)"/></g>
-    <polygon class="glow" points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125" fill="none" stroke="#3ef2ff" stroke-width="2.5"/>
+    <polygon class="glow" points="125,30 275,30 370,125 370,275 275,370 125,370 30,275 30,125" fill="none" stroke="#ff2a44" stroke-width="2.5"/>
     <polygon points="140,66 260,66 334,140 334,260 260,334 140,334 66,260 66,140" fill="none" stroke="#ffffff1c" stroke-width="1" stroke-dasharray="3 7"/>
-    <g fill="#3ef2ff" class="glow"><circle cx="125" cy="30" r="3.5"/><circle cx="275" cy="30" r="3.5"/><circle cx="370" cy="125" r="3.5"/><circle cx="370" cy="275" r="3.5"/><circle cx="275" cy="370" r="3.5"/><circle cx="125" cy="370" r="3.5"/><circle cx="30" cy="275" r="3.5"/><circle cx="30" cy="125" r="3.5"/></g>
+    <g fill="#ff2a44" class="glow"><circle cx="125" cy="30" r="3.5"/><circle cx="275" cy="30" r="3.5"/><circle cx="370" cy="125" r="3.5"/><circle cx="370" cy="275" r="3.5"/><circle cx="275" cy="370" r="3.5"/><circle cx="125" cy="370" r="3.5"/><circle cx="30" cy="275" r="3.5"/><circle cx="30" cy="125" r="3.5"/></g>
     <text x="200" y="218" text-anchor="middle" font-family="Montserrat,'Arial Black'" font-weight="900" font-style="italic" font-size="96" fill="#eef0f3" letter-spacing="-5">JFC</text>
     <rect x="236" y="196" width="34" height="7" fill="#e30613" transform="skewX(-18) translate(66 0)"/>
     <text x="200" y="252" text-anchor="middle" font-family="'Exo 2'" font-weight="700" font-size="14" fill="#8d939e" letter-spacing="8">BISHKEK · ARENA</text>
@@ -274,6 +298,11 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  <div class="quiz rv"><div class="goals" id="goals" role="tablist"></div><div class="res" id="res" role="tabpanel"></div></div>
 </div></section>
 
+<section class="sec" id="results" style="padding-top:10px"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="res_kicker"></span><h2 data-t="res_title"></h2></div><a class="btn btn-ne" data-link="ig" id="igb"></a></div>
+ <div class="res4" id="res4"></div>
+</div></section>
+
 <section class="sec" id="dirs" style="padding-top:20px"><div class="wrap">
  <div class="sh rv"><div><span class="eb" data-t="dirs_kicker"></span><h2 data-t="dirs_title"></h2></div><p data-t="dirs_sub"></p></div>
  <div class="dirs rv" id="dirsg"></div>
@@ -284,9 +313,10 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  <div class="coaches" id="coachg"></div>
 </div></section>
 
-<section class="sec" id="prices"><div class="wrap">
+<section class="sec" id="prices" style="padding-block:44px"><div class="wrap">
  <div class="sh rv"><div><span class="eb" data-t="prices_kicker"></span><h2 data-t="prices_title"></h2></div><p data-t="prices_sub"></p></div>
  <div class="tw rv"><table class="pt" id="pt"></table></div>
+ <div class="guar rv" id="guar"></div>
 </div></section>
 
 <section class="sec" id="schedule" style="padding-top:20px"><div class="wrap">
@@ -308,9 +338,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
     <g stroke="#ffffff0d" stroke-width="1">
      <path d="M0 40H600M0 100H600M0 160H600M0 220H600M0 280H600M0 340H600M0 400H600M60 0V440M140 0V440M220 0V440M300 0V440M380 0V440M460 0V440M540 0V440"/></g>
     <path d="M-20 185 L620 105" stroke="#262a33" stroke-width="22"/><path d="M250 -20 L330 460" stroke="#262a33" stroke-width="16"/>
-    <path d="M-20 185 L620 105" stroke="#3ef2ff" stroke-width="1.5" opacity=".5" stroke-dasharray="10 12" style="filter:drop-shadow(0 0 4px #3ef2ff)"/>
-    <circle cx="300" cy="140" r="44" fill="#3ef2ff10" stroke="#3ef2ff" stroke-width="1" style="filter:drop-shadow(0 0 8px #3ef2ff)"/>
-    <circle cx="300" cy="140" r="9" fill="#3ef2ff" style="filter:drop-shadow(0 0 8px #3ef2ff)"/>
+    <path d="M-20 185 L620 105" stroke="#ff2a44" stroke-width="1.5" opacity=".5" stroke-dasharray="10 12" style="filter:drop-shadow(0 0 4px #ff2a44)"/>
+    <circle cx="300" cy="140" r="44" fill="#ff2a4410" stroke="#ff2a44" stroke-width="1" style="filter:drop-shadow(0 0 8px #ff2a44)"/>
+    <circle cx="300" cy="140" r="9" fill="#ff2a44" style="filter:drop-shadow(0 0 8px #ff2a44)"/>
     <text x="300" y="80" text-anchor="middle" font-family="Montserrat,'Arial Black'" font-weight="900" font-style="italic" font-size="22" fill="#eef0f3">JFC GYM</text>
    </svg>
    <div class="info">
@@ -351,6 +381,11 @@ window.render=function(){
  $('hph').innerHTML=icon('phone')+'<span>'+J.C.phone+'</span>';$('hwa').innerHTML=ib('wa','WhatsApp');$('hbg').innerHTML=icon('menu');
  const o=J.isOpen(),nx=J.nextClass();
  $('live').classList.toggle('closed',!o);$('live').querySelector('span').textContent=t(o?'open_now':'closed_now')+' · '+t('loc_hours');
+ $('promo').innerHTML=`<div class="wrap">${icon('fire')}<span><b>${t('promo')}</b> <em>${J.promoDate()}</em></span><a href="${J.waLink(t('wa_msg')+' '+t('promo'))}" target="_blank" rel="noopener">${t('promo_btn')} →</a></div>`;
+ $('micro').innerHTML=icon('shield')+t('cta_micro');
+ $('igb').innerHTML=ib('ig','@jfc_gym.kg');
+ $('res4').innerHTML=[['level',1],['medal',2],['kick',3],['ig',4]].map(([k,i])=>`<div class="r4">${icon(k)}<b>${t('res'+i+'_n')}${i===1?'<small>'+t('res1_u')+'</small>':''}</b><p>${t('res'+i+'_t')}</p></div>`).join('');
+ $('guar').innerHTML=icon('shield')+`<div><b>${t('guar_t')}</b><span>${t('guar_d')}</span></div>`;
  $('h1').innerHTML=ib('wa',t('cta_trial'));$('h2').innerHTML=ib('arrow',t('quiz_title'));
  [0,1,2,7].forEach((d,i)=>$('tg'+(i+1)).innerHTML=(i===0&&nx?`<b>${nx.time}</b> · `:'')+L(dirs[d])[0]);
  $('stats').innerHTML=[1,2,3].map(i=>`<div><b>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('')+`<a href="${J.C.gis}" target="_blank" rel="noopener"><b>4.9 ★</b><span>${t('gis_reviews')}</span></a>`;
@@ -364,7 +399,7 @@ window.render=function(){
    <div class="lbl">${t('nav_schedule')}</div><div class="chips">${cls.slice(0,6).map(x=>`<span class="chip">${days[J.lang][x.di]} <b>${x.x}</b></span>`).join('')||`<span class="chip">${t('sched_sub')}</span>`}</div>
    <div class="lbl">${t('nav_dirs')}</div><div class="chips">${g.d.map(d=>`<span class="chip">${icon(dirs[d].ic)}${L(dirs[d])[0]}</span>`).join('')}</div></div>
    <div class="rco"><div class="pic">${portrait(g.c[0],'#1f232b','#0f1115','#3a3f48')}</div><div class="tx"><small>${t('coach_sel')}</small><b>${c.n}</b><small>${L(c)}</small></div></div>
-   <div class="foot"><div class="pr">${t('price_from')} ${hit.p}<small>${t('som')} ${L(hit.u)}</small></div><a class="btn btn-wa" href="${J.waLink(t('wa_msg')+' '+t('quiz_rec')+': '+t(g.k))}" target="_blank" rel="noopener">${ib('wa',t('cta_trial'))}</a></div>`;
+   <div class="foot"><div class="pr">${t('price_from')} ${hit.p}<small>${t('som')} ${L(hit.u)}</small></div><a class="btn btn-rd" href="${J.waLink(t('wa_msg')+' '+t('quiz_rec')+': '+t(g.k))}" target="_blank" rel="noopener">${ib('wa',t('cta_trial'))}</a></div>`;
  };
  drawQ();$('goals').onclick=e=>{const b=e.target.closest('.goal');if(b){goal=+b.dataset.i;drawQ();}};
  $('dirsg').innerHTML=dirs.map(d=>`<a class="dir" href="${J.waLink(t('wa_msg')+' '+L(d)[0])}" target="_blank" rel="noopener">${icon(d.ic)}<h3>${L(d)[0]}</h3><p>${L(d)[1]}</p></a>`).join('');
