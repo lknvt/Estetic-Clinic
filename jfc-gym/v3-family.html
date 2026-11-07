@@ -39,7 +39,7 @@ h3{font-family:Montserrat,sans-serif;font-weight:800;letter-spacing:-.01em;line-
 .top .ic{width:16px;height:16px;color:#fff}
 .top a{color:#fff;font-weight:800}
 /* header */
-.hd{position:sticky;top:0;z-index:50;background:#f5f3eee6;backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:.2s}
+.hd{position:sticky;top:0;z-index:50;background:#f4f4f5f0;backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:.2s}
 .hd .wrap{display:flex;align-items:center;gap:22px;height:76px}
 .logo{display:flex;align-items:center;gap:10px;white-space:nowrap}
 .logo .mk{width:44px;height:44px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;letter-spacing:.02em;position:relative}
@@ -56,45 +56,40 @@ nav a:hover:after{right:0}
 .lang button.on{background:var(--ink);color:#fff}
 .hd .btn{height:48px;padding:0 18px;font-size:14px}
 .burger{display:none;width:48px;height:48px;border-radius:14px;border:0;background:#fff;box-shadow:inset 0 0 0 1px var(--ln);color:var(--ink);cursor:pointer;place-items:center}
-/* hero */
-.hero{padding:28px 0 40px;min-height:calc(100svh - 116px);display:flex;align-items:center}
-.hero .wrap{display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center;width:100%}
-.hero h1{font-size:clamp(40px,4.9vw,70px);margin:20px 0 18px}
-.hero h1 em{font-style:italic;color:#fff;background:var(--or);padding:0 .16em;display:inline-block;transform:skew(-6deg);white-space:nowrap}
-
-.hero p{color:var(--mu);font-size:18px;max-width:520px}
-.aud-chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 26px}
-.aud-chips span{display:flex;align-items:center;gap:7px;background:#fff;border-radius:99px;padding:8px 14px;font-weight:700;font-size:14px;box-shadow:0 6px 16px -10px #11111333}
-.aud-chips .ic{width:18px;height:18px;color:var(--or)}
-.ctas{display:flex;flex-wrap:wrap;gap:10px}
-.trust{display:flex;align-items:center;gap:14px;margin-top:28px}
-.avs{display:flex}
-.avs span{width:40px;height:40px;border-radius:50%;border:3px solid var(--bg);margin-left:-10px;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--ink)}
-.avs span:first-child{margin-left:0}
-.trust b{font-size:18px}.trust .st{display:flex;color:#ffb400}.trust .st .ic{width:16px;height:16px}
-.trust small{display:block;color:var(--mu);font-size:13px}
-.col{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:200px 150px 200px;gap:14px;position:relative}
-.tile{border-radius:var(--r);padding:22px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:.3s}
-.tile:hover{transform:translateY(-4px) rotate(-.5deg)}
-.tile .bi{width:64px;height:64px;color:var(--ink)}
-.tile b{font-size:22px;font-weight:800}
-.tile small{display:block;color:var(--ink2);font-weight:600;font-size:13px}
-.t1{background:var(--ink);color:#fff;grid-row:span 2}.t1 .bi{color:var(--or2);width:90px;height:90px}.t1 small{color:#aab4cc}
-.t1 .big{font-family:Montserrat,sans-serif;font-style:italic;font-size:120px;font-weight:900;line-height:.8;position:absolute;right:-8px;bottom:-14px;color:#ffffff0d}
-.t2{background:var(--or);color:#fff}.t2 .bi{color:#fff}.t2 small{color:#ffe1d4}
-.t3{background:#fff;box-shadow:inset 0 0 0 1.5px var(--ln)}
-.tile .tr{position:absolute;right:-30px;top:-30px;width:150px;height:150px;background:var(--or);opacity:.12;clip-path:polygon(0 0,100% 0,50% 86%)}
-.t1 .tr{opacity:.85;width:220px;height:220px;right:-50px;top:-40px}.t2 .tr{background:#000;opacity:.18}.t4{background:var(--bl);grid-column:span 2;flex-direction:row;align-items:center;gap:18px;justify-content:flex-start}
-.float{position:absolute;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:10px;font-weight:800;font-size:14px;z-index:2}
-.f1{left:-22px;bottom:-18px}.f2{right:-14px;top:-14px;background:var(--ink);color:#fff}.f2 .ic{color:var(--or2)}
-.dotg{width:10px;height:10px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 4px #16a34a26}
-.f1.closed .dotg{background:#999;box-shadow:none}
-/* stats */
-.stats{background:var(--ink);color:#fff;border-radius:var(--r);display:grid;grid-template-columns:repeat(4,1fr);padding:10px}
-.stats div{padding:22px 26px;border-right:1px solid #ffffff18}
-.stats div:last-child{border:0}
-.stats b{font:italic 900 40px/1 Montserrat,sans-serif;color:var(--or2)}
-.stats span{display:block;color:#b8c1d6;font-size:14px;margin-top:6px}
+/* hero: фото зала на весь экран, затемнение слева, полоса цифр внизу */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;color:#fff;overflow:hidden;isolation:isolate;margin-top:-76px}
+.hbg{position:absolute;inset:0;z-index:-1;background:#1a1a1c}
+.hbg .scene{position:absolute;inset:-12px;width:calc(100% + 24px);height:calc(100% + 24px);filter:blur(2.5px) saturate(.9) contrast(1.05)}
+.hbg .photo{position:absolute;inset:0;background-position:center;background-size:cover}
+.hbg .shade{position:absolute;inset:0;background:linear-gradient(90deg,#0a0a0cf2 0%,#0a0a0cd0 38%,#0a0a0c66 70%,#0a0a0c33 100%),linear-gradient(0deg,#0a0a0ce6 0%,transparent 30%),linear-gradient(180deg,#0a0a0cb3 0%,transparent 22%)}
+.hin{flex:1;width:100%;display:flex;align-items:center;padding-top:130px;padding-bottom:50px}
+.htx{max-width:760px}
+.kick2{display:block;font:800 13px/1 Manrope,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:var(--or2)}
+.hero h1{font-size:clamp(44px,6vw,92px);line-height:1;margin:26px 0 26px;text-shadow:0 4px 30px #0006}
+.hero h1 em{font-style:italic;color:#fff;background:var(--or);padding:0 .16em;display:inline-block;transform:skew(-6deg);white-space:nowrap;margin-top:.1em;text-shadow:none}
+.hero p{color:#e4e4e7;font-size:19px;max-width:520px;margin-bottom:34px}
+.btn-ghost{background:#ffffff0d;color:#fff;box-shadow:inset 0 0 0 1.5px #ffffff55;backdrop-filter:blur(6px)}.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.btn-ghost .ic{width:18px;height:18px}
+.hstats{position:relative;border-top:1px solid #ffffff1f;background:#0a0a0c80;backdrop-filter:blur(8px)}
+.hstats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.hs{display:flex;align-items:center;gap:14px;padding:26px 24px;border-right:1px solid #ffffff1f}
+.hs:first-child{padding-left:0}.hs:last-child{border:0}
+.hs b{font:italic 900 40px/1 Montserrat,sans-serif;color:#fff;white-space:nowrap}
+.hs span{color:#c4c4cb;font-size:14px;line-height:1.3}
+.hs .pi{width:30px;height:30px;color:var(--or2)}
+.hs .st{display:flex;gap:2px;color:#ffc21a;margin-bottom:4px}.hs .st .ic{width:15px;height:15px}
+a.hs:hover span{color:#fff}
+/* header over hero */
+.hd{transition:background .3s,box-shadow .3s}
+.hph{display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px;white-space:nowrap;color:var(--ink)}
+.hph .ic{width:20px;height:20px;color:var(--or)}
+.hd.over{background:transparent;backdrop-filter:none}
+.hd.over nav a,.hd.over .hph{color:#fff}
+.hd.over .jlogo text:first-child{fill:#fff}
+.hd.over .lang{background:#ffffff14;box-shadow:inset 0 0 0 1px #ffffff33}
+.hd.over .lang button{color:#ffffffb3}.hd.over .lang button.on{background:#fff;color:#111}
+.hd.over .burger{background:#ffffff14;color:#fff;box-shadow:inset 0 0 0 1px #ffffff33}
+.hd:not(.over){box-shadow:0 10px 30px -20px #0004}
 /* highlights */
 .hls{display:flex;gap:18px;justify-content:space-between;overflow-x:auto;background:#fff;border-radius:var(--r);padding:20px 26px;margin-bottom:14px;scrollbar-width:none;box-shadow:0 1px 0 var(--ln)}
 .hl{flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;font-weight:700;width:86px;text-align:center;line-height:1.2}
@@ -234,7 +229,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.fab:before{animation:none}}
 @media(max-width:1160px){
  nav{display:none}.burger{display:grid}
- body.nav-open nav{display:flex;position:fixed;top:116px;left:16px;right:16px;flex-direction:column;background:#fff;border-radius:24px;padding:20px 24px;margin:0;box-shadow:var(--sh);gap:16px}
+ body.nav-open nav{display:flex;position:fixed;top:84px;left:16px;right:16px;flex-direction:column;background:#fff;border-radius:24px;padding:20px 24px;margin:0;box-shadow:var(--sh);gap:16px}
  body.nav-open nav a{font-size:18px}
  .coaches{grid-template-columns:repeat(2,1fr)}
  .revs{grid-template-columns:repeat(2,1fr)}.rsum{grid-row:auto;grid-column:span 2}
@@ -244,8 +239,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  .top .hide{display:none}
  .hd .btn{display:none}
  body.nav-open nav{top:76px}
- .hero{min-height:0;padding-top:16px}
- .hero .wrap{grid-template-columns:1fr;gap:34px}
+ .hin{padding-top:110px;padding-bottom:34px}
+ .hstats .wrap{grid-template-columns:1fr 1fr}
+ .hs{padding:18px 14px}.hs:nth-child(odd){padding-left:0}.hs:nth-child(2){border-right:0}.hs:nth-child(-n+2){border-bottom:1px solid #ffffff1f}
+ .hs b{font-size:30px}.hs{flex-direction:column;align-items:flex-start;gap:6px}
+ .hph span{display:none}
+ .hbg .shade{background:linear-gradient(90deg,#0a0a0ce6,#0a0a0c99),linear-gradient(0deg,#0a0a0ce6 0%,transparent 40%)}
  .col{grid-template-rows:150px 150px 120px}.tile{padding:18px}.tile b{font-size:18px}.tile .bi{width:48px;height:48px}.t1 .bi{width:64px;height:64px}
  .f1{left:8px;top:auto;bottom:-16px}.f2{right:8px}
  .stats{grid-template-columns:1fr 1fr}
@@ -271,7 +270,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 @media(max-width:560px){
  .top .wrap{justify-content:center}.top .hide2{display:none}
  .logo small{display:none}
- .hero h1{font-size:40px}
+ .hero h1{font-size:42px}
  .hero p{font-size:16px}
  .ctas .btn{flex:1 1 100%}
  .tabs{width:100%}.tabs button{flex:1;padding:10px 6px;font-size:13px;justify-content:center}.tabs button .ic{display:none}
@@ -284,33 +283,61 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 </style>
 </head>
 <body>
-<div class="top"><div class="wrap">
- <div><span class="hide" id="tp1"></span><span class="hide2" id="tp2"></span></div>
- <div><a data-link="tel" id="tp3"></a></div>
-</div></div>
-<header class="hd"><div class="wrap">
+<header class="hd over"><div class="wrap">
  <a href="#top" class="logo" id="lg" aria-label="JFC GYM"></a>
  <nav><a href="#dirs" data-t="nav_dirs"></a><a href="#coaches" data-t="nav_coaches"></a><a href="#prices" data-t="nav_prices"></a><a href="#schedule" data-t="nav_schedule"></a><a href="#reviews" data-t="nav_reviews"></a><a href="#contacts" data-t="nav_contacts"></a></nav>
  <div class="hr">
+  <a class="hph" data-link="tel" id="hph"></a>
   <div class="lang"><button data-lang="ru">RU</button><button data-lang="ky">KG</button></div>
   <a class="btn btn-o" data-link="wa" id="hwa"></a>
   <button class="burger" data-burger aria-label="Меню" id="hbg"></button>
  </div>
 </div></header>
 
-<section class="hero" id="top"><div class="wrap">
- <div class="rv">
-  <span class="pill" id="hk"></span>
-  <h1 data-th="hero_title"></h1>
-  <p data-t="hero_sub"></p>
-  <div class="aud-chips" id="chips"></div>
-  <div class="ctas"><a class="btn btn-o" data-link="wa" id="h1"></a><a class="btn btn-w" data-link="tel" id="h2"></a></div>
-  <div class="trust"><div class="avs"><span style="background:#e30613;color:#fff">Т</span><span style="background:#111;color:#fff">А</span><span style="background:#fde6e7">Д</span><span style="background:#fff">С</span></div><div><b>4.9</b> <span class="st" id="tst" style="display:inline-flex;vertical-align:-2px"></span><small data-t="reviews_sub"></small></div></div>
+<section class="hero" id="top">
+ <div class="hbg">
+  <!-- Чтобы поставить реальное фото зала: положите файл img/hero.jpg и добавьте к .photo background-image:url(img/hero.jpg) -->
+  <svg class="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+   <defs>
+    <linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f2f3"/><stop offset="1" stop-color="#d9d9dc"/></linearGradient>
+    <linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d8d94"/><stop offset="1" stop-color="#4a4a50"/></linearGradient>
+    <linearGradient id="bag" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#050505"/><stop offset=".45" stop-color="#2c2c30"/><stop offset="1" stop-color="#080808"/></linearGradient>
+    <pattern id="net3" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v18M0 0h18" stroke="#1a1a1a" stroke-width="1.6"/></pattern>
+    <radialGradient id="lamp" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+   </defs>
+   <rect width="1600" height="640" fill="url(#wl)"/>
+   <polygon points="560,40 1060,40 810,470" fill="#e30613"/>
+   <polygon points="1000,90 1300,90 1150,350" fill="#111"/>
+   <polygon points="1240,40 1600,40 1420,350" fill="#e30613"/>
+   <polygon points="380,640 560,330 740,640" fill="#111" opacity=".9"/>
+   <polygon points="60,40 300,40 180,250" fill="#e30613" opacity=".85"/>
+   <text x="700" y="250" font-family="Montserrat,Arial Black" font-weight="900" font-style="italic" font-size="150" fill="#fff" letter-spacing="-8">JFC</text>
+   <g fill="#fff" opacity=".9"><rect x="80" y="0" width="420" height="10"/><rect x="620" y="0" width="420" height="10"/><rect x="1160" y="0" width="420" height="10"/></g>
+   <rect x="0" y="0" width="1600" height="420" fill="url(#lamp)" opacity=".5"/>
+   <rect y="630" width="1600" height="270" fill="url(#fl)"/>
+   <g stroke="#ffffff14" stroke-width="2"><path d="M0 700H1600M0 780H1600M0 860H1600"/></g>
+   <g><path d="M1000 640L1080 380H1600V680Z" fill="#00000010"/><rect x="1080" y="360" width="520" height="20" fill="#111"/><rect x="1080" y="660" width="520" height="40" fill="#111"/><rect x="1080" y="380" width="520" height="280" fill="url(#net3)" opacity=".75"/>
+    <g fill="#111"><rect x="1080" y="360" width="16" height="340"/><rect x="1250" y="360" width="16" height="340"/><rect x="1420" y="360" width="16" height="340"/><rect x="1584" y="360" width="16" height="340"/></g>
+    <g fill="#e30613"><rect x="1080" y="372" width="16" height="44"/><rect x="1250" y="372" width="16" height="44"/><rect x="1420" y="372" width="16" height="44"/></g></g>
+   <g stroke="#333" stroke-width="3"><path d="M210 0V230M330 0V200M450 0V250"/></g>
+   <rect x="180" y="230" width="62" height="270" rx="20" fill="url(#bag)"/><rect x="300" y="200" width="62" height="250" rx="20" fill="url(#bag)"/><rect x="420" y="250" width="62" height="280" rx="20" fill="url(#bag)"/>
+   <g fill="#e30613"><rect x="180" y="290" width="62" height="10"/><rect x="300" y="260" width="62" height="10"/><rect x="420" y="310" width="62" height="10"/></g>
+   <ellipse cx="331" cy="700" rx="220" ry="18" fill="#00000030"/>
+  </svg>
+  <div class="photo"></div><div class="shade"></div>
  </div>
- <div class="col rv" id="col"></div>
-</div></section>
+ <div class="wrap hin">
+  <div class="htx rv">
+   <span class="kick2" data-t="hero_kicker"></span>
+   <h1 data-th="hero_title"></h1>
+   <p data-t="hero_sub"></p>
+   <div class="ctas"><a class="btn btn-g" data-link="wa" id="h1"></a><a class="btn btn-ghost" href="#dirs" id="h2"></a></div>
+  </div>
+ </div>
+ <div class="hstats"><div class="wrap" id="stats"></div></div>
+</section>
 
-<div class="wrap"><div class="hls rv" id="hls"></div><div class="stats rv" id="stats"></div></div>
+<div class="wrap" style="margin-top:22px"><div class="hls rv" id="hls"></div></div>
 
 <section class="sec" id="aud"><div class="wrap">
  <div class="sh rv"><span class="pill"><span data-t="aud_kicker"></span></span><h2 data-t="adv_title"></h2></div>
@@ -380,24 +407,16 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 const $=id=>document.getElementById(id);let aud=0,selDay=null;
 const tint=['#fde6e7','#ececef','#fde6e7','#ececef','#fde6e7','#ececef','#fde6e7','#ececef'];
 const tcol=['#e30613','#111113','#e30613','#111113','#e30613','#111113','#e30613','#111113'];
+const hdr=document.querySelector('.hd'),onS=()=>hdr.classList.toggle('over',scrollY<40&&!document.body.classList.contains('nav-open'));addEventListener('scroll',onS,{passive:true});document.addEventListener('click',()=>setTimeout(onS));
 window.render=function(){
  const J=window.JFC,{t,L,icon,dirs,coaches,prices,schedule,reviews,days,portrait}=J;
  const ib=(k,x)=>icon(k)+'<span>'+x+'</span>';
- $('tp1').innerHTML=icon('pin')+t('loc_addr');$('tp2').innerHTML=icon('clock')+t('loc_hours');$('tp3').innerHTML=icon('phone')+' '+J.C.phone;
+ $('hph').innerHTML=icon('phone')+'<span>'+J.C.phone+'</span>';
  $('hwa').innerHTML=ib('wa',t('cta_wa'));$('hbg').innerHTML=icon('menu');
- $('hk').innerHTML='<span>'+t('hero_kicker')+'</span>';
  $('lg').innerHTML=J.logo('#111');$('lg2').innerHTML=J.logo('#111');
  $('hls').innerHTML=J.highlights.map(([k,l,h])=>`<a class="hl" href="${h}"><span class="c">${J.hl(k)}</span>${t(l)}</a>`).join('');
- $('chips').innerHTML=[['team','aud_adult'],['kids','aud_kids'],['women','aud_women']].map(([k,x])=>`<span>${icon(k)}${t(x)}</span>`).join('');
- $('h1').innerHTML=ib('wa',t('cta_trial'));$('h2').innerHTML=ib('phone',J.C.phone);
- $('tst').innerHTML=icon('star').repeat(5);
- $('col').innerHTML=`<div class="tile t1"><span class="tr"></span><span class="big">MMA</span>${icon('mma','bi')}<div><b>${L(dirs[0])[0]}</b><small>${t('cage_chip')}</small></div></div>
-  <div class="tile t2"><span class="tr"></span>${icon('box','bi')}<div><b>${L(dirs[1])[0]}</b></div></div>
-  <div class="tile t3"><span class="tr"></span>${icon('kids','bi')}<div><b>${L(dirs[6])[0]}</b><small>${t('kids_chip')}</small></div></div>
-  <div class="tile t4">${icon('gym','bi')}<div><b>${L(dirs[4])[0]}</b><small>${t('loc_hours')}</small></div></div>
-  <div class="float f1 ${J.isOpen()?'':'closed'}"><span class="dotg"></span>${t(J.isOpen()?'open_now':'closed_now')}</div>
-  <div class="float f2">${icon('medal')}${t('trial_badge')}</div>`;
- $('stats').innerHTML=[1,2,3,4].map(i=>`<div><b>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('');
+ $('h1').innerHTML=ib('wa',t('cta_trial'));$('h2').innerHTML=ib('arrow',t('see_dirs'));
+ $('stats').innerHTML=[1,2,3].map(i=>`<div class="hs"><b>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('')+`<a class="hs" href="${J.C.gis}" target="_blank" rel="noopener">${icon('pin','pi')}<div><span class="st">${icon('star').repeat(5)}</span><span>${t('gis_reviews')}</span></div></a>`;
  const A=[['team','aud_adult',[0,1,2,3,4,5],'#fde6e7'],['kids','aud_kids',[6,3,2],'#ececef'],['women','aud_women',[7,4,5],'#fde6e7']];
  const keys=['adult','kids','women'];
  const drawA=()=>{
