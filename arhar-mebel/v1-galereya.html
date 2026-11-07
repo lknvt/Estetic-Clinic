@@ -11,8 +11,8 @@
 <style>
 /* Концепция: белая галерея реальных проектов. Чёрный как в логотипе, орех и дымчато-синий из постов. */
 :root{
-  --paper:#FBFAF8; --stone:#F1EDE7; --ink:#151413; --walnut:#7A4A2C; --smoke:#3E5671;
-  --mut:#6B655E; --line:#E4DED5; --wa:#25D366;
+  --paper:#FCFBF9; --stone:#F3EFE9; --linen:#EAE3D9; --ink:#1F1B18; --walnut:#7A4A2C; --walnut2:#633B22; --smoke:#3E5671;
+  --mut:#6B655E; --line:#E6E0D7; --wa:#25D366; --star:#E2A21B;
   --f-d:Unbounded,system-ui,sans-serif; --f-b:Onest,system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -29,7 +29,7 @@ h1,h2,h3{font-family:var(--f-d);font-weight:500;letter-spacing:-.03em;line-heigh
 .ph img{width:100%;height:100%;object-fit:cover}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;font:600 15px/1 var(--f-b);padding:17px 24px;border-radius:999px;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
-.btn-k{background:var(--ink);color:#fff}.btn-k:hover{background:var(--walnut)}
+.btn-k{background:var(--walnut);color:#fff}.btn-k:hover{background:var(--walnut2)}
 .btn-wa{background:var(--wa);color:#05301a}.btn-wa:hover{background:#1fbf5b}
 .btn-o{background:#fff;color:var(--ink);border:1.5px solid var(--line)}.btn-o:hover{border-color:var(--ink)}
 .btn-o .gi{color:#2FA84F}
@@ -49,7 +49,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(251,250,248,.94);backdro
 .ib.wa{background:var(--wa);border-color:var(--wa);color:#fff}.ib.g{color:#2FA84F}
 .langs{display:flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;background:#fff}
 .langs button{border:0;background:none;border-radius:999px;font:600 12.5px var(--f-b);padding:8px 11px;cursor:pointer;color:var(--mut)}
-.langs button[aria-pressed=true]{background:var(--ink);color:#fff}
+.langs button[aria-pressed=true]{background:var(--walnut);color:#fff}
 .burger{display:none}
 
 section{padding:76px 0}
@@ -76,6 +76,29 @@ section{padding:76px 0}
 .mosaic .ph{border-radius:22px}
 .mosaic .ph:first-child{grid-row:span 2}
 .mosaic figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.92);border-radius:999px;padding:6px 13px;font:600 13px var(--f-b)}
+.proof{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--mut);align-items:center}
+.proof>*{display:flex;align-items:center;gap:6px}
+.proof b{color:var(--ink);font:600 16px var(--f-d);letter-spacing:-.02em}
+.proof .stars{color:var(--star);letter-spacing:1px}
+.cta-note{align-self:center;color:var(--mut);font-size:13.5px}
+.guar{margin-top:26px;display:grid;grid-template-columns:.7fr 2fr;gap:24px;align-items:center;background:var(--stone);border-radius:24px;padding:22px 26px}
+.guar h2{font-size:22px}
+.guar-g{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.guar-g div{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center}
+.guar-g .ic{grid-row:span 2;width:30px;height:30px;color:var(--walnut);background:#fff;border-radius:50%;padding:6px;box-sizing:content-box}
+.guar-g b{font-size:15px}
+.guar-g span{font-size:13px;color:var(--mut);line-height:1.35}
+.faq{display:grid;grid-template-columns:.8fr 1.4fr;gap:48px;align-items:start}
+.faq h2{font-size:clamp(28px,3.3vw,44px);margin-bottom:14px}
+.faq>div>p{color:var(--mut);margin-bottom:22px;max-width:36ch}
+.faq-l{display:flex;flex-direction:column;gap:10px}
+details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 22px}
+details[open]{border-color:var(--linen);box-shadow:0 14px 30px -24px rgba(60,40,20,.4)}
+summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:600;font-size:16.5px;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:400 24px/1 var(--f-d);color:var(--walnut);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 18px;color:var(--mut);max-width:62ch}
 .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
 .trust div{background:var(--stone);border-radius:18px;padding:16px 20px;display:flex;align-items:baseline;gap:10px}
 .trust b{font:500 30px var(--f-d);letter-spacing:-.04em;white-space:nowrap}
@@ -127,7 +150,7 @@ section{padding:76px 0}
 .rv .s{color:#E2A21B;letter-spacing:2px;font-size:15px}
 .rv p{font-size:15px;flex:1}
 .rv .who{display:flex;align-items:center;gap:11px}
-.rv .av{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:500 14px var(--f-d)}
+.rv .av{width:38px;height:38px;border-radius:50%;background:var(--walnut);color:#fff;display:grid;place-items:center;font:500 14px var(--f-d)}
 .rv .who b{display:block;font-size:14.5px}
 .rv .who span{font-size:12.5px;color:var(--mut)}
 .score{display:flex;align-items:center;gap:14px;border:1.5px solid var(--line);border-radius:999px;padding:8px 8px 8px 20px;background:#fff}
@@ -135,11 +158,11 @@ section{padding:76px 0}
 .score .s{color:#E2A21B;letter-spacing:2px}
 
 /* заявка */
-.lead{background:var(--ink);color:#fff;border-radius:32px;padding:52px;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+.lead{background:linear-gradient(135deg,var(--stone),var(--linen));color:var(--ink);border-radius:32px;padding:52px;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
 .lead h2{font-size:clamp(28px,3.2vw,44px);margin-bottom:14px}
-.lead>div>p{color:#b9b3ab;margin-bottom:24px;max-width:44ch}
-.lead .callbox span{color:#b9b3ab}
-form{background:#fff;color:var(--ink);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.lead>div>p{color:var(--mut);margin-bottom:24px;max-width:44ch}
+.lead h2{color:var(--walnut2)}
+form{background:#fff;color:var(--ink);border-radius:24px;padding:26px;box-shadow:0 30px 60px -40px rgba(60,40,20,.45);display:flex;flex-direction:column;gap:14px}
 form label{font-weight:600;font-size:14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font:500 14px var(--f-b);cursor:pointer;color:var(--ink)}
@@ -172,7 +195,9 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
 @media (max-width:1180px){.nav{display:none}.burger{display:grid}
   body.menu-open .nav{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:var(--paper);padding:18px 28px 26px;gap:16px;font-size:19px;color:var(--ink);border-bottom:1px solid var(--line)}}
 @media (max-width:1000px){
-  .hero-g,.lead{grid-template-columns:1fr}
+  .hero-g,.lead,.faq,.guar{grid-template-columns:1fr}
+  .guar-g{grid-template-columns:1fr 1fr}
+  .faq{gap:22px}
   .mosaic{min-height:440px}
   .trust{grid-template-columns:1fr 1fr}
   .bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}
@@ -212,6 +237,8 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
   .rv{flex:0 0 86%;scroll-snap-align:start}
   .lead{padding:28px 18px;border-radius:24px}
   form{padding:18px}.row2{grid-template-columns:1fr}
+  .guar{padding:18px}.guar-g{gap:14px}
+  summary{font-size:15.5px;padding:15px 0}details{padding:0 16px}
   .ct{grid-template-columns:1fr}.cc.big{grid-column:auto}.cc.big b{font-size:24px}
   .fab{display:none}
   .mbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(251,250,248,.97);border-top:1px solid var(--line)}
@@ -254,6 +281,12 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
     <div class="cta">
      <a class="btn btn-wa" data-href="wa" data-i="wa"><span data-t="cta.wa"></span></a>
      <a class="btn btn-k" href="#lead"><span data-t="cta.measure"></span></a>
+     <small class="cta-note" data-t="hero.cta.note"></small>
+    </div>
+    <div class="proof">
+     <a data-href="gis"><b>4,9</b><span class="stars">★★★★★</span><span data-t="proof.rating"></span></a>
+     <span><b>36 000+</b><span data-t="proof.subs"></span></span>
+     <span><b>8</b><span data-t="proof.years"></span></span>
     </div>
     <div class="callbox">
      <a class="num" data-href="phone" data-c="phone"></a>
@@ -263,7 +296,7 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
    </div>
    <div class="mosaic" id="mosaic"></div>
   </div>
-  <div class="trust" id="trust"></div>
+  <div class="guar"><h2 data-t="g.title"></h2><div class="guar-g" id="guar"></div></div>
  </div>
 </section>
 
@@ -303,6 +336,13 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
    <a class="score" data-href="gis"><b>4,9</b><span class="s">★★★★★</span><span class="btn btn-k" style="padding:11px 16px"><span data-t="rev.all"></span></span></a>
   </div>
   <div class="rv-g" id="revs"></div>
+ </div>
+</section>
+
+<section id="faq" style="padding-top:20px">
+ <div class="w faq">
+  <div><h2 data-t="faq.title"></h2><p data-t="faq.sub"></p><a class="btn btn-wa" data-href="wa" data-i="wa"><span data-t="cta.wa"></span></a></div>
+  <div class="faq-l" id="faqL"></div>
  </div>
 </section>
 
@@ -356,7 +396,8 @@ const fig = (src, alt, cap, cls = 'ph') => `<figure class="${cls}"><img src="${P
 AM.onLang(() => {
   const L = AM.lang, C = DATA.catalog;
   $('mosaic').innerHTML = [['kitchen-hero', C[0][L][0]], ['wardrobe', REAL.works[1][L]], ['kitchen-walnut-blue', REAL.works[2][L]]].map(([n, t]) => fig(n, t, t)).join('');
-  $('trust').innerHTML = DATA.stats.map(([n, k]) => `<div><b>${n}</b><span>${AM.t(k)}</span></div>`).join('');
+  $('guar').innerHTML = DATA.guarantees.map(g => `<div>${ico(g.i)}<b>${g[L][0]}</b><span>${g[L][1]}</span></div>`).join('');
+  $('faqL').innerHTML = DATA.faq.map((f, i) => `<details${i ? '' : ' open'}><summary>${f[L][0]}</summary><p>${f[L][1]}</p></details>`).join('');
   $('bento').innerHTML = C.map(c => `<a class="bt" href="${AM.wa(AM.t('wa.msg') + ' — ' + c[L][0])}" target="_blank" rel="noopener"><img src="${P(REAL.catalog[c.k])}" alt="${esc(c[L][0])}" loading="lazy">
     <div class="tx"><h3>${c[L][0]}</h3><p>${c[L][1]}</p><span class="go">${ico('wa')}${AM.t('cta.calc')}</span></div></a>`).join('');
   $('proc').innerHTML = DATA.process.map((p, i) => `<div class="st"><figure class="ph"><img src="${P(REAL.process[i])}" alt="" loading="lazy"><span class="n">${i + 1}</span></figure><h3>${p[L][0]}</h3><p>${p[L][1]}</p></div>`).join('');
