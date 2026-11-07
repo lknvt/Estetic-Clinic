@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARHAR — Вариант 1 · Галерея</title>
+<meta name="description" content="ARHAR — мебель от дизайна до установки в Бишкеке. Кухни, гардеробные, ванные, офисы. 8 лет на рынке.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Unbounded:wght@400;500;600&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Концепция: белая галерея реальных проектов. Чёрный как в логотипе, орех и дымчато-синий из постов. */
+:root{
+  --paper:#FBFAF8; --stone:#F1EDE7; --ink:#151413; --walnut:#7A4A2C; --smoke:#3E5671;
+  --mut:#6B655E; --line:#E4DED5; --wa:#25D366;
+  --f-d:Unbounded,system-ui,sans-serif; --f-b:Onest,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
+body{font:400 16px/1.6 var(--f-b);color:var(--ink);background:var(--paper);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.img-x{opacity:0}
+h1,h2,h3{font-family:var(--f-d);font-weight:500;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
+.w{max-width:1280px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:3px solid var(--smoke);outline-offset:3px;border-radius:8px}
+.ic{width:20px;height:20px;flex:none}
+.ph{background:var(--stone);overflow:hidden;position:relative}
+.ph img{width:100%;height:100%;object-fit:cover}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;font:600 15px/1 var(--f-b);padding:17px 24px;border-radius:999px;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
+.btn-k{background:var(--ink);color:#fff}.btn-k:hover{background:var(--walnut)}
+.btn-wa{background:var(--wa);color:#05301a}.btn-wa:hover{background:#1fbf5b}
+.btn-o{background:#fff;color:var(--ink);border:1.5px solid var(--line)}.btn-o:hover{border-color:var(--ink)}
+.btn-o .gi{color:#2FA84F}
+
+/* шапка */
+header{position:sticky;top:0;z-index:50;background:rgba(251,250,248,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:26px;height:70px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .wm{font:400 30px/1 Comfortaa,sans-serif;letter-spacing:-.02em}
+.nav{display:flex;gap:24px;font-size:15px;color:var(--mut)}
+.nav a:hover{color:var(--ink)}
+.hd-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.hphone{display:flex;flex-direction:column;align-items:flex-end;line-height:1.2;margin-right:6px}
+.hphone b{font:600 16px var(--f-d);letter-spacing:-.02em;white-space:nowrap}
+.hphone small{color:var(--mut);font-size:12px}
+.ib{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.ib.wa{background:var(--wa);border-color:var(--wa);color:#fff}.ib.g{color:#2FA84F}
+.langs{display:flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;background:#fff}
+.langs button{border:0;background:none;border-radius:999px;font:600 12.5px var(--f-b);padding:8px 11px;cursor:pointer;color:var(--mut)}
+.langs button[aria-pressed=true]{background:var(--ink);color:#fff}
+.burger{display:none}
+
+section{padding:76px 0}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:32px}
+.sh h2{font-size:clamp(28px,3.3vw,46px);max-width:18ch}
+.sh p{color:var(--mut);max-width:42ch}
+
+/* hero */
+.hero{padding:34px 0 28px}
+.hero-g{display:grid;grid-template-columns:1fr 1.08fr;gap:44px;align-items:stretch}
+.hero-l{display:flex;flex-direction:column;justify-content:center;gap:24px}
+.hero h1{font-size:clamp(36px,4.3vw,62px)}
+.hero .sub{font-size:18px;color:var(--mut);max-width:46ch}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:20px;background:#fff}
+.pillars div{padding:14px 16px;border-left:1px solid var(--line)}
+.pillars div:first-child{border-left:0}
+.pillars b{display:block;font:500 16px var(--f-d);letter-spacing:-.02em}
+.pillars span{font-size:13px;color:var(--mut);line-height:1.35;display:block;margin-top:3px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.callbox{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.callbox a.num{font:600 26px var(--f-d);letter-spacing:-.03em;white-space:nowrap}
+.callbox span{font-size:14px;color:var(--mut)}
+.mosaic{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-height:560px}
+.mosaic .ph{border-radius:22px}
+.mosaic .ph:first-child{grid-row:span 2}
+.mosaic figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.92);border-radius:999px;padding:6px 13px;font:600 13px var(--f-b)}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.trust div{background:var(--stone);border-radius:18px;padding:16px 20px;display:flex;align-items:baseline;gap:10px}
+.trust b{font:500 30px var(--f-d);letter-spacing:-.04em;white-space:nowrap}
+.trust span{font-size:13.5px;color:var(--mut);line-height:1.3}
+
+/* каталог — бенто */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:12px}
+.bt{position:relative;border-radius:22px;overflow:hidden;background:var(--stone);color:#fff;display:flex}
+.bt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.bt:hover img{transform:scale(1.05)}
+.bt::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,12,10,.82),rgba(15,12,10,.05) 60%)}
+.bt .tx{position:relative;z-index:1;margin-top:auto;padding:20px;display:flex;flex-direction:column;gap:6px;width:100%}
+.bt h3{font-size:21px}
+.bt p{font-size:14px;color:#e8e2da;max-width:34ch}
+.bt .go{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:14px;margin-top:4px}
+
+/* процесс с фото */
+.proc{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.st{display:flex;flex-direction:column;gap:12px}
+.st .ph{aspect-ratio:3/3.4;border-radius:20px}
+.st .n{position:absolute;left:12px;top:12px;width:38px;height:38px;border-radius:50%;background:#fff;display:grid;place-items:center;font:600 15px var(--f-d)}
+.st h3{font-size:17px}
+.st p{font-size:14px;color:var(--mut);margin-top:-4px}
+.st:nth-child(2) .n{background:var(--smoke);color:#fff}
+
+/* работы — плёнка */
+.works{display:grid;grid-template-columns:repeat(9,1fr);gap:10px}
+.wk{grid-column:span 3;height:250px;border-radius:18px;position:relative}
+.wk:nth-child(4),.wk:nth-child(5){grid-column:span 3}
+.wk:nth-child(1){grid-column:span 4}.wk:nth-child(2){grid-column:span 2}
+.wk:nth-child(7){grid-column:span 2}.wk:nth-child(8){grid-column:span 4}
+.wk figcaption{position:absolute;left:10px;bottom:10px;right:10px;background:rgba(255,255,255,.93);border-radius:12px;padding:7px 11px;font:600 13px var(--f-b);width:max-content;max-width:calc(100% - 20px)}
+.ig-row{margin-top:18px;display:flex;justify-content:center}
+
+/* команда */
+.team-g{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.tm .ph{aspect-ratio:4/4.6;border-radius:22px}
+.tm h3{font-size:17px;margin-top:14px}
+.tm p{color:var(--mut);font-size:14px}
+.tm .xp{display:inline-block;margin-top:8px;background:var(--stone);border-radius:999px;padding:4px 11px;font-size:12.5px;font-weight:600;color:var(--walnut)}
+.note{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--stone);border-radius:18px;padding:16px 20px}
+.note p{flex:1;min-width:220px;font-weight:500}
+
+/* отзывы */
+.rv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.rv{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.rv .s{color:#E2A21B;letter-spacing:2px;font-size:15px}
+.rv p{font-size:15px;flex:1}
+.rv .who{display:flex;align-items:center;gap:11px}
+.rv .av{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:500 14px var(--f-d)}
+.rv .who b{display:block;font-size:14.5px}
+.rv .who span{font-size:12.5px;color:var(--mut)}
+.score{display:flex;align-items:center;gap:14px;border:1.5px solid var(--line);border-radius:999px;padding:8px 8px 8px 20px;background:#fff}
+.score b{font:500 26px var(--f-d)}
+.score .s{color:#E2A21B;letter-spacing:2px}
+
+/* заявка */
+.lead{background:var(--ink);color:#fff;border-radius:32px;padding:52px;display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+.lead h2{font-size:clamp(28px,3.2vw,44px);margin-bottom:14px}
+.lead>div>p{color:#b9b3ab;margin-bottom:24px;max-width:44ch}
+.lead .callbox span{color:#b9b3ab}
+form{background:#fff;color:var(--ink);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:14px}
+form label{font-weight:600;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font:500 14px var(--f-b);cursor:pointer;color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--smoke);border-color:var(--smoke);color:#fff}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;font:400 16px var(--f-b);background:var(--paper);color:var(--ink)}
+input:focus{outline:none;border-color:var(--ink)}
+.msg{font-size:13.5px;color:var(--mut);min-height:20px}
+.msg[data-state=err]{color:#b3261e}.msg[data-state=ok]{color:#1a7f43}
+
+/* контакты */
+.ct{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px}
+.cc{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:6px}
+.cc .ic{width:28px;height:28px;color:var(--walnut);margin-bottom:8px}
+.cc small{color:var(--mut);font-size:13px}
+.cc b{font:500 19px var(--f-d);letter-spacing:-.02em}
+.cc .btn{margin-top:auto;align-self:flex-start}
+.cc.big{background:var(--stone);border-color:var(--stone)}
+.cc.big b{font-size:28px;white-space:nowrap}
+.cc .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+footer{padding:26px 0 100px;border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+footer .w{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
+
+.fab{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(37,211,102,.8)}
+.fab .ic{width:30px;height:30px}
+.mbar{display:none}
+
+@media (max-height:820px) and (min-width:1001px){section{padding:58px 0}.mosaic{min-height:470px}.bento{grid-template-rows:230px 230px}.wk{height:215px}.hero h1{font-size:52px}}
+@media (max-width:1180px){.nav{display:none}.burger{display:grid}
+  body.menu-open .nav{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:var(--paper);padding:18px 28px 26px;gap:16px;font-size:19px;color:var(--ink);border-bottom:1px solid var(--line)}}
+@media (max-width:1000px){
+  .hero-g,.lead{grid-template-columns:1fr}
+  .mosaic{min-height:440px}
+  .trust{grid-template-columns:1fr 1fr}
+  .bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .bt{min-height:240px}
+  .proc{grid-template-columns:repeat(3,1fr)}
+  .works{grid-template-columns:1fr 1fr}.wk,.wk:nth-child(n){grid-column:auto;height:220px}.wk:first-child{grid-column:span 2}
+  .team-g{grid-template-columns:1fr 1fr}
+  .rv-g{grid-template-columns:1fr 1fr}
+  .ct{grid-template-columns:1fr 1fr}.cc.big{grid-column:span 2}
+  .hphone{display:none}
+}
+@media (max-width:700px){
+  .btn{white-space:normal;text-align:center;line-height:1.25}
+  .w{padding:0 16px}
+  section{padding:52px 0}
+  html{scroll-padding-top:64px}
+  .hd{height:62px;gap:10px}.logo .wm{font-size:26px}
+  body.menu-open .nav{top:62px}
+  .hd-r .ib.g{display:none}
+  .sh{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:22px}
+  .hero{padding:20px 0 10px}.hero-l{gap:18px}
+  .hero h1{font-size:33px}.hero .sub{font-size:16px}
+  .pillars div{padding:11px 10px}.pillars b{font-size:14px}.pillars span{font-size:11.5px}
+  .cta .btn{flex:1 1 100%}
+  .callbox a.num{font-size:23px}
+  .mosaic{min-height:0;grid-template-rows:170px 170px}
+  .trust{gap:8px}.trust div{flex-direction:column;gap:2px;padding:12px 14px}.trust b{font-size:24px}
+  .bento{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px}
+  .bt{flex:0 0 80%;min-height:330px;scroll-snap-align:start}
+  .proc{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px}
+  .st{flex:0 0 66%;scroll-snap-align:start}
+  .works{gap:8px}.wk,.wk:nth-child(n){height:170px}
+  .wk figcaption{font-size:12px;padding:5px 9px;left:7px;bottom:7px}
+  .team-g{gap:10px}.tm h3{font-size:14.5px}.tm p{font-size:12.5px}
+  .score{border-radius:20px;flex-wrap:wrap;padding:10px 12px;gap:8px 12px}
+  .rv-g{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px}
+  .rv{flex:0 0 86%;scroll-snap-align:start}
+  .lead{padding:28px 18px;border-radius:24px}
+  form{padding:18px}.row2{grid-template-columns:1fr}
+  .ct{grid-template-columns:1fr}.cc.big{grid-column:auto}.cc.big b{font-size:24px}
+  .fab{display:none}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(251,250,248,.97);border-top:1px solid var(--line)}
+  .mbar a{display:flex;flex-direction:column;align-items:center;gap:3px;font:600 12.5px var(--f-b);padding:8px 4px;border-radius:14px}
+  .mbar .c{background:var(--ink);color:#fff}.mbar .w2{background:var(--wa);color:#05301a}.mbar .g2{background:#fff;border:1.5px solid var(--line)}.mbar .g2 .ic{color:#2FA84F}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+ <div class="w hd">
+  <a class="logo" href="#top" aria-label="ARHAR"><span class="wm">arhar</span></a>
+  <nav class="nav">
+   <a href="#catalog" data-t="nav.catalog"></a><a href="#process" data-t="nav.process"></a><a href="#works" data-t="nav.works"></a>
+   <a href="#team" data-t="nav.team"></a><a href="#reviews" data-t="nav.reviews"></a><a href="#contacts" data-t="nav.contacts"></a>
+  </nav>
+  <div class="hd-r">
+   <a class="hphone" data-href="phone"><b data-c="phone"></b><small data-c="hours"></small></a>
+   <a class="ib wa" data-href="wa" data-i="wa" aria-label="WhatsApp"></a>
+   <a class="ib g" data-href="gis" data-i="gis" aria-label="2ГИС"></a>
+   <div class="langs" role="group" aria-label="Язык"><button data-lang="ru">RU</button><button data-lang="ky">KG</button></div>
+   <button class="ib burger" data-menu data-i="menu" aria-label="Меню"></button>
+  </div>
+ </div>
+</header>
+
+<main id="top">
+<section class="hero">
+ <div class="w">
+  <div class="hero-g">
+   <div class="hero-l">
+    <h1 data-t="hero2.title"></h1>
+    <p class="sub" data-t="hero2.sub"></p>
+    <div class="pillars">
+     <div><b data-t="b.time"></b><span data-t="b.time.s"></span></div>
+     <div><b data-t="b.quality"></b><span data-t="b.quality.s"></span></div>
+     <div><b data-t="b.warranty"></b><span data-t="b.warranty.s"></span></div>
+    </div>
+    <div class="cta">
+     <a class="btn btn-wa" data-href="wa" data-i="wa"><span data-t="cta.wa"></span></a>
+     <a class="btn btn-k" href="#lead"><span data-t="cta.measure"></span></a>
+    </div>
+    <div class="callbox">
+     <a class="num" data-href="phone" data-c="phone"></a>
+     <span data-c="hours"></span>
+     <a class="btn btn-o" data-href="gis" style="padding:11px 16px"><svg class="ic gi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><span data-t="cta.gis"></span></a>
+    </div>
+   </div>
+   <div class="mosaic" id="mosaic"></div>
+  </div>
+  <div class="trust" id="trust"></div>
+ </div>
+</section>
+
+<section id="catalog" style="padding-top:40px">
+ <div class="w">
+  <div class="sh"><h2 data-t="cat.title"></h2><p data-t="cat.sub"></p></div>
+  <div class="bento" id="bento"></div>
+ </div>
+</section>
+
+<section id="process" style="background:var(--stone)">
+ <div class="w">
+  <div class="sh"><h2 data-t="proc.title"></h2><p data-t="proc.sub"></p></div>
+  <div class="proc" id="proc"></div>
+ </div>
+</section>
+
+<section id="works">
+ <div class="w">
+  <div class="sh"><h2 data-t="works.title"></h2><p data-t="works.sub"></p></div>
+  <div class="works" id="worksG"></div>
+  <div class="ig-row"><a class="btn btn-o" data-href="ig" data-i="ig"><span data-t="works.ig"></span></a></div>
+ </div>
+</section>
+
+<section id="team" style="padding-top:20px">
+ <div class="w">
+  <div class="sh"><h2 data-t="team.title"></h2><p data-t="team.sub"></p></div>
+  <div class="team-g" id="teamG"></div>
+  <div class="note"><p data-t="team.note"></p><a class="btn btn-wa" data-href="wa" data-i="wa"><span data-t="cta.wa"></span></a></div>
+ </div>
+</section>
+
+<section id="reviews" style="padding-top:20px">
+ <div class="w">
+  <div class="sh"><h2 data-t="rev.title"></h2>
+   <a class="score" data-href="gis"><b>4,9</b><span class="s">★★★★★</span><span class="btn btn-k" style="padding:11px 16px"><span data-t="rev.all"></span></span></a>
+  </div>
+  <div class="rv-g" id="revs"></div>
+ </div>
+</section>
+
+<section id="lead" style="padding-top:20px">
+ <div class="w">
+  <div class="lead">
+   <div>
+    <h2 data-t="lead.title"></h2>
+    <p data-t="lead.sub"></p>
+    <div class="callbox"><a class="num" data-href="phone" data-c="phone"></a><span data-c="hours"></span></div>
+   </div>
+   <form data-lead novalidate>
+    <label data-t="lead.what"></label>
+    <div class="chips" id="chips"></div>
+    <div class="row2">
+     <input id="f-name" name="name" autocomplete="name" data-tp="lead.name" aria-label="Имя">
+     <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-tp="lead.phone" aria-label="Телефон" value="+996 ">
+    </div>
+    <button class="btn btn-wa" type="submit" data-i="wa"><span data-t="lead.send"></span></button>
+    <p class="msg" data-t="lead.note" aria-live="polite"></p>
+   </form>
+  </div>
+ </div>
+</section>
+
+<section id="contacts" style="padding-top:20px">
+ <div class="w">
+  <div class="sh"><h2 data-t="ct.title"></h2><p data-t="ct.sub"></p></div>
+  <div class="ct">
+   <div class="cc big"><span data-i="phone"></span><small data-t="ct.phone"></small><b><a data-href="phone" data-c="phone"></a></b><small data-c="hours"></small>
+    <div class="row"><a class="btn btn-wa" data-href="wa" data-i="wa"><span>WhatsApp</span></a><a class="btn btn-k" data-href="phone" data-i="phone"><span data-t="cta.call"></span></a></div></div>
+   <div class="cc"><span data-i="pin"></span><small data-t="ct.address"></small><b data-c="address"></b><a class="btn btn-o" data-href="gis" style="margin-top:14px"><span data-t="ct.route"></span></a></div>
+   <div class="cc"><span data-i="ig"></span><small>Instagram</small><b>@arhar_mebel</b><small data-t="ig.sub"></small><a class="btn btn-o" data-href="ig" style="margin-top:14px"><span data-t="ig.follow"></span></a></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer><div class="w"><span class="wm">arhar</span><span data-t="foot"></span><a data-href="phone" data-c="phone"></a></div></footer>
+<a class="fab" data-href="wa" data-i="wa" aria-label="WhatsApp"></a>
+<nav class="mbar" aria-label="Быстрая связь">
+ <a class="c" data-href="phone" data-i="phone"><span data-t="cta.call"></span></a>
+ <a class="w2" data-href="wa" data-i="wa"><span>WhatsApp</span></a>
+ <a class="g2" data-href="gis" data-i="gis"><span>2ГИС</span></a>
+</nav>
+
+<script src="site.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const fig = (src, alt, cap, cls = 'ph') => `<figure class="${cls}"><img src="${P(src)}" alt="${esc(alt)}" loading="lazy">${cap ? `<figcaption>${cap}</figcaption>` : ''}</figure>`;
+AM.onLang(() => {
+  const L = AM.lang, C = DATA.catalog;
+  $('mosaic').innerHTML = [['kitchen-hero', C[0][L][0]], ['wardrobe', REAL.works[1][L]], ['kitchen-walnut-blue', REAL.works[2][L]]].map(([n, t]) => fig(n, t, t)).join('');
+  $('trust').innerHTML = DATA.stats.map(([n, k]) => `<div><b>${n}</b><span>${AM.t(k)}</span></div>`).join('');
+  $('bento').innerHTML = C.map(c => `<a class="bt" href="${AM.wa(AM.t('wa.msg') + ' — ' + c[L][0])}" target="_blank" rel="noopener"><img src="${P(REAL.catalog[c.k])}" alt="${esc(c[L][0])}" loading="lazy">
+    <div class="tx"><h3>${c[L][0]}</h3><p>${c[L][1]}</p><span class="go">${ico('wa')}${AM.t('cta.calc')}</span></div></a>`).join('');
+  $('proc').innerHTML = DATA.process.map((p, i) => `<div class="st"><figure class="ph"><img src="${P(REAL.process[i])}" alt="" loading="lazy"><span class="n">${i + 1}</span></figure><h3>${p[L][0]}</h3><p>${p[L][1]}</p></div>`).join('');
+  $('worksG').innerHTML = REAL.works.map(w => fig(w.img, w[L], w[L], 'ph wk')).join('');
+  $('teamG').innerHTML = DATA.team.map((m, i) => `<article class="tm">${fig(REAL.team[i], m.name)}<h3>${m.name}</h3><p>${m[L]}</p><span class="xp">${AM.t('exp')}: ${m.exp} ${L === 'ky' ? 'жыл' : 'лет'}</span></article>`).join('');
+  $('revs').innerHTML = DATA.reviews.map(r => `<article class="rv"><div class="s">★★★★★</div><p>${r[L]}</p><div class="who"><div class="av">${r.name[0]}</div><div><b>${r.name}</b><span>${AM.L(r.where)}</span></div></div></article>`).join('');
+  $('chips').innerHTML = C.map(c => `<button type="button" class="chip" aria-pressed="false">${c[L][0]}</button>`).join('');
+});
+</script>
+</body>
+</html>

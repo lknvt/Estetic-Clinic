@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARHAR — Вариант 3 · Арки (стиль Instagram)</title>
+<meta name="description" content="ARHAR — мебель от дизайна до установки. Кухни, гардеробные, ванные и офисы в Бишкеке.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400&family=Tenor+Sans&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Концепция: как посты @arhar_mebel — тёплый беж, арочные окна, тонкие заголовки капсом
+   с подписью строчными («КУХНЯ на заказ»), коричневые круглые иконки. */
+:root{
+  --bg:#EEE8E0; --card:#F8F5F0; --ink:#2A211B; --cocoa:#5A4131; --cocoa2:#46321F;
+  --sand:#DCD1C3; --mut:#7A6D62; --line:#DDD3C6; --brass:#B08D57; --wa:#25D366;
+  --f-d:"Tenor Sans",Georgia,serif; --f-b:Raleway,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
+body{font:500 16px/1.65 var(--f-b);color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.img-x{opacity:0}
+h1,h2,h3{font-family:var(--f-d);font-weight:400;text-transform:uppercase;letter-spacing:.04em;line-height:1.1;text-wrap:balance}
+.low{display:block;font-family:var(--f-b);text-transform:none;letter-spacing:0;font-weight:500;color:var(--mut)}
+.w{max-width:1240px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:2px solid var(--cocoa);outline-offset:3px;border-radius:6px}
+.ic{width:20px;height:20px;flex:none}
+.arch{border-radius:999px 999px 18px 18px;overflow:hidden;background:var(--sand);position:relative}
+.arch img,.rnd img{width:100%;height:100%;object-fit:cover}
+.rnd{border-radius:50%;overflow:hidden;background:var(--sand);position:relative}
+.dot{width:44px;height:44px;border-radius:50%;background:var(--cocoa);color:#F3EADF;display:grid;place-items:center;flex:none}
+.dot .ic{width:20px;height:20px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;font:600 15px/1 var(--f-b);padding:17px 26px;border-radius:999px;transition:background .2s,color .2s;white-space:nowrap}
+.btn-c{background:var(--cocoa);color:#fff}.btn-c:hover{background:var(--cocoa2)}
+.btn-wa{background:var(--wa);color:#05301a}.btn-wa:hover{background:#1fbf5b}
+.btn-l{background:transparent;border:1.5px solid var(--cocoa);color:var(--cocoa)}.btn-l:hover{background:var(--cocoa);color:#fff}
+
+/* шапка */
+header{position:sticky;top:0;z-index:50;background:rgba(238,232,224,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:24px;height:72px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo .bub{width:46px;height:46px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;font:400 13px Comfortaa,sans-serif}
+.logo small{font:600 12px/1.25 var(--f-b);color:var(--mut)}
+.nav{display:flex;gap:22px;font-size:14.5px;font-weight:600;color:var(--mut)}
+.nav a:hover{color:var(--ink)}
+.hd-r{margin-left:auto;display:flex;align-items:center;gap:8px}
+.hphone{font:600 16px var(--f-b);white-space:nowrap;margin-right:6px}
+.ib{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);color:var(--cocoa);cursor:pointer}
+.ib.wa{background:var(--wa);border-color:var(--wa);color:#fff}.ib.g{color:#2FA84F}
+.langs{display:flex;gap:2px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.langs button{border:0;background:none;border-radius:999px;font:700 12.5px var(--f-b);padding:8px 11px;cursor:pointer;color:var(--mut)}
+.langs button[aria-pressed=true]{background:var(--cocoa);color:#fff}
+.burger{display:none}
+
+section{padding:76px 0}
+.sh{text-align:center;max-width:680px;margin:0 auto 36px}
+.sh h2{font-size:clamp(28px,3.4vw,44px)}
+.sh .low{font-size:17px;margin-top:10px}
+
+/* hero */
+.hero{padding:40px 0 34px}
+.hero-g{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(46px,6vw,86px);letter-spacing:.03em}
+.hero h1 .low{font-size:clamp(22px,2.3vw,32px);color:var(--cocoa);margin-top:8px}
+.hero .sub{color:var(--mut);font-size:17px;max-width:46ch;margin:22px 0 24px}
+.ilist{display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.ilist>*{display:flex;align-items:center;gap:14px}
+.ilist b{display:block;font-size:16px}
+.ilist span{font-size:14px;color:var(--mut)}
+.ilist .phone b{font:400 26px var(--f-d);letter-spacing:.02em}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.hero-v{position:relative;display:grid;grid-template-columns:1fr .62fr;gap:16px;align-items:end}
+.hero-v .a1{height:560px}
+.hero-v .col{display:flex;flex-direction:column;gap:16px}
+.hero-v .a2{height:300px}
+.hero-v .r1{width:100%;aspect-ratio:1}
+.pill{position:absolute;left:-22px;bottom:70px;background:var(--card);border-radius:18px;padding:12px 16px;box-shadow:0 22px 40px -22px rgba(42,33,27,.5);display:flex;align-items:center;gap:12px}
+.pill b{font:400 26px var(--f-d)}
+.pill span{font-size:13px;color:var(--mut);line-height:1.3}
+
+/* хайлайты */
+.hl{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;padding:6px 0 0}
+.hl a{display:flex;flex-direction:column;align-items:center;gap:8px;width:96px;text-align:center;font-weight:600;font-size:13px}
+.hl .rnd{width:84px;height:84px;outline:2px solid var(--sand);outline-offset:3px}
+.hl a:hover .rnd{outline-color:var(--cocoa)}
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0}
+
+/* каталог — арки */
+.cat{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.ca{display:flex;flex-direction:column;gap:12px;text-align:center}
+.ca .arch{aspect-ratio:3/4.3}
+.ca h3{font-size:16px;letter-spacing:.05em}
+.ca p{font-size:13.5px;color:var(--mut);line-height:1.45}
+.ca a{font-weight:700;font-size:13.5px;color:var(--cocoa);display:inline-flex;gap:6px;align-items:center;justify-content:center}
+.ca a:hover{text-decoration:underline}
+
+/* почему — как пост-уведомление */
+.notice{display:grid;grid-template-columns:.9fr 1.1fr;gap:0;background:var(--card);border-radius:32px;overflow:hidden}
+.notice .tx{padding:52px}
+.notice h2{font-size:clamp(28px,3vw,40px);margin-bottom:28px}
+.notice .ilist{gap:20px;margin:0}
+.notice .ilist>*{align-items:flex-start}
+.notice .ilist b{font-size:17px;margin-bottom:2px}
+.notice .ilist span{font-size:15px}
+.notice .pic{position:relative;background:radial-gradient(circle at 50% 100%,#cbbfae,var(--sand) 70%);min-height:460px}
+.notice .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.notice .pic .arch{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:62%;height:86%;border-radius:999px 999px 0 0;border:10px solid var(--card);border-bottom:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.stats div{background:var(--card);border-radius:22px;padding:18px 20px;text-align:center}
+.stats b{display:block;font:400 32px var(--f-d)}
+.stats span{font-size:13.5px;color:var(--mut)}
+
+/* процесс */
+.proc{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative}
+.proc::before{content:"";position:absolute;left:10%;right:10%;top:60px;border-top:1px dashed var(--brass)}
+.st{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;position:relative}
+.st .rnd{width:120px;height:120px;border:5px solid var(--bg)}
+.st .n{position:absolute;top:86px;left:calc(50% + 26px);width:34px;height:34px;border-radius:50%;background:var(--cocoa);color:#fff;display:grid;place-items:center;font:700 14px var(--f-b);border:3px solid var(--bg)}
+.st h3{font-size:15px;letter-spacing:.05em;margin-top:4px}
+.st p{font-size:14px;color:var(--mut)}
+
+/* работы */
+.works{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.wk{height:300px;border-radius:20px;overflow:hidden;position:relative;background:var(--sand)}
+.wk img{width:100%;height:100%;object-fit:cover}
+.wk:nth-child(odd){border-radius:999px 999px 20px 20px}
+.wk figcaption{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(248,245,240,.94);border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:700;text-align:center}
+
+/* команда */
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tm{text-align:center}
+.tm .arch{aspect-ratio:3/3.9;margin-bottom:14px}
+.tm h3{font-size:16px;letter-spacing:.04em}
+.tm p{font-size:14px;color:var(--mut)}
+.tm .xp{display:inline-block;margin-top:8px;border:1px solid var(--brass);color:var(--cocoa);border-radius:999px;padding:3px 12px;font-size:12.5px;font-weight:700}
+
+/* отзывы */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rv{background:var(--card);border-radius:26px;padding:26px;display:flex;flex-direction:column;gap:14px;position:relative}
+.rv::before{content:"“";font:400 70px/0.6 var(--f-d);color:var(--sand);position:absolute;right:22px;top:34px}
+.rv .s{color:var(--brass);letter-spacing:3px}
+.rv p{flex:1;font-size:15px}
+.rv .who{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:14px}
+.rv .who .dot{width:40px;height:40px;font:700 15px var(--f-b)}
+.rv .who b{display:block;font-size:14.5px}
+.rv .who span{font-size:12.5px;color:var(--mut)}
+.rv-cta{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:22px}
+
+/* заявка */
+.lead{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--cocoa);color:#F3EADF;border-radius:32px;overflow:hidden}
+.lead .tx{padding:52px;display:flex;flex-direction:column;gap:18px;justify-content:center}
+.lead h2{font-size:clamp(28px,3vw,42px)}
+.lead h2 .low{color:#D9C8B4;font-size:18px;margin-top:10px}
+.lead .phone{font:400 30px var(--f-d);letter-spacing:.02em;white-space:nowrap}
+.lead .hrs{color:#D9C8B4;font-size:14px}
+form{background:var(--card);color:var(--ink);padding:40px;display:flex;flex-direction:column;gap:14px}
+form label{font-weight:700;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font:600 13.5px var(--f-b);cursor:pointer;color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--cocoa);border-color:var(--cocoa);color:#fff}
+input{width:100%;border:1.5px solid var(--line);border-radius:999px;padding:14px 20px;font:500 16px var(--f-b);background:#fff;color:var(--ink)}
+input:focus{outline:none;border-color:var(--cocoa)}
+.msg{font-size:13.5px;color:var(--mut);min-height:20px}
+.msg[data-state=err]{color:#b3261e}.msg[data-state=ok]{color:#1a7f43}
+
+/* контакты */
+.ct{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cc{background:var(--card);border-radius:26px;padding:28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px}
+.cc .dot{margin-bottom:6px;width:54px;height:54px}
+.cc small{color:var(--mut);font-size:13px;font-weight:600}
+.cc b{font:400 21px var(--f-d);letter-spacing:.02em}
+.cc .btn{margin-top:10px}
+footer{padding:28px 0 100px;text-align:center;color:var(--mut);font-size:14px;display:flex;flex-direction:column;align-items:center;gap:10px}
+footer .bub{width:54px;height:54px;border-radius:50%;background:#000;color:#fff;display:grid;place-items:center;font:400 14px Comfortaa,sans-serif}
+
+.fab{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 14px 30px -10px rgba(37,211,102,.8)}
+.fab .ic{width:30px;height:30px}
+.mbar{display:none}
+
+@media (max-height:820px) and (min-width:1001px){section{padding:56px 0}.hero-v .a1{height:470px}.hero-v .a2{height:250px}.hero h1{font-size:70px}.notice .pic{min-height:400px}.notice .tx{padding:40px}}
+@media (max-width:1180px){.nav{display:none}.burger{display:grid}
+  body.menu-open .nav{display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:var(--bg);padding:18px 28px 26px;gap:16px;font-size:18px;color:var(--ink);border-bottom:1px solid var(--line)}}
+@media (max-width:1000px){
+  .works{grid-template-columns:repeat(3,1fr)}.wk:nth-child(n+7){display:none}
+  .hero-g,.notice,.lead{grid-template-columns:1fr}
+  .hero-v .a1{height:420px}.hero-v .a2{height:220px}
+  .cat{grid-template-columns:repeat(3,1fr)}
+  .proc{grid-template-columns:repeat(3,1fr);row-gap:30px}.proc::before{display:none}
+  .team{grid-template-columns:1fr 1fr}
+  .revs{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .ct{grid-template-columns:1fr}
+  .hphone{display:none}
+  .notice .pic{min-height:340px}
+}
+@media (max-width:700px){
+  .btn{white-space:normal;text-align:center;line-height:1.25}
+  .w{padding:0 16px}
+  section{padding:52px 0}
+  html{scroll-padding-top:64px}
+  .hd{height:62px;gap:10px}.logo small{display:none}.logo .bub{width:40px;height:40px;font-size:11.5px}
+  body.menu-open .nav{top:62px}
+  .hd-r .ib.g{display:none}
+  .hero{padding:22px 0 20px}
+  .hero h1{font-size:44px}.hero h1 .low{font-size:21px}
+  .hero .sub{font-size:15.5px;margin:16px 0 20px}
+  .ilist .phone b{font-size:22px}
+  .cta .btn{flex:1 1 100%}
+  .hero-v{grid-template-columns:1fr .7fr;gap:10px}.hero-v .a1{height:300px}.hero-v .a2{height:170px}.hero-v .col{gap:10px}
+  .pill{left:8px;bottom:12px;padding:9px 12px}.pill b{font-size:20px}
+  .hl{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;gap:14px;margin:0 -16px;padding:4px 16px 4px;scrollbar-width:none}
+  .hl a{flex:none;width:78px;font-size:12px}.hl .rnd{width:68px;height:68px}
+  .cat{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:0 16px 6px}
+  .ca{flex:0 0 58%;scroll-snap-align:start}
+  .notice{border-radius:24px}.notice .tx{padding:26px 20px}.notice .pic{min-height:280px}
+  .stats div{padding:14px 10px}.stats b{font-size:24px}
+  .proc{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px;gap:14px}
+  .st{flex:0 0 62%;scroll-snap-align:start}
+  .works{grid-template-columns:1fr 1fr;gap:8px}.wk{height:210px}.wk:nth-child(n+7){display:block}
+  .wk figcaption{font-size:11px;padding:5px 8px;left:6px;right:6px;bottom:6px}
+  .team{gap:12px}.tm h3{font-size:13.5px}.tm p{font-size:12.5px}
+  .revs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px}
+  .rv{flex:0 0 86%;scroll-snap-align:start}
+  .lead{border-radius:24px}.lead .tx{padding:28px 20px}form{padding:22px 18px}
+  .lead .phone{font-size:24px}
+  .fab{display:none}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(248,245,240,.97);border-top:1px solid var(--line)}
+  .mbar a{display:flex;flex-direction:column;align-items:center;gap:3px;font:700 12.5px var(--f-b);padding:8px 4px;border-radius:16px}
+  .mbar .c{background:var(--cocoa);color:#fff}.mbar .w2{background:var(--wa);color:#05301a}.mbar .g2{background:#fff;border:1px solid var(--line)}.mbar .g2 .ic{color:#2FA84F}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+ <div class="w hd">
+  <a class="logo" href="#top" aria-label="ARHAR"><span class="bub">arhar</span><small>ARHAR<br><span data-t="brand.sub"></span></small></a>
+  <nav class="nav">
+   <a href="#catalog" data-t="nav.catalog"></a><a href="#works" data-t="nav.works"></a><a href="#process" data-t="nav.process"></a>
+   <a href="#team" data-t="nav.team"></a><a href="#reviews" data-t="nav.reviews"></a><a href="#contacts" data-t="nav.contacts"></a>
+  </nav>
+  <div class="hd-r">
+   <a class="hphone" data-href="phone" data-c="phone"></a>
+   <a class="ib wa" data-href="wa" data-i="wa" aria-label="WhatsApp"></a>
+   <a class="ib g" data-href="gis" data-i="gis" aria-label="2ГИС"></a>
+   <div class="langs" role="group" aria-label="Язык"><button data-lang="ru">RU</button><button data-lang="ky">KG</button></div>
+   <button class="ib burger" data-menu data-i="menu" aria-label="Меню"></button>
+  </div>
+ </div>
+</header>
+
+<main id="top">
+<section class="hero">
+ <div class="w hero-g">
+  <div>
+   <h1 id="h1"></h1>
+   <p class="sub" data-t="hero2.sub"></p>
+   <div class="ilist">
+    <a class="phone" data-href="phone"><span class="dot" data-i="phone"></span><div><b data-c="phone"></b><span data-c="hours"></span></div></a>
+    <div><span class="dot" data-i="pin"></span><div><b data-c="address"></b><a data-href="gis" style="font-size:14px;color:var(--cocoa);font-weight:700;text-decoration:underline" data-t="ct.route"></a></div></div>
+   </div>
+   <div class="cta">
+    <a class="btn btn-wa" data-href="wa" data-i="wa"><span data-t="cta.wa"></span></a>
+    <a class="btn btn-c" href="#lead"><span data-t="cta.measure"></span></a>
+   </div>
+  </div>
+  <div class="hero-v">
+   <div class="arch a1"><img src="img/kitchen-hero.jpg" alt="Кухня ARHAR" fetchpriority="high"></div>
+   <div class="col">
+    <div class="rnd r1"><img src="img/installers.jpg" alt="Монтаж ARHAR"></div>
+    <div class="arch a2"><img src="img/wardrobe.jpg" alt="Гардеробная ARHAR"></div>
+   </div>
+   <div class="pill"><b>8</b><span data-t="s.years"></span><b style="margin-left:6px">36K</b><span data-t="s.subs"></span></div>
+  </div>
+ </div>
+</section>
+
+<div class="strip"><div class="w"><nav class="hl" id="hl" aria-label="Разделы"></nav></div></div>
+
+<section id="catalog">
+ <div class="w">
+  <div class="sh"><h2 data-t="cat.title"></h2><span class="low" data-t="cat.sub"></span></div>
+  <div class="cat" id="cat"></div>
+ </div>
+</section>
+
+<section style="padding-top:10px">
+ <div class="w">
+  <div class="notice">
+   <div class="tx">
+    <h2 data-t="why.title"></h2>
+    <div class="ilist" id="why"></div>
+   </div>
+   <div class="pic"><div class="arch"><img src="img/kitchen-white.jpg" alt="Белая кухня ARHAR" loading="lazy"></div></div>
+  </div>
+  <div class="stats" id="stats"></div>
+ </div>
+</section>
+
+<section id="process">
+ <div class="w">
+  <div class="sh"><h2 data-t="proc.title"></h2><span class="low" data-t="proc.sub"></span></div>
+  <div class="proc" id="proc"></div>
+ </div>
+</section>
+
+<section id="works" style="padding-top:20px">
+ <div class="w">
+  <div class="sh"><h2 data-t="works.title"></h2><span class="low" data-t="works.sub"></span></div>
+  <div class="works" id="worksG"></div>
+  <div class="rv-cta"><a class="btn btn-l" data-href="ig" data-i="ig"><span data-t="works.ig"></span></a></div>
+ </div>
+</section>
+
+<section id="team" style="padding-top:20px">
+ <div class="w">
+  <div class="sh"><h2 data-t="team.title"></h2><span class="low" data-t="team.note"></span></div>
+  <div class="team" id="teamG"></div>
+ </div>
+</section>
+
+<section id="reviews" style="padding-top:20px">
+ <div class="w">
+  <div class="sh"><h2 data-t="rev.title"></h2><span class="low">4,9 ★★★★★ · <span data-t="rev.sub"></span></span></div>
+  <div class="revs" id="revs"></div>
+  <div class="rv-cta"><a class="btn btn-l" data-href="gis" data-i="gis"><span data-t="rev.all"></span></a><a class="btn btn-wa" data-href="wa" data-i="wa"><span data-t="cta.wa"></span></a></div>
+ </div>
+</section>
+
+<section id="lead" style="padding-top:20px">
+ <div class="w">
+  <div class="lead">
+   <div class="tx">
+    <h2><span data-t="lead.title"></span><span class="low" data-t="lead.sub"></span></h2>
+    <a class="phone" data-href="phone" data-c="phone"></a>
+    <span class="hrs" data-c="hours"></span>
+   </div>
+   <form data-lead novalidate>
+    <label data-t="lead.what"></label>
+    <div class="chips" id="chips"></div>
+    <input id="f-name" name="name" autocomplete="name" data-tp="lead.name" aria-label="Имя">
+    <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-tp="lead.phone" aria-label="Телефон" value="+996 ">
+    <button class="btn btn-wa" type="submit" data-i="wa"><span data-t="lead.send"></span></button>
+    <p class="msg" data-t="lead.note" aria-live="polite"></p>
+   </form>
+  </div>
+ </div>
+</section>
+
+<section id="contacts" style="padding-top:20px">
+ <div class="w">
+  <div class="sh"><h2 data-t="ct.title"></h2><span class="low" data-t="ct.sub"></span></div>
+  <div class="ct">
+   <div class="cc"><span class="dot" data-i="phone"></span><small data-t="ct.phone"></small><b><a data-href="phone" data-c="phone"></a></b><small data-c="hours"></small><a class="btn btn-wa" data-href="wa" data-i="wa"><span>WhatsApp</span></a></div>
+   <div class="cc"><span class="dot" data-i="pin"></span><small data-t="ct.address"></small><b data-c="address"></b><a class="btn btn-c" data-href="gis" data-i="gis"><span data-t="ct.route"></span></a></div>
+   <div class="cc"><span class="dot" data-i="ig"></span><small>Instagram</small><b>@arhar_mebel</b><small data-t="ig.sub"></small><a class="btn btn-l" data-href="ig"><span data-t="ig.follow"></span></a></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer><span class="bub">arhar</span><span data-t="foot"></span></footer>
+<a class="fab" data-href="wa" data-i="wa" aria-label="WhatsApp"></a>
+<nav class="mbar" aria-label="Быстрая связь">
+ <a class="c" data-href="phone" data-i="phone"><span data-t="cta.call"></span></a>
+ <a class="w2" data-href="wa" data-i="wa"><span>WhatsApp</span></a>
+ <a class="g2" data-href="gis" data-i="gis"><span>2ГИС</span></a>
+</nav>
+
+<script src="site.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const im = (n, alt = '') => `<img src="${P(n)}" alt="${esc(alt)}" loading="lazy">`;
+AM.onLang(() => {
+  const L = AM.lang, C = DATA.catalog, ky = L === 'ky';
+  $('h1').innerHTML = ky ? 'Эмерек<span class="low">дизайндан орнотууга чейин</span>' : 'Мебель<span class="low">от дизайна до установки</span>';
+  const hl = [['#reviews', 'clients', AM.t('hl.reviews')], ['#process', 'site', AM.t('hl.turnkey')], ...C.map(c => ['#catalog', REAL.catalog[c.k], c[L][0]])];
+  $('hl').innerHTML = hl.map(([h, n, t]) => `<a href="${h}"><span class="rnd">${im(n)}</span>${t}</a>`).join('');
+  $('cat').innerHTML = C.map(c => `<article class="ca"><div class="arch">${im(REAL.catalog[c.k], c[L][0])}</div><h3>${c[L][0]}</h3><p>${c[L][1]}</p>
+    <a href="${AM.wa(AM.t('wa.msg') + ' — ' + c[L][0])}" target="_blank" rel="noopener">${ico('wa')}${AM.t('cta.calc')}</a></article>`).join('');
+  $('why').innerHTML = DATA.why.map(w => `<div><span class="dot">${ico(w.i)}</span><div><b>${w[L][0]}</b><span>${w[L][1]}</span></div></div>`).join('');
+  $('stats').innerHTML = DATA.stats.map(([n, k]) => `<div><b>${n}</b><span>${AM.t(k)}</span></div>`).join('');
+  $('proc').innerHTML = DATA.process.map((p, i) => `<div class="st"><div class="rnd" style="width:120px;height:120px">${im(REAL.process[i])}</div><span class="n">${i + 1}</span><h3>${p[L][0]}</h3><p>${p[L][1]}</p></div>`).join('');
+  $('worksG').innerHTML = REAL.works.slice(0, 8).map(w => `<figure class="wk">${im(w.img, w[L])}<figcaption>${w[L]}</figcaption></figure>`).join('');
+  $('teamG').innerHTML = DATA.team.map((m, i) => `<article class="tm"><div class="arch">${im(REAL.team[i], m.name)}</div><h3>${m.name}</h3><p>${m[L]}</p><span class="xp">${AM.t('exp')}: ${m.exp} ${ky ? 'жыл' : 'лет'}</span></article>`).join('');
+  $('revs').innerHTML = DATA.reviews.map(r => `<article class="rv"><div class="s">★★★★★</div><p>${r[L]}</p><div class="who"><span class="dot">${r.name[0]}</span><div><b>${r.name}</b><span>${AM.L(r.where)}</span></div></div></article>`).join('');
+  $('chips').innerHTML = C.map(c => `<button type="button" class="chip" aria-pressed="false">${c[L][0]}</button>`).join('');
+});
+</script>
+</body>
+</html>
