@@ -158,19 +158,20 @@ const DATA = {
 /* Реальные фото из Instagram @arhar_mebel (папка img/) */
 const P = n => `img/${n}.jpg`;
 const REAL = {
-  catalog: { kitchen: 'kitchen-hero', wardrobe: 'wardrobe', bath: 'bath-wood', bedroom: 'living', kids: 'kids', biz: 'office-shoro' },
+  // Фото для макета (Unsplash, высокое разрешение). Перед запуском заменить на фото реальных работ ARHAR.
+  catalog: { kitchen: 'kitchen-blue', wardrobe: 'storage', bath: 'bath-vanity', bedroom: 'bedroom-light', kids: 'bedroom-cozy', biz: 'office' },
   works: [
-    { img: 'kitchen-white', ru: 'Белая кухня с мрамором', ky: 'Мрамору бар ак ашкана' },
-    { img: 'wardrobe', ru: 'Гардеробная с подсветкой', ky: 'Жарыгы бар кийим бөлмө' },
-    { img: 'kitchen-walnut-blue', ru: 'Кухня: орех и дымчато-синий', ky: 'Ашкана: жаңгак жана түтүн-көк' },
-    { img: 'bath-green', ru: 'Ванная с латунью', ky: 'Латунь кошулган ванна' },
-    { img: 'living', ru: 'Гостиная в классике', ky: 'Классикалык конок бөлмө' },
-    { img: 'kitchen-wood', ru: 'Кухня под дерево', ky: 'Жыгач түстөгү ашкана' },
-    { img: 'office', ru: 'Кабинет руководителя', ky: 'Жетекчинин кабинети' },
-    { img: 'kids', ru: 'Детская с рабочим местом', ky: 'Иш орду бар балдар бөлмөсү' },
-    { img: 'kitchen-beige', ru: 'Кухня в бежевых тонах', ky: 'Беж түстөгү ашкана' }
+    { img: 'kitchen-white', ru: 'Светлая кухня с островом', ky: 'Аралчасы бар жарык ашкана' },
+    { img: 'kitchen-blue', ru: 'Кухня: орех и дымчато-синий', ky: 'Ашкана: жаңгак жана түтүн-көк' },
+    { img: 'living-sage', ru: 'Гостиная с комодом из ореха', ky: 'Жаңгак комоду бар конок бөлмө' },
+    { img: 'bath-marble', ru: 'Ванная с мрамором и латунью', ky: 'Мрамор жана латунь менен ванна' },
+    { img: 'bedroom-light', ru: 'Спальня в светлых тонах', ky: 'Ачык түстөгү уктоочу бөлмө' },
+    { img: 'kitchen-marble', ru: 'Белая кухня с мрамором', ky: 'Мрамору бар ак ашкана' },
+    { img: 'office', ru: 'Офис под ключ', ky: 'Ачкычка чейин кеңсе' },
+    { img: 'bath-white', ru: 'Светлая ванная', ky: 'Жарык ванна' },
+    { img: 'living-bright', ru: 'Гостиная с ТВ-зоной', ky: 'ТВ-зонасы бар конок бөлмө' }
   ],
-  process: ['measure', 'site', 'kitchen-beige', 'kitchen-wood', 'installers']
+  process: ['p-room', 'p-plan', 'kitchen-island', 'p-tools', 'p-drill']
 };
 
 /* Пустое место под фото сотрудника (фото и ФИО заполнит компания) */

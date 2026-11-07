@@ -58,11 +58,11 @@ section{padding:76px 0}
 .sh p{color:var(--mut);max-width:42ch}
 
 /* hero */
-.hero{padding:34px 0 28px}
-.hero-g{display:grid;grid-template-columns:1fr 1.08fr;gap:44px;align-items:stretch}
-.hero-l{display:flex;flex-direction:column;justify-content:center;gap:24px}
-.hero h1{font-size:clamp(36px,4.3vw,62px)}
-.hero .sub{font-size:18px;color:var(--mut);max-width:46ch}
+.hero{padding:72px 0 40px}
+.hero-g{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.hero-l{display:flex;flex-direction:column;justify-content:center;gap:30px;max-width:590px}
+.hero h1{font-size:clamp(34px,3.7vw,54px);line-height:1.1}
+.hero .sub{font-size:18px;line-height:1.7;color:var(--mut);max-width:42ch}
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:20px;background:#fff}
 .pillars div{padding:14px 16px;border-left:1px solid var(--line)}
 .pillars div:first-child{border-left:0}
@@ -72,16 +72,16 @@ section{padding:76px 0}
 .callbox{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .callbox a.num{font:600 26px var(--f-d);letter-spacing:-.03em;white-space:nowrap}
 .callbox span{font-size:14px;color:var(--mut)}
-.mosaic{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:1fr 1fr;gap:12px;min-height:560px}
-.mosaic .ph{border-radius:22px}
-.mosaic .ph:first-child{grid-row:span 2}
+.mosaic{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;height:560px}
+.mosaic .ph{border-radius:24px}
+.mosaic .ph:nth-child(2){margin-top:64px}
 .mosaic figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.92);border-radius:999px;padding:6px 13px;font:600 13px var(--f-b)}
-.proof{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--mut);align-items:center}
+.proof{display:flex;flex-wrap:wrap;gap:8px 26px;padding-top:26px;border-top:1px solid var(--line);font-size:14px;color:var(--mut);align-items:center}
 .proof>*{display:flex;align-items:center;gap:6px}
 .proof b{color:var(--ink);font:600 16px var(--f-d);letter-spacing:-.02em}
 .proof .stars{color:var(--star);letter-spacing:1px}
 .cta-note{align-self:center;color:var(--mut);font-size:13.5px}
-.guar{margin-top:26px;display:grid;grid-template-columns:.7fr 2fr;gap:24px;align-items:center;background:var(--stone);border-radius:24px;padding:22px 26px}
+.guar{margin-top:64px;display:grid;grid-template-columns:.7fr 2fr;gap:24px;align-items:center;background:var(--stone);border-radius:24px;padding:22px 26px}
 .guar h2{font-size:22px}
 .guar-g{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .guar-g div{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:center}
@@ -191,14 +191,14 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
 .fab .ic{width:30px;height:30px}
 .mbar{display:none}
 
-@media (max-height:820px) and (min-width:1001px){section{padding:58px 0}.mosaic{min-height:470px}.bento{grid-template-rows:230px 230px}.wk{height:215px}.hero h1{font-size:52px}}
+@media (max-height:820px) and (min-width:1001px){section{padding:58px 0}.mosaic{height:470px}.hero{padding:48px 0 32px}.bento{grid-template-rows:230px 230px}.wk{height:215px}.hero h1{font-size:52px}}
 @media (max-width:1180px){.nav{display:none}.burger{display:grid}
   body.menu-open .nav{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:var(--paper);padding:18px 28px 26px;gap:16px;font-size:19px;color:var(--ink);border-bottom:1px solid var(--line)}}
 @media (max-width:1000px){
   .hero-g,.lead,.faq,.guar{grid-template-columns:1fr}
   .guar-g{grid-template-columns:1fr 1fr}
   .faq{gap:22px}
-  .mosaic{min-height:440px}
+  .mosaic{height:440px}.hero-g{gap:40px}.hero-l{max-width:none}
   .trust{grid-template-columns:1fr 1fr}
   .bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}
   .bt{min-height:240px}
@@ -223,7 +223,7 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
   .pillars div{padding:11px 10px}.pillars b{font-size:14px}.pillars span{font-size:11.5px}
   .cta .btn{flex:1 1 100%}
   .callbox a.num{font-size:23px}
-  .mosaic{min-height:0;grid-template-rows:170px 170px}
+  .mosaic{height:300px;gap:10px}.mosaic .ph:nth-child(2){margin-top:36px}.hero{padding:28px 0 16px}.guar{margin-top:36px}
   .trust{gap:8px}.trust div{flex-direction:column;gap:2px;padding:12px 14px}.trust b{font-size:24px}
   .bento{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:0 16px 6px}
   .bt{flex:0 0 80%;min-height:330px;scroll-snap-align:start}
@@ -273,11 +273,6 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
    <div class="hero-l">
     <h1 data-t="hero2.title"></h1>
     <p class="sub" data-t="hero2.sub"></p>
-    <div class="pillars">
-     <div><b data-t="b.time"></b><span data-t="b.time.s"></span></div>
-     <div><b data-t="b.quality"></b><span data-t="b.quality.s"></span></div>
-     <div><b data-t="b.warranty"></b><span data-t="b.warranty.s"></span></div>
-    </div>
     <div class="cta">
      <a class="btn btn-wa" data-href="wa" data-i="wa"><span data-t="cta.wa"></span></a>
      <a class="btn btn-k" href="#lead"><span data-t="cta.measure"></span></a>
@@ -287,11 +282,6 @@ footer .wm{font:400 22px Comfortaa,sans-serif;color:var(--ink)}
      <a data-href="gis"><b>4,9</b><span class="stars">★★★★★</span><span data-t="proof.rating"></span></a>
      <span><b>36 000+</b><span data-t="proof.subs"></span></span>
      <span><b>8</b><span data-t="proof.years"></span></span>
-    </div>
-    <div class="callbox">
-     <a class="num" data-href="phone" data-c="phone"></a>
-     <span data-c="hours"></span>
-     <a class="btn btn-o" data-href="gis" style="padding:11px 16px"><svg class="ic gi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><span data-t="cta.gis"></span></a>
     </div>
    </div>
    <div class="mosaic" id="mosaic"></div>
@@ -395,7 +385,7 @@ const $ = id => document.getElementById(id);
 const fig = (src, alt, cap, cls = 'ph') => `<figure class="${cls}"><img src="${P(src)}" alt="${esc(alt)}" loading="lazy">${cap ? `<figcaption>${cap}</figcaption>` : ''}</figure>`;
 AM.onLang(() => {
   const L = AM.lang, C = DATA.catalog;
-  $('mosaic').innerHTML = [['kitchen-hero', C[0][L][0]], ['wardrobe', REAL.works[1][L]], ['kitchen-walnut-blue', REAL.works[2][L]]].map(([n, t]) => fig(n, t, t)).join('');
+  $('mosaic').innerHTML = [['kitchen-blue', REAL.works[1][L]], ['living-sage', REAL.works[2][L]]].map(([n, t]) => fig(n, t, t)).join('');
   $('guar').innerHTML = DATA.guarantees.map(g => `<div>${ico(g.i)}<b>${g[L][0]}</b><span>${g[L][1]}</span></div>`).join('');
   $('faqL').innerHTML = DATA.faq.map((f, i) => `<details${i ? '' : ' open'}><summary>${f[L][0]}</summary><p>${f[L][1]}</p></details>`).join('');
   $('bento').innerHTML = C.map(c => `<a class="bt" href="${AM.wa(AM.t('wa.msg') + ' — ' + c[L][0])}" target="_blank" rel="noopener"><img src="${P(REAL.catalog[c.k])}" alt="${esc(c[L][0])}" loading="lazy">

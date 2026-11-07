@@ -269,10 +269,10 @@ footer .bub{width:54px;height:54px;border-radius:50%;background:#000;color:#fff;
    </div>
   </div>
   <div class="hero-v">
-   <div class="arch a1"><img src="img/kitchen-hero.jpg" alt="Кухня ARHAR" fetchpriority="high"></div>
+   <div class="arch a1"><img src="img/kitchen-white.jpg" alt="Кухня ARHAR" fetchpriority="high"></div>
    <div class="col">
-    <div class="rnd r1"><img src="img/installers.jpg" alt="Монтаж ARHAR"></div>
-    <div class="arch a2"><img src="img/wardrobe.jpg" alt="Гардеробная ARHAR"></div>
+    <div class="rnd r1"><img src="img/bath-marble.jpg" alt="Ванная"></div>
+    <div class="arch a2"><img src="img/living-sage.jpg" alt="Гостиная"></div>
    </div>
    <div class="pill"><b>8</b><span data-t="s.years"></span><b style="margin-left:6px">36K</b><span data-t="s.subs"></span></div>
   </div>
@@ -295,7 +295,7 @@ footer .bub{width:54px;height:54px;border-radius:50%;background:#000;color:#fff;
     <h2 data-t="why.title"></h2>
     <div class="ilist" id="why"></div>
    </div>
-   <div class="pic"><div class="arch"><img src="img/kitchen-white.jpg" alt="Белая кухня ARHAR" loading="lazy"></div></div>
+   <div class="pic"><div class="arch"><img src="img/kitchen-blue.jpg" alt="Кухня" loading="lazy"></div></div>
   </div>
   <div class="stats" id="stats"></div>
  </div>
@@ -378,7 +378,7 @@ const im = (n, alt = '') => `<img src="${P(n)}" alt="${esc(alt)}" loading="lazy"
 AM.onLang(() => {
   const L = AM.lang, C = DATA.catalog, ky = L === 'ky';
   $('h1').innerHTML = ky ? 'Эмерек<span class="low">дизайндан орнотууга чейин</span>' : 'Мебель<span class="low">от дизайна до установки</span>';
-  const hl = [['#reviews', 'clients', AM.t('hl.reviews')], ['#process', 'site', AM.t('hl.turnkey')], ...C.map(c => ['#catalog', REAL.catalog[c.k], c[L][0]])];
+  const hl = [['#reviews', 'living-bright', AM.t('hl.reviews')], ['#process', 'p-plan', AM.t('hl.turnkey')], ...C.map(c => ['#catalog', REAL.catalog[c.k], c[L][0]])];
   $('hl').innerHTML = hl.map(([h, n, t]) => `<a href="${h}"><span class="rnd">${im(n)}</span>${t}</a>`).join('');
   $('cat').innerHTML = C.map(c => `<article class="ca"><div class="arch">${im(REAL.catalog[c.k], c[L][0])}</div><h3>${c[L][0]}</h3><p>${c[L][1]}</p>
     <a href="${AM.wa(AM.t('wa.msg') + ' — ' + c[L][0])}" target="_blank" rel="noopener">${ico('wa')}${AM.t('cta.calc')}</a></article>`).join('');
