@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,600;0,800;0,900;1,800;1,900&family=Onest:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Golos+Text:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,600;0,800;0,900;1,800;1,900&family=Onest:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Golos+Text:wght@400;500;600;700&family=Tilt+Neon&display=swap">
 <style>
 /* Layout: fixed concept switcher; three brand concepts (black · neon red · white) with sticky headers, compact one-screen sections, scroll reveals; mobile gets a bottom call / WhatsApp / 2GIS bar */
 :root{
@@ -85,6 +85,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tick span{padding-right:44px}
 @keyframes tick{to{transform:translateX(-50%)}}
 
+/* neon tubes & signs */
+.nsign{font-family:'Tilt Neon','Onest',sans-serif;font-weight:400;color:#fff4f4;letter-spacing:.04em;line-height:1;white-space:nowrap;text-shadow:0 0 2px #fff,0 0 7px #ff4a4a,0 0 16px #ff2020,0 0 34px #ff1a1a,0 0 64px #e3161e;animation:flick 7s infinite}
+.nsign.w{color:#fff;text-shadow:0 0 2px #fff,0 0 9px #fff,0 0 22px rgba(255,255,255,.75),0 0 48px rgba(255,90,90,.55)}
+.nbox{border:2px solid #ff5a5a;box-shadow:0 0 6px #ff2b2b,0 0 22px rgba(255,43,43,.6),inset 0 0 10px rgba(255,43,43,.45);animation:hum 3s ease-in-out infinite}
+@keyframes hum{50%{box-shadow:0 0 4px #ff2b2b,0 0 12px rgba(255,43,43,.4),inset 0 0 6px rgba(255,43,43,.3)}}
+.ntube{display:block;height:4px;border-radius:4px;background:#ff5252;box-shadow:0 0 6px #ff2b2b,0 0 16px #e3161e,0 0 34px rgba(227,22,30,.6)}
+.pic{position:relative;overflow:hidden}
+.pic>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.pic:hover>img{transform:scale(1.06)}
+
 /* Floating + mobile bar */
 .fab{position:fixed;right:max(20px,env(safe-area-inset-right,0px));bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:45;display:flex;flex-direction:column;gap:10px}
 .fab a{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.35);transition:transform .2s;position:relative}
@@ -152,6 +162,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .n-stats b{display:block;font:800 30px 'Unbounded',sans-serif;font-variant-numeric:tabular-nums}
 .n-stats b em{font-style:normal;color:var(--red)}
 .n-stats div>span{font-size:13px;color:var(--mut);line-height:1.35;display:block;margin-top:4px}
+.n-sign{position:absolute;right:7%;top:24%;z-index:2;font-size:clamp(44px,6.4vw,100px);transform:rotate(-6deg)}
+.n-halo{position:absolute;right:16%;top:12%;width:min(300px,24vw);aspect-ratio:1;border-radius:50%;z-index:2;border-color:#fff;box-shadow:0 0 8px #fff,0 0 30px rgba(255,255,255,.55),inset 0 0 14px rgba(255,255,255,.5);animation:breathe 5s ease-in-out infinite}
+.v-neon .n-sh h2::after{content:"";display:block;width:84px;height:4px;margin-top:18px;border-radius:4px;background:#ff5252;box-shadow:0 0 6px #ff2b2b,0 0 16px #e3161e,0 0 34px rgba(227,22,30,.6)}
+.n-cyc-sign{position:absolute;right:26px;top:24px;z-index:2;font-size:clamp(34px,4vw,60px);transform:rotate(-4deg)}
+.n-dir:hover{box-shadow:0 0 0 1px #ff4a4a,0 0 26px rgba(255,43,43,.35)}
+.n-gb.trial{box-shadow:0 0 0 2px #ff6a6a,0 0 40px rgba(255,43,43,.55)}
 .n-tick{background:var(--red);color:#fff;font:800 20px 'Unbounded',sans-serif;text-transform:uppercase;padding:14px 0;border-block:1px solid #ff4b4b}
 .n-tick span::after{content:"✕";margin-left:44px;opacity:.6;font-size:14px;vertical-align:middle}
 .n-sec{padding-block:76px;border-bottom:1px solid var(--line);position:relative}
@@ -200,8 +216,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .n-tm{background:var(--s1);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .3s}
 .n-tm:hover{transform:translateY(-4px)}
 .n-tm .ph{aspect-ratio:1/1.05;position:relative;overflow:hidden}
-.n-tm .ph svg{width:100%;height:100%;transition:transform .6s}
-.n-tm:hover .ph svg{transform:scale(1.05)}
+.n-tm .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:grayscale(.2) contrast(1.05)}
+.n-tm:hover .ph img{transform:scale(1.05);filter:none}
+.n-tm .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(227,22,30,.35),transparent 45%);opacity:0;transition:opacity .3s}
+.n-tm:hover .ph::after{opacity:1}
+.n-tm:hover{box-shadow:0 0 0 1px #ff4a4a,0 0 28px rgba(255,43,43,.35)}
 .n-tm .yr{position:absolute;left:14px;top:14px;background:var(--red);color:#fff;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
 .n-tm .tx{padding:16px 18px 20px}
 .n-tm h3{margin:0 0 6px;font-size:17px}
@@ -233,7 +252,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .v-neon .map{border:1px solid var(--line)}
 .n-foot{padding-block:28px;color:var(--mut);font-size:13px}
 .n-foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
-@media (max-width:1020px){.n-photo{width:100%;opacity:.55;-webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}.n-dirs{grid-template-columns:1fr 1fr}.n-cycle,.n-rev,.n-contact,.n-gift{grid-template-columns:1fr}.n-prices,.n-team{grid-template-columns:1fr 1fr}.n-p.hot{transform:none}.n-rings i:nth-child(2),.n-rings i:nth-child(3){display:none}}
+@media (max-width:1020px){.n-sign,.n-halo{display:none}.n-photo{width:100%;opacity:.55;-webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}.n-dirs{grid-template-columns:1fr 1fr}.n-cycle,.n-rev,.n-contact,.n-gift{grid-template-columns:1fr}.n-prices,.n-team{grid-template-columns:1fr 1fr}.n-p.hot{transform:none}.n-rings i:nth-child(2),.n-rings i:nth-child(3){display:none}}
 @media (max-width:620px){.n-sec{padding-block:54px}.n-hero .wrap{padding-block:90px 40px;min-height:0}.n-stats{grid-template-columns:1fr 1fr}.n-stats div:nth-child(3){padding-left:0;border-left:0}.n-stats b{font-size:24px}.n-dirs{grid-template-columns:1fr 1fr;gap:10px}.n-dir{padding:16px;min-height:180px}.n-dir h3{font-size:14px}.n-dir p{font-size:13px}.n-dir .tg{display:none}.n-prices,.n-rgrid{grid-template-columns:1fr}.n-team{gap:10px}.n-tm .tx{padding:12px}.n-tm h3{font-size:15px}.n-tm p{font-size:13px}.n-cphoto{min-height:360px}.n-ctas .btn{flex:1 1 100%}.n-phone{margin:8px 0 0}.n-tick{font-size:15px}}
 
 /* =================== 2 · CYCLE ENERGY (reel style) =================== */
@@ -256,6 +275,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .c-sub b{color:#fff;background:var(--red);padding:2px 8px;border-radius:6px}
 .c-ctas{display:flex;gap:12px;flex-wrap:wrap}
 .c-ctas .btn-ln{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35);backdrop-filter:blur(6px)}
+.c-sign{position:absolute;left:clamp(20px,4vw,48px);top:clamp(20px,4vw,40px);font-size:clamp(28px,4.4vw,66px);transform:rotate(-4deg);z-index:1}
+.c-burn{box-shadow:0 0 0 2px #ff5a5a,0 0 34px rgba(255,43,43,.45)}
+.c-burn .num{text-shadow:0 0 10px rgba(255,43,43,.9),0 0 30px rgba(255,43,43,.6),0 0 60px rgba(227,22,30,.45);color:#ff3a3a;animation:flick 7s infinite}
+.c-row .th{box-shadow:none}
+.c-row:hover .th{box-shadow:0 0 0 2px #ff5a5a,0 0 22px rgba(255,43,43,.7)}
+.c-tm:hover{box-shadow:0 0 0 2px #ff5a5a,0 0 28px rgba(255,43,43,.55)}
 .wheel{width:180px;height:180px;position:relative;flex:0 0 auto}
 .wheel svg{width:100%;height:100%}
 .wheel .rot{animation:spin 14s linear infinite;transform-origin:90px 90px}
@@ -278,12 +303,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .c-row .tg{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1.5px solid currentColor;white-space:nowrap}
 .c-row .tg.au{background:var(--red);border-color:var(--red);color:#fff}
 .c-row p{margin:0;color:var(--mut);font-size:15px;line-height:1.45}
-.c-row .th{width:120px;height:64px;border-radius:12px;overflow:hidden;background:var(--ink);display:grid;place-items:center;color:#fff;transform:rotate(-4deg) scale(.9);transition:transform .35s}
+.c-row .th{width:120px;height:72px;border-radius:12px;overflow:hidden;background:var(--ink);display:grid;place-items:center;color:#fff;transform:rotate(-4deg) scale(.9);transition:transform .35s}
 .c-row .th img{width:100%;height:100%;object-fit:cover}
 .c-row .th .ico{width:30px;height:30px}
 .c-row:hover{background:var(--ink);color:#fff;padding-inline:22px}
 .c-row:hover p{color:#c9c9cf}
-.c-row:hover .th{transform:rotate(3deg) scale(1.08);background:var(--red)}
+.c-row:hover .th{transform:rotate(3deg) scale(1.08)}
 .c-burn{background:var(--ink);color:#fff;border-radius:30px;padding:clamp(26px,4vw,48px);display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
 .c-burn::after{content:"ENERGY";position:absolute;right:-20px;bottom:-40px;font:900 italic 180px/1 'Montserrat',sans-serif;color:rgba(255,255,255,.04);pointer-events:none}
 .c-burn .num{font:900 italic clamp(90px,12vw,170px)/.85 'Montserrat',sans-serif;color:var(--red);font-variant-numeric:tabular-nums}
@@ -316,8 +341,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .c-p .tg{align-self:flex-start;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;background:var(--ink);color:#fff;padding:4px 10px;border-radius:999px}
 .c-team{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .c-tm{border-radius:22px;overflow:hidden;position:relative;aspect-ratio:3/4;background:#111;color:#fff}
-.c-tm>svg{width:100%;height:100%;transition:transform .6s}
-.c-tm:hover>svg{transform:scale(1.06)}
+.c-tm>img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.c-tm:hover>img{transform:scale(1.06)}
 .c-tm .tx{position:absolute;inset:auto 0 0;padding:18px;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent)}
 .c-tm h3{margin:0 0 4px;font:900 italic 19px 'Montserrat',sans-serif;text-transform:uppercase}
 .c-tm p{margin:0;font-size:13.5px;color:#dcdcdc;line-height:1.4}
@@ -377,6 +402,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @keyframes fl{50%{transform:translateY(-12px)}}
 .s-stick{position:absolute;left:44%;bottom:6%;width:140px;height:140px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;text-align:center;font:700 12px/1.25 'Golos Text',sans-serif;text-transform:uppercase;letter-spacing:.04em;padding:30px;box-shadow:0 18px 40px -12px rgba(195,20,27,.6);z-index:2}
 .s-stick svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+.s-neon{position:absolute;left:-14px;top:-18px;z-index:3;font-size:clamp(34px,4vw,58px);transform:rotate(-8deg);padding:10px 18px;border-radius:16px;background:rgba(15,10,10,.86)}
+.s-l.pic{color:#fff}
+.s-l.pic::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.82),rgba(0,0,0,.05) 65%);z-index:0}
+.s-l.pic>*:not(img){position:relative;z-index:1}
+.s-l.pic:hover{box-shadow:0 0 0 2px #ff5a5a,0 0 30px rgba(255,43,43,.5)}
+.s-l.big{grid-row:span 2}
 .s-sec{padding-block:72px}
 .s-sh{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;margin-bottom:36px}
 .s-eb{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
@@ -408,8 +439,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .s-l .ico{width:36px;height:36px;margin-bottom:auto}
 .s-team{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .s-tm .ph{aspect-ratio:3/3.6;border-radius:200px 200px 22px 22px;overflow:hidden;margin-bottom:14px;position:relative}
-.s-tm .ph svg{width:100%;height:100%;transition:transform .6s}
-.s-tm:hover .ph svg{transform:scale(1.06)}
+.s-tm .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.s-tm:hover .ph img{transform:scale(1.06)}
+.s-tm:hover .ph{box-shadow:0 0 0 2px #ff5a5a,0 0 26px rgba(255,43,43,.45)}
+.s-tm .ph{transition:box-shadow .3s}
 .s-tm h3{margin:0 0 4px;font:500 22px 'Playfair Display',serif}
 .s-tm p{margin:0;color:var(--mut);font-size:14px;line-height:1.45}
 .s-tm .yr{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--red);border:1px solid currentColor;border-radius:999px;padding:3px 10px}
@@ -449,8 +482,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .v-soul .map{border:1px solid var(--line);border-radius:26px}
 .s-foot{padding-block:28px;font-size:13px;color:var(--mut);border-top:1px solid var(--line)}
 .s-foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
-@media (max-width:1020px){.s-hero .wrap,.s-prices,.s-contact{grid-template-columns:1fr}.s-dirs{grid-template-columns:1fr 1fr}.s-life{grid-template-columns:1fr 1fr}.s-l.ph{grid-row:auto;grid-column:span 2;min-height:300px}.s-team{grid-template-columns:1fr 1fr}.s-rev{grid-template-columns:1fr 1fr}.s-r.big{grid-row:auto;grid-column:span 2}.s-sh{grid-template-columns:1fr}}
-@media (max-width:620px){.s-sec{padding-block:50px}.s-hero .wrap{padding-block:28px 40px;gap:30px}.s-coll{min-height:380px;height:400px}.s-stick{width:116px;height:116px;font-size:10px;padding:24px;left:36%}.s-dir{padding:18px;min-height:170px}.s-dir h3{font-size:19px}.s-dir p{font-size:13px}.s-life{grid-template-columns:1fr}.s-l.ph{grid-column:auto}.s-l{min-height:170px}.s-rev{grid-template-columns:1fr}.s-r.big{grid-column:auto}.s-prow{grid-template-columns:1fr auto;padding:16px}.s-prow .btn{grid-column:span 2}.s-team{gap:14px}.s-tm h3{font-size:18px}.s-tm p{font-size:13px}.s-cbox{padding:22px}.s-ctas .btn{flex:1 1 100%}}
+@media (max-width:1020px){.s-hero .wrap,.s-prices,.s-contact{grid-template-columns:1fr}.s-dirs{grid-template-columns:1fr 1fr}.s-life{grid-template-columns:1fr 1fr}.s-l.big{grid-row:auto;grid-column:span 2;min-height:300px}.s-team{grid-template-columns:1fr 1fr}.s-rev{grid-template-columns:1fr 1fr}.s-r.big{grid-row:auto;grid-column:span 2}.s-sh{grid-template-columns:1fr}}
+@media (max-width:620px){.s-sec{padding-block:50px}.s-hero .wrap{padding-block:28px 40px;gap:30px}.s-coll{min-height:380px;height:400px}.s-stick{width:116px;height:116px;font-size:10px;padding:24px;left:36%}.s-dir{padding:18px;min-height:170px}.s-dir h3{font-size:19px}.s-dir p{font-size:13px}.s-life{grid-template-columns:1fr}.s-l.big{grid-column:auto}.s-neon{left:4px;top:-10px}.s-l{min-height:170px}.s-rev{grid-template-columns:1fr}.s-r.big{grid-column:auto}.s-prow{grid-template-columns:1fr auto;padding:16px}.s-prow .btn{grid-column:span 2}.s-team{gap:14px}.s-tm h3{font-size:18px}.s-tm p{font-size:13px}.s-cbox{padding:22px}.s-ctas .btn{flex:1 1 100%}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ring .arc{stroke-dashoffset:126}}
 </style>
@@ -474,7 +507,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ===== Настройки: замените номер, WhatsApp, адрес и ссылку 2ГИС ===== */
 const CFG={phone:'+996 700 000 000',tel:'+996700000000',wa:'996700000000',
   gis:'https://2gis.kg/bishkek/search/Magnat%20fitness',ig:'https://instagram.com/magnat_fitness'};
-const IMG={gym:'img/gym.jpg',cycle:'img/cycle.jpg',group:'img/group.jpg',trainer:'img/trainer.jpg',neon:'img/neon.jpg'};
+const IMG={hero:'img/hero.jpg',gym:'img/gym.jpg',cycle:'img/class.jpg',bike:'img/bike.jpg',dumbbells:'img/dumbbells.jpg',group:'img/group.jpg',stretch:'img/stretch.jpg',sauna:'img/sauna.jpg',massage:'img/massage.jpg',kids:'img/kids.jpg',bar:'img/bar.jpg',openair:'img/openair.jpg',row:'img/row.jpg'};
 
 const L={
 ru:{sw_note:'макет · цены, команда и отзывы — примеры',sw_1:'неон и свет',sw_2:'стиль рилсов',sw_3:'с душой',
@@ -503,7 +536,7 @@ p_trial:'Пробный день',p_m:'Месяц',p_3m:'3 месяца',p_y:'Г
 per_m:'/ мес',per_3m:'/ 3 мес',per_y:'/ год',
 f_tour:'Экскурсия по клубу',f_try:'Тренировка на выбор',f_gym:'Тренажёрный зал',f_grp:'Групповые тренировки',f_cyc:'Cycle Energy и Body Plastic',f_sauna:'Сауна',f_frz:'Заморозка до 30 дней',f_pt:'2 персональные тренировки',f_guest:'Гостевые визиты для друзей',
 tg_hit:'Хит',tg_best:'Выгоднее всего',choose:'Выбрать',
-t_eb:'Команда',t_t:'Тренеры, которые зажигают',yrs:'лет опыта',yrs_s:'лет',t_note:'Имена и фото — примеры. Возьмите из сторис «Тренеры / TEAM».',
+t_eb:'Команда',t_t:'Тренеры, которые зажигают',yrs:'лет опыта',yrs_s:'лет',t_note:'Имена и стоковые фото — примеры. Замените на реальных тренеров.',
 r1:'Автор Cycle Energy, кардио',r2:'Body Plastic, стретчинг',r3:'Тренажёрный зал, силовой тренинг',r4:'Детские секции, функционал',
 v_eb:'Отзывы',v_t:'Говорят наши клиенты',v_note:'Отзывы — примеры. Возьмите реальные из сторис «Отзывы / Feedback» и 2ГИС.',v_more:'Все отзывы в 2ГИС',v_ig:'Смотреть Instagram',
 v_ig_d:'человек следят за жизнью клуба: тренировки, результаты, Open Air и праздники.',
@@ -519,13 +552,13 @@ life_bar:'Фитбар',life_bar_d:'Коктейль после трениров
 life_mas:'Массаж и сауна',life_mas_d:'Восстановление прямо в клубе.',
 life_ev:'Open Air и ДР Магната',life_ev_d:'Тренировки на свежем воздухе и клубные праздники.',
 life_kid:'Детские секции',life_kid_d:'Пока вы тренируетесь, дети тоже в деле.',
-life_ph:'Атмосфера Magnat',life_ph_d:'Кольца света, красный кирпич и неон MF.',
+life_ph:'Атмосфера Magnat',life_ph_d:'Свет, музыка и красный неон MF.',
 h1_soul:'Премиальный фитнес <em>с душой</em>',
 c_eb:'Контакты',c_t:'Ждём вас в Magnat',addr_l:'Адрес',addr:'г. Бишкек — укажите точный адрес',hours_l:'Режим работы',hours:'Укажите часы работы',phone_l:'Телефон',
 copy:'Скопировать',copied:'Скопировано',map:'Открыть в 2ГИС',
 form_t:'Запишитесь на пробный день',form_name:'Ваше имя',form_btn:'Записаться через WhatsApp',
 wa_msg:'Здравствуйте! Хочу записаться на пробный день в Magnat Fitness.',wa_from:'Меня зовут',
-photo_cred:'фото: @magnat_fitness',
+photo_cred:'фото: Unsplash',
 foot:'© 2026 Magnat Fitness · Бишкек',mb_call:'Позвонить',mb_wa:'WhatsApp',mb_gis:'2ГИС',stick:'Пробный день'},
 ky:{sw_note:'макет · баалар, команда жана пикирлер — мисал',sw_1:'неон жана жарык',sw_2:'рилс стили',sw_3:'жүрөк менен',
 nav_dirs:'Багыттар',nav_cycle:'Cycle Energy',nav_sched:'Ырааттама',nav_prices:'Баалар',nav_team:'Машыктыруучулар',nav_reviews:'Пикирлер',nav_contacts:'Байланыш',
@@ -553,7 +586,7 @@ p_trial:'Сыноо күнү',p_m:'1 ай',p_3m:'3 ай',p_y:'1 жыл',trial_pr
 per_m:'/ ай',per_3m:'/ 3 ай',per_y:'/ жыл',
 f_tour:'Клуб боюнча экскурсия',f_try:'Каалаган машыгуу',f_gym:'Машыгуу залы',f_grp:'Топтук машыгуулар',f_cyc:'Cycle Energy жана Body Plastic',f_sauna:'Сауна',f_frz:'30 күнгө чейин тоңдуруу',f_pt:'2 жеке машыгуу',f_guest:'Досторго конок келүүлөр',
 tg_hit:'Хит',tg_best:'Эң пайдалуу',choose:'Тандоо',
-t_eb:'Команда',t_t:'Шыктандырган машыктыруучулар',yrs:'жыл тажрыйба',yrs_s:'жыл',t_note:'Аттар жана сүрөттөр — мисал. «Тренеры / TEAM» сторисинен алыңыз.',
+t_eb:'Команда',t_t:'Шыктандырган машыктыруучулар',yrs:'жыл тажрыйба',yrs_s:'жыл',t_note:'Аттар жана сток сүрөттөр — мисал. Чыныгы машыктыруучуларга алмаштырыңыз.',
 r1:'Cycle Energy автору, кардио',r2:'Body Plastic, стретчинг',r3:'Машыгуу залы, күч машыгуусу',r4:'Балдар секциялары, функционалдык',
 v_eb:'Пикирлер',v_t:'Кардарларыбыз эмне дейт',v_note:'Пикирлер — мисал. Чыныгыларын «Отзывы / Feedback» сторисинен жана 2ГИСтен алыңыз.',v_more:'Бардык пикирлер 2ГИСте',v_ig:"Instagram'ды көрүү",
 v_ig_d:'адам клубдун жашоосун көзөмөлдөйт: машыгуулар, натыйжалар, Open Air жана майрамдар.',
@@ -569,13 +602,13 @@ life_bar:'Фитбар',life_bar_d:'Машыгуудан кийинки кокт
 life_mas:'Массаж жана сауна',life_mas_d:'Клубдун ичинде эле калыбына келүү.',
 life_ev:'Open Air жана Магнаттын туулган күнү',life_ev_d:'Ачык абадагы машыгуулар жана клубдук майрамдар.',
 life_kid:'Балдар секциялары',life_kid_d:'Сиз машыгып жатканда балдар да алек.',
-life_ph:'Magnat атмосферасы',life_ph_d:'Жарык шакектери, кызыл кыш жана MF неону.',
+life_ph:'Magnat атмосферасы',life_ph_d:'Жарык, музыка жана кызыл MF неону.',
 h1_soul:'Жүрөк менен жасалган <em>премиум</em> фитнес',
 c_eb:'Байланыш',c_t:"Сизди Magnat'та күтөбүз",addr_l:'Дарек',addr:'Бишкек ш. — так даректи көрсөтүңүз',hours_l:'Иш убактысы',hours:'Иш убактысын көрсөтүңүз',phone_l:'Телефон',
 copy:'Көчүрүү',copied:'Көчүрүлдү',map:'2ГИСте ачуу',
 form_t:'Сыноо күнүнө жазылыңыз',form_name:'Атыңыз',form_btn:'WhatsApp аркылуу жазылуу',
 wa_msg:"Саламатсызбы! Magnat Fitness'ке сыноо күнүнө жазылгым келет.",wa_from:'Менин атым',
-photo_cred:'сүрөт: @magnat_fitness',
+photo_cred:'сүрөт: Unsplash',
 foot:'© 2026 Magnat Fitness · Бишкек',mb_call:'Чалуу',mb_wa:'WhatsApp',mb_gis:'2ГИС',stick:'Сыноо күнү'}
 };
 let lang='ru',cur='neon';
@@ -622,7 +655,8 @@ const PRICES=[
  {k:'p_m',v:'4 500',per:'per_m',f:['f_gym','f_grp','f_sauna']},
  {k:'p_3m',v:'12 000',per:'per_3m',f:['f_gym','f_grp','f_cyc','f_sauna','f_pt'],hot:'tg_hit'},
  {k:'p_y',v:'39 000',per:'per_y',f:['f_gym','f_grp','f_cyc','f_frz','f_guest'],hot2:'tg_best'}];
-const TEAM=[{n:'Алия Сапарова',r:'r1',y:7},{n:'Мээрим Асанова',r:'r2',y:6},{n:'Бакыт Осмонов',r:'r3',y:9},{n:'Данияр Исаков',r:'r4',y:5}];
+const TEAM=[{n:'Алия Сапарова',r:'r1',y:7,img:'img/t1.jpg',pos:'50% 30%'},{n:'Мээрим Асанова',r:'r2',y:6,img:'img/t2.jpg',pos:'50% 25%'},{n:'Бакыт Осмонов',r:'r3',y:9,img:'img/t3.jpg',pos:'55% 35%'},{n:'Данияр Исаков',r:'r4',y:5,img:'img/t4.jpg',pos:'35% 40%'}];
+const tph=m=>`<img src="${m.img}" alt="${m.n}" loading="lazy" style="object-position:${m.pos}">`;
 const REV=[['Айжан','rv1','res1'],['Камила','rv2','res2'],['Мирлан','rv3','res3'],['Жибек','rv4','res4']];
 const SCHED=[['07:30',[['Cycle Energy','cy'],['Body Plastic','bp'],['Cycle Energy','cy'],['Body Plastic','bp'],['Cycle Energy','cy'],['Пилатес','gr']]],
  ['10:00',[['Пилатес','gr'],['Стретчинг','gr'],['Body Plastic','bp'],['Пилатес','gr'],['Стретчинг','gr'],['Cycle Energy','cy']]],
@@ -666,7 +700,7 @@ return `<div class="v v-neon">
 
 <section class="n-hero" id="top">
  <div class="n-rings" aria-hidden="true"><i></i><i></i><i></i></div>
- <div class="n-photo"><img src="${IMG.gym}" alt="Тренажёрный зал Magnat Fitness с красной кирпичной стеной"><span class="cred">${t('photo_cred')}</span></div>
+ <div class="n-photo"><img src="${IMG.hero}" alt="Силовая тренировка в тёмном зале"><span class="cred">${t('photo_cred')}</span><i class="n-halo nbox" aria-hidden="true"></i><span class="n-sign nsign" aria-hidden="true">energy</span></div>
  <div class="wrap">
   <span class="n-kick rv">Magnat Fitness · Premium</span>
   <h1 class="disp rv" style="--d:.08s">${slogan()}</h1>
@@ -693,7 +727,7 @@ return `<div class="v v-neon">
 
 <section class="n-sec" id="cycle"><div class="wrap">
  <div class="n-cycle">
-  <div class="n-cphoto photo rv"><img src="${IMG.cycle}" alt="Тренировка Cycle Energy в Magnat Fitness" loading="lazy"><div class="ncap"><div class="n-eb">${ic('bike')}${t('cy_kick')}</div><h3>${t('cap_a')} <span class="neon">${t('cap_b')}</span></h3><p>${t('cy_d')}</p></div></div>
+  <div class="n-cphoto photo rv"><img src="${IMG.cycle}" alt="Групповая тренировка под музыку и свет" loading="lazy"><span class="n-cyc-sign nsign" aria-hidden="true">cycle</span><div class="ncap"><div class="n-eb">${ic('bike')}${t('cy_kick')}</div><h3>${t('cap_a')} <span class="neon">${t('cap_b')}</span></h3><p>${t('cy_d')}</p></div></div>
   <div class="n-kcal rv" style="--d:.1s">
    <svg class="ring" viewBox="0 0 240 240" aria-hidden="true"><circle cx="120" cy="120" r="100" fill="none" stroke="#2a2a2d" stroke-width="14"/><circle class="arc" cx="120" cy="120" r="100" fill="none" stroke="#e3161e" stroke-width="14" stroke-linecap="round" transform="rotate(-90 120 120)" style="filter:drop-shadow(0 0 10px rgba(227,22,30,.8))"/><text x="120" y="128" text-anchor="middle" font-family="Unbounded" font-weight="900" font-size="54" fill="#fff" data-count="700">700</text><text x="120" y="158" text-anchor="middle" font-family="Manrope" font-weight="700" font-size="14" fill="#a0a0a6" letter-spacing="3">${t('kcal').toUpperCase()}</text></svg>
    <small>${t('cy_ring')} <b style="color:#fff">${t('cy_ring_b')}</b></small>
@@ -709,7 +743,7 @@ return `<div class="v v-neon">
 
 <section class="n-sec" id="team"><div class="wrap">
  <div class="n-sh rv"><div><div class="n-eb">${ic('user')}${t('t_eb')}</div><h2 class="disp">${t('t_t')}</h2></div><p class="note">${t('t_note')}</p></div>
- <div class="n-team">${TEAM.map((m,n)=>`<article class="n-tm rv" style="--d:${n*.07}s"><div class="ph">${ava(m.n,'dark')}<span class="yr">${m.y} ${t('yrs')}</span></div><div class="tx"><h3>${m.n}</h3><p>${t(m.r)}</p></div></article>`).join('')}</div>
+ <div class="n-team">${TEAM.map((m,n)=>`<article class="n-tm rv" style="--d:${n*.07}s"><div class="ph">${tph(m)}<span class="yr">${m.y} ${t('yrs')}</span></div><div class="tx"><h3>${m.n}</h3><p>${t(m.r)}</p></div></article>`).join('')}</div>
 </div></section>
 
 <section class="n-sec" id="reviews"><div class="wrap">
@@ -739,13 +773,13 @@ return `<div class="v v-neon">
   <a class="map rv" style="--d:.1s" href="${CFG.gis}" ${ext} aria-label="${t('map')}">${mapSvg('#131314','#2a2a2d','#1a1d18','#1a1f26','#e3161e')}<span>${ic('pin')}${t('map')}</span></a>
  </div>
 </div></section>
-<footer class="n-foot"><div class="wrap"><span>${t('foot')}</span><a href="${CFG.ig}" ${ext}>Instagram @magnat_fitness</a></div></footer>
+<footer class="n-foot"><div class="wrap"><span>${t('foot')} · фото: Unsplash</span><a href="${CFG.ig}" ${ext}>Instagram @magnat_fitness</a></div></footer>
 ${fab()}</div>`;
 }
 
 /* ===== 2 · CYCLE ENERGY ===== */
 function vCycle(){
-const thumbs={gym:IMG.gym,cyc:IMG.cycle,grp:IMG.group};
+const thumbs={gym:IMG.dumbbells,cyc:IMG.bike,bp:IMG.stretch,grp:IMG.group,sauna:IMG.sauna,mas:IMG.massage,kid:IMG.kids,bar:IMG.bar};
 return `<div class="v v-cyc">
 <header class="hdr"><div class="wrap">${logoBlock()}
  ${nav([['dirs','nav_dirs'],['sched','nav_sched'],['prices','nav_prices'],['team','nav_team'],['reviews','nav_reviews'],['contacts','nav_contacts']])}${hphone()}
@@ -754,7 +788,8 @@ return `<div class="v v-cyc">
 
 <section class="c-hero" id="top"><div class="wrap">
  <div class="c-stage">
-  <img src="${IMG.cycle}" alt="Cycle Energy в Magnat Fitness">
+  <img src="${IMG.cycle}" alt="Групповая тренировка под музыку и свет">
+  <span class="c-sign nsign" aria-hidden="true">cycle energy</span>
   <div class="c-in">
    <div>
     <h1 class="cap rv"><span>${t('cap_a')}</span>${t('cap_b')}</h1>
@@ -804,7 +839,7 @@ return `<div class="v v-cyc">
 
 <section class="c-sec" id="team" style="padding-top:0"><div class="wrap">
  <div class="c-sh rv"><div><span class="c-eb">${ic('user')}${t('t_eb')}</span><h2 class="disp">${t('t_t')}</h2></div><p class="note">${t('t_note')}</p></div>
- <div class="c-team">${TEAM.map((m,n)=>`<article class="c-tm rv" style="--d:${n*.07}s">${ava(m.n,n%2?'dark':'red')}<span class="yr">${m.y} ${t('yrs_s')}</span><div class="tx"><h3>${m.n}</h3><p>${t(m.r)}</p></div></article>`).join('')}</div>
+ <div class="c-team">${TEAM.map((m,n)=>`<article class="c-tm rv" style="--d:${n*.07}s">${tph(m)}<span class="yr">${m.y} ${t('yrs_s')}</span><div class="tx"><h3>${m.n}</h3><p>${t(m.r)}</p></div></article>`).join('')}</div>
 </div></section>
 
 <section class="c-sec" id="reviews" style="padding-top:0"><div class="wrap">
@@ -834,7 +869,7 @@ return `<div class="v v-cyc">
   </form>
  </div>
 </div></section>
-<footer class="c-foot"><div class="wrap"><span>${t('foot')}</span><a href="${CFG.ig}" ${ext}>Instagram @magnat_fitness</a></div></footer>
+<footer class="c-foot"><div class="wrap"><span>${t('foot')} · фото: Unsplash</span><a href="${CFG.ig}" ${ext}>Instagram @magnat_fitness</a></div></footer>
 ${fab()}</div>`;
 }
 
@@ -855,9 +890,10 @@ return `<div class="v v-soul">
   <div class="s-phone rv" style="--d:.32s">${ic('phone')}<a href="tel:${CFG.tel}"><small>${t('call_us')}</small><b>${CFG.phone}</b></a>${copyBtn()}</div>
  </div>
  <div class="s-coll">
-  <div class="photo p1"><img src="${IMG.gym}" alt="Тренажёрный зал Magnat Fitness"><span class="cred">${t('photo_cred')}</span></div>
-  <div class="photo p2"><img src="${IMG.cycle}" alt="Cycle Energy" loading="lazy"></div>
-  <div class="photo p3"><img src="${IMG.group}" alt="Групповая тренировка" loading="lazy"></div>
+  <div class="photo p1"><img src="${IMG.row}" alt="Тренировка в зале"><span class="cred">${t('photo_cred')}</span></div>
+  <div class="photo p2"><img src="${IMG.cycle}" alt="Групповая тренировка" loading="lazy"></div>
+  <div class="photo p3"><img src="${IMG.stretch}" alt="Растяжка" loading="lazy"></div>
+  <span class="s-neon nsign" aria-hidden="true">energy ♥</span>
   <div class="s-stick"><svg viewBox="0 0 140 140" aria-hidden="true"><defs><path id="sp" d="M70 70m-56 0a56 56 0 1 1 112 0a56 56 0 1 1-112 0"/></defs><text font-size="11" font-weight="700" fill="#fff" letter-spacing="3"><textPath href="#sp">MAGNAT · FITNESS · ENERGY · MAGNAT · FITNESS · </textPath></text></svg><span>${t('stick')}</span></div>
  </div>
 </div></section>
@@ -870,17 +906,17 @@ return `<div class="v v-soul">
 <section class="s-sec" style="padding-top:0"><div class="wrap">
  <div class="s-sh rv"><div><span class="s-eb">${ic('party')}${t('life_eb')}</span><h2 class="disp">${t('life_t')}</h2></div></div>
  <div class="s-life">
-  <div class="s-l ph rv"><img src="${IMG.gym}" alt="" loading="lazy"><h3>${t('life_ph')}</h3><p>${t('life_ph_d')}</p></div>
-  <div class="s-l brick rv" style="--d:.06s">${ic('cup')}<h3>${t('life_bar')}</h3><p>${t('life_bar_d')}</p></div>
-  <div class="s-l ink rv" style="--d:.12s">${ic('party')}<h3>${t('life_ev')}</h3><p>${t('life_ev_d')}</p></div>
-  <div class="s-l bl rv" style="--d:.18s">${ic('steam')}<h3>${t('life_mas')}</h3><p>${t('life_mas_d')}</p></div>
-  <div class="s-l wh rv" style="--d:.24s">${ic('child')}<h3>${t('life_kid')}</h3><p>${t('life_kid_d')}</p></div>
+  <div class="s-l pic big rv"><img src="${IMG.gym}" alt="" loading="lazy"><h3>${t('life_ph')}</h3><p>${t('life_ph_d')}</p></div>
+  <div class="s-l pic rv" style="--d:.06s"><img src="${IMG.bar}" alt="" loading="lazy"><h3>${t('life_bar')}</h3><p>${t('life_bar_d')}</p></div>
+  <div class="s-l pic rv" style="--d:.12s"><img src="${IMG.openair}" alt="" loading="lazy"><h3>${t('life_ev')}</h3><p>${t('life_ev_d')}</p></div>
+  <div class="s-l pic rv" style="--d:.18s"><img src="${IMG.sauna}" alt="" loading="lazy"><h3>${t('life_mas')}</h3><p>${t('life_mas_d')}</p></div>
+  <div class="s-l pic rv" style="--d:.24s"><img src="${IMG.kids}" alt="" loading="lazy"><h3>${t('life_kid')}</h3><p>${t('life_kid_d')}</p></div>
  </div>
 </div></section>
 
 <section class="s-sec" id="team" style="background:#fff"><div class="wrap">
  <div class="s-sh rv"><div><span class="s-eb">${ic('user')}${t('t_eb')}</span><h2 class="disp">${t('t_t')}</h2></div><p class="note">${t('t_note')}</p></div>
- <div class="s-team">${TEAM.map((m,n)=>`<article class="s-tm rv" style="--d:${n*.07}s"><div class="ph">${ava(m.n,'light')}</div><h3>${m.n}</h3><p>${t(m.r)}</p><span class="yr">${m.y} ${t('yrs')}</span></article>`).join('')}</div>
+ <div class="s-team">${TEAM.map((m,n)=>`<article class="s-tm rv" style="--d:${n*.07}s"><div class="ph">${tph(m)}</div><h3>${m.n}</h3><p>${t(m.r)}</p><span class="yr">${m.y} ${t('yrs')}</span></article>`).join('')}</div>
 </div></section>
 
 <section class="s-sec" id="prices"><div class="wrap">
@@ -911,7 +947,7 @@ return `<div class="v v-soul">
   <a class="map rv" style="--d:.1s" href="${CFG.gis}" ${ext} aria-label="${t('map')}">${mapSvg('#efece9','#ffffff','#e6eadf','#d9e3ea','#c3141b')}<span>${ic('pin')}${t('map')}</span></a>
  </div>
 </div></section>
-<footer class="s-foot"><div class="wrap"><span>${t('foot')}</span><a href="${CFG.ig}" ${ext}>Instagram @magnat_fitness</a></div></footer>
+<footer class="s-foot"><div class="wrap"><span>${t('foot')} · фото: Unsplash</span><a href="${CFG.ig}" ${ext}>Instagram @magnat_fitness</a></div></footer>
 ${fab()}</div>`;
 }
 
