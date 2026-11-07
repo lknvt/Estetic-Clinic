@@ -266,33 +266,34 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 .btn-rd:after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,#ffffff55,transparent);animation:shine 3.2s infinite}
 @keyframes shine{0%,60%{left:-60%}100%{left:130%}}
 .co[data-tilt],.r4{transition:transform .15s ease-out,box-shadow .25s}
-/* round timer */
-.tm-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:20px;align-items:center;background:var(--s1);border-radius:22px;box-shadow:inset 0 0 0 1px var(--ln);padding:34px;position:relative;overflow:hidden}
-.tm-wrap:before{content:"";position:absolute;inset:auto -10% -60% 40%;height:120%;background:radial-gradient(#ff2a4422,transparent 60%);pointer-events:none}
-.tm-wrap h2{font-size:clamp(28px,3vw,42px);margin:14px 0 12px}
-.tm-wrap p{color:var(--mu);max-width:440px;margin-bottom:22px}
-.clock{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;justify-self:center}
-.ring{width:230px;height:230px;position:relative}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring .bg{stroke:#ffffff10}
-.ring:before{content:"";position:absolute;inset:8px;border-radius:50%;box-shadow:0 0 34px -4px #ff2a4477,inset 0 0 24px -6px #ff2a4455;pointer-events:none}
-.ring.rest:before{box-shadow:none}
-.ring .fg{stroke:var(--ne);stroke-linecap:round;transition:stroke-dashoffset 1s linear,stroke .3s}
-.ring.rest .fg{stroke:#8d939e;filter:none}
-.ring .c{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
-.ring .c b{font:900 italic 56px/1 var(--fd);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.ring .c span{font:700 12px var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--ne2);margin-top:6px}
-.ring.rest .c span{color:var(--mu)}
-.ring.go{animation:beat 1s infinite}
-@keyframes beat{50%{transform:scale(1.015)}}
-.rounds{display:flex;gap:6px;margin-bottom:16px}
-.rounds i{width:28px;height:6px;border-radius:3px;background:#ffffff14}
-.rounds i.on{background:var(--ne);box-shadow:0 0 8px var(--ne)}
-.tbtns{display:flex;gap:8px;flex-wrap:wrap}
-.tbtns .btn{height:48px;padding:0 18px;font-size:14px}
-.tlink{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--ne2);font-weight:700;font-size:14px}
-@media (prefers-reduced-motion:reduce){.hero h1 em,.oct svg,.oct .run,.oct .spin,.btn-rd:after,.ring.go,.hero h1 .w{animation:none}}
-@media(max-width:900px){.tm-wrap{grid-template-columns:1fr;padding:22px}.clock{grid-template-columns:1fr;justify-items:center;gap:16px}.ring{width:200px;height:200px}}
+/* tour plan */
+.tour{display:grid;grid-template-columns:1.35fr .65fr;gap:16px;align-items:stretch}
+.plan{background:var(--s1);border-radius:20px;box-shadow:inset 0 0 0 1px var(--ln);padding:14px}
+.plan svg{width:100%;height:auto;display:block}
+.zone{cursor:pointer;outline:none}
+.zone .sh{fill:#ffffff05;stroke:#ffffff2e;stroke-width:1.5;transition:fill .2s,stroke .2s}
+.zone text{font:800 15px var(--fd);letter-spacing:.14em;fill:#8d939e;text-anchor:middle;transition:fill .2s;pointer-events:none}
+.zone text.sm{font-size:12px}
+.zone:hover .sh,.zone:focus-visible .sh{stroke:#ff8a96;fill:#ff2a440d}
+.zone.on .sh{stroke:var(--ne);stroke-width:2.5;fill:#ff2a441a;filter:drop-shadow(0 0 6px #ff2a44) drop-shadow(0 0 14px #ff2a4488)}
+.zone.on text{fill:#fff}
+.zone.on .sh{animation:zpulse 2s ease-in-out infinite}
+@keyframes zpulse{50%{stroke-opacity:.6}}
+.ent text{font:700 10px var(--fb);letter-spacing:.2em;text-anchor:middle}
+.zinfo{background:var(--s1);border-radius:20px;box-shadow:inset 0 0 0 1px var(--ln);padding:26px;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden}
+.zinfo:after{content:"";position:absolute;left:26px;right:26px;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--ne),transparent);box-shadow:var(--neg)}
+.zinfo .zi{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:var(--ne);color:#fff;box-shadow:var(--neg)}
+.zinfo .zi .ic{width:28px;height:28px}
+.zinfo h3{font-size:26px}
+.zinfo p{color:#b9bec7}
+.zinfo .lbl{font:600 11px var(--fd);letter-spacing:.2em;text-transform:uppercase;color:var(--mu);margin-top:6px}
+.zinfo .btn{margin-top:auto;align-self:flex-start}
+.zdots{display:flex;gap:6px}
+.zdots i{width:18px;height:4px;border-radius:2px;background:#ffffff1a}.zdots i.on{background:var(--ne);box-shadow:0 0 8px var(--ne)}
+.zinfo>*{animation:zin .35s ease-out both}
+@keyframes zin{from{opacity:0;transform:translateY(8px)}}
+@media(max-width:900px){.tour{grid-template-columns:1fr}.plan{padding:8px}}
+@media (prefers-reduced-motion:reduce){.hero h1 em,.oct svg,.oct .run,.oct .spin,.btn-rd:after,.hero h1 .w,.zone.on .sh,.zinfo>*{animation:none}}
 .dtabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px}
 .dtabs button{flex:1 0 auto;min-width:46px;height:44px;border:0;border-radius:10px;background:var(--s1);box-shadow:inset 0 0 0 1px var(--ln);font-weight:700;cursor:pointer;color:var(--tx)}
 .dtabs button.on{box-shadow:inset 0 0 0 1px var(--ne),0 0 16px -6px var(--ne);color:var(--ne2)}
@@ -354,13 +355,25 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
  <div class="res4" id="res4"></div>
 </div></section>
 
-<section class="sec" id="timer" style="padding-top:10px"><div class="wrap">
- <div class="tm-wrap rv">
-  <div><span class="eb" data-t="timer_kicker"></span><h2 data-t="timer_title"></h2><p data-t="timer_sub"></p>
-   <div class="rounds" id="rnds"></div>
-   <div class="tbtns"><button class="btn btn-rd" id="tgo"></button><button class="btn btn-gh" id="trs"></button></div>
-   <a class="tlink" data-link="wa" id="tcta"></a></div>
-  <div class="clock"><div class="ring" id="ring"><svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="54" fill="none" stroke-width="6"/><circle class="fg" id="rfg" cx="60" cy="60" r="54" fill="none" stroke-width="6" stroke-dasharray="339.3" stroke-dashoffset="0"/></svg><div class="c"><b id="tt">3:00</b><span id="tph"></span></div></div></div>
+<section class="sec" id="tour" style="padding-top:10px"><div class="wrap">
+ <div class="sh rv"><div><span class="eb" data-t="tour_kicker"></span><h2 data-t="tour_title"></h2></div><p data-t="tour_sub"></p></div>
+ <div class="tour rv">
+  <div class="plan">
+   <svg viewBox="0 0 600 380" id="plan" role="group" aria-label="Схема зала">
+    <defs><pattern id="tg" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#ffffff08"/></pattern>
+     <pattern id="tnet" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v10M0 0h10" stroke="#ffffff10"/></pattern></defs>
+    <rect x="10" y="10" width="580" height="360" rx="14" fill="url(#tg)" stroke="#ffffff1c"/>
+    <g class="zone" data-z="0" tabindex="0"><polygon points="88,32 172,32 230,90 230,174 172,232 88,232 30,174 30,90" fill="url(#tnet)"/><polygon class="sh" points="88,32 172,32 230,90 230,174 172,232 88,232 30,174 30,90"/><text x="130" y="138">OCTAGON</text></g>
+    <g class="zone" data-z="1" tabindex="0"><rect class="sh" x="252" y="32" width="166" height="166" rx="4"/><path d="M262 42h146v146H262z M270 50h130v130H270z" fill="none" stroke="#ffffff1a"/><text x="335" y="120">RING</text></g>
+    <g class="zone" data-z="2" tabindex="0"><rect class="sh" x="440" y="32" width="130" height="110" rx="6"/><g fill="#ffffff1f"><circle cx="472" cy="66" r="11"/><circle cx="505" cy="66" r="11"/><circle cx="538" cy="66" r="11"/><circle cx="472" cy="104" r="11"/><circle cx="505" cy="104" r="11"/><circle cx="538" cy="104" r="11"/></g><text x="505" y="132" class="sm">BAGS</text></g>
+    <g class="zone" data-z="3" tabindex="0"><rect class="sh" x="30" y="254" width="250" height="96" rx="6"/><path d="M92 254v96M155 254v96M218 254v96" stroke="#ffffff10"/><text x="155" y="308">TATAMI</text></g>
+    <g class="zone" data-z="4" tabindex="0"><rect class="sh" x="440" y="164" width="130" height="186" rx="6"/><g stroke="#ffffff2a" stroke-width="3"><path d="M462 196h30M462 228h30M462 260h30M518 196h30M518 228h30M518 260h30"/></g><text x="505" y="316" class="sm">GYM</text></g>
+    <g class="zone" data-z="5" tabindex="0"><rect class="sh" x="302" y="220" width="116" height="58" rx="6"/><text x="360" y="254" class="sm">FIT BAR</text></g>
+    <g class="zone" data-z="6" tabindex="0"><rect class="sh" x="302" y="292" width="116" height="58" rx="6"/><text x="360" y="326" class="sm">LOCKERS</text></g>
+    <g class="ent"><path d="M240 370h40" stroke="#ff2a44" stroke-width="4"/><text x="260" y="362" class="sm" fill="#ff8a96">ВХОД</text></g>
+   </svg>
+  </div>
+  <div class="zinfo" id="zinfo" aria-live="polite"></div>
  </div>
 </div></section>
 
@@ -433,21 +446,15 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
 <script>
 (function(){
 const $=id=>document.getElementById(id);let goal=1,selDay=null;
-// Раундовый таймер: 3 раунда по 3:00, отдых 1:00
-const TM={R:3,W:180,P:60,r:1,ph:'work',left:180,run:false,id:null,
- paint(){const J=window.JFC,t=J.t,tot=this.ph==='work'?this.W:this.P;
-  $('tt').textContent=Math.floor(this.left/60)+':'+String(this.left%60).padStart(2,'0');
-  $('tph').textContent=(this.ph==='work'?t('work'):t('rest'))+' · '+t('round')+' '+this.r+'/'+this.R;
-  $('rfg').style.strokeDashoffset=(339.3*(1-this.left/tot)).toFixed(1);
-  $('ring').classList.toggle('rest',this.ph==='rest');$('ring').classList.toggle('go',this.run&&this.ph==='work');
-  $('rnds').innerHTML=Array.from({length:this.R},(_,i)=>`<i class="${i<this.r-(this.ph==='work'?1:0)||(i===this.r-1&&this.run)?'on':''}"></i>`).join('');
-  $('tgo').innerHTML=J.icon(this.run?'clock':'arrow')+'<span>'+(this.run?t('pause'):t('start'))+'</span>';
-  $('trs').textContent=t('reset');$('tcta').innerHTML=t('timer_cta')+' →';},
- tick(){this.left--;if(this.left<=0){if(this.ph==='work'){if(this.r>=this.R){window.JFC.bell(3);this.stop();this.r=1;this.ph='work';this.left=this.W;this.paint();return}window.JFC.bell(1);this.ph='rest';this.left=this.P}else{window.JFC.bell(2);this.ph='work';this.r++;this.left=this.W}}this.paint()},
- toggle(){if(this.run)this.stop();else{this.run=true;window.JFC.bell(1);this.id=setInterval(()=>this.tick(),1000)}this.paint()},
- stop(){this.run=false;clearInterval(this.id)},
- reset(){this.stop();this.r=1;this.ph='work';this.left=this.W;this.paint()}};
-document.addEventListener('click',e=>{if(e.target.closest('#tgo'))TM.toggle();if(e.target.closest('#trs'))TM.reset();});
+// Тур по залу
+let zone=0;
+function drawZ(){const J=window.JFC,{t,L,icon,dirs,zones}=J,z=zones[zone];
+ document.querySelectorAll('.zone').forEach(g=>g.classList.toggle('on',+g.dataset.z===zone));
+ $('zinfo').innerHTML=`<div class="zdots">${zones.map((_,i)=>`<i class="${i===zone?'on':''}"></i>`).join('')}</div><span class="zi">${icon(z.ic)}</span><h3>${L(z)[0]}</h3><p>${L(z)[1]}</p>
+  <div class="lbl">${t('tour_used')}</div><div class="chips">${z.d.length?z.d.map(d=>`<span class="chip">${icon(dirs[d].ic)}${L(dirs[d])[0]}</span>`).join(''):`<span class="chip">${t('tour_free')}</span>`}</div>
+  <a class="btn btn-rd" href="${J.waLink(t('wa_msg')+' '+t('tour_cta'))}" target="_blank" rel="noopener">${icon('wa')}<span>${t('tour_cta')}</span></a>`;}
+document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.zone');if(g){zone=+g.dataset.z;drawZ()}});
+document.addEventListener('keydown',e=>{const g=document.activeElement&&document.activeElement.closest&&document.activeElement.closest('.zone');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();zone=+g.dataset.z;drawZ()}});
 // подсветка за курсором в первом экране
 document.addEventListener('pointermove',e=>{const h=document.querySelector('.hero');if(!h)return;const r=h.getBoundingClientRect();if(e.clientY>r.bottom)return;h.style.setProperty('--mx',(e.clientX-r.left)+'px');h.style.setProperty('--my',(e.clientY-r.top)+'px');},{passive:true});
 const PT={ru:['Тренажёрный зал','Групповые тренировки','Единоборства','Персональные','Заморозка'],ky:['Машыгуу залы','Топтук машыгуулар','Мушташ түрлөрү','Жеке машыгуулар','Тоңдуруу']};
@@ -467,7 +474,7 @@ window.render=function(){
  const wds=(t('hero_title_1')+' '+t('hero_title_2')).split(' ');
  $('ht').innerHTML=wds.map((w,i)=>`<span class="w" style="animation-delay:${i*.09}s">${w}</span>`).join(' ')+`<em class="w" style="animation-delay:${wds.length*.09}s">${t('hero_title_3')}</em>`;
  $('h1').innerHTML=ib('wa',t('cta_trial'));
- TM.paint();$('h2').innerHTML=ib('arrow',t('quiz_title'));
+ drawZ();$('h2').innerHTML=ib('arrow',t('quiz_title'));
  [0,1,2,7].forEach((d,i)=>$('tg'+(i+1)).innerHTML=(i===0&&nx?`<b>${nx.time}</b> · `:'')+L(dirs[d])[0]);
  $('stats').innerHTML=[1,2,3].map(i=>`<div><b data-cu>${t('st'+i+'_n')}</b><span>${t('st'+i+'_l')}</span></div>`).join('')+`<a href="${J.C.gis}" target="_blank" rel="noopener"><b>4.9 ★</b><span>${t('gis_reviews')}</span></a>`;
  const drawQ=()=>{
