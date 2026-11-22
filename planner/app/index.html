@@ -25,6 +25,7 @@ label{display:block;font-size:13px;color:var(--hint);margin:10px 0 4px}.row{disp
 .panel{background:var(--bg);width:100%;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px}
 .fab{position:fixed;right:16px;bottom:20px;width:56px;height:56px;border-radius:50%;font-size:28px;padding:0}
 .empty{text-align:center;color:var(--hint);padding:24px 0}.h2{font-size:14px;color:var(--hint);margin:16px 0 6px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{min-width:44px;padding:8px 0;text-align:center}.chip.on{background:var(--btn);color:var(--btx)}
 </style>
 </head>
 <body>
@@ -41,7 +42,10 @@ label{display:block;font-size:13px;color:var(--hint);margin:10px 0 4px}.row{disp
   <label>Заметка</label><textarea id="fNote" rows="2"></textarea>
   <div class="row"><div><label>Дата начала</label><input type="date" id="fDate"></div><div><label>Время (необязательно)</label><input type="time" id="fTime"></div></div>
   <label>Повтор</label>
-  <div class="row"><select id="fUnit"><option value="none">Не повторять</option><option value="day">Каждые N дней</option><option value="week">Каждые N недель</option><option value="month">Каждые N месяцев</option></select><input type="number" id="fEvery" min="1" max="365" value="1"></div>
+  <select id="fUnit"><option value="none">Не повторять</option><option value="day">Каждый день</option><option value="week">Каждую неделю</option><option value="month">Каждый месяц</option></select>
+  <div id="fWeekBox" hidden><label>По каким дням недели</label><div class="chips" id="fWd"></div></div>
+  <div id="fMonthBox" hidden><label>Какого числа</label><input type="number" id="fMonthDay" min="1" max="31"><div class="meta">Если в месяце нет такого числа (например, 31), задача выпадет на последний день месяца.</div></div>
+  <div id="fEveryBox" hidden><label id="fEveryLbl">Повторять через</label><div class="row"><input type="number" id="fEvery" min="1" max="365" value="1"><input id="fUnitName" disabled></div></div>
   <div class="row"><div><label>Повторять до (необязательно)</label><input type="date" id="fUntil"></div><div><label>Напомнить за (мин)</label><input type="number" id="fRemind" min="0" value="0"></div></div>
   <div class="row" style="margin-top:16px"><button id="sDel" class="danger">Удалить</button><button id="sCancel">Отмена</button><button id="sSave" class="pri">Сохранить</button></div>
 </div></div>
@@ -61,10 +65,24 @@ function occurs(t, ds){ // та же логика, что на сервере
   if(t.repeat_unit==="none") return ds===t.start_date;
   const n=t.repeat_every||1, diff=Math.round((d-s)/864e5);
   if(t.repeat_unit==="day") return diff%n===0;
-  if(t.repeat_unit==="week") return diff%(7*n)===0;
+  if(t.repeat_unit==="week"){
+    const wd=t.weekdays&&t.weekdays.length?t.weekdays:[s.getUTCDay()];
+    if(!wd.includes(d.getUTCDay())) return false;
+    const mon=x=>Math.round((x-((x.getUTCDay()+6)%7)*864e5)/864e5); // понедельник той же недели
+    return Math.round((mon(d)-mon(s))/7)%n===0;
+  }
   const m=(d.getUTCFullYear()-s.getUTCFullYear())*12+d.getUTCMonth()-s.getUTCMonth(); if(m%n) return false;
   const last=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate();
-  return d.getUTCDate()===Math.min(s.getUTCDate(),last);
+  return d.getUTCDate()===Math.min(t.month_day||s.getUTCDate(),last);
+}
+const WD=[["Пн",1],["Вт",2],["Ср",3],["Чт",4],["Пт",5],["Сб",6],["Вс",0]];
+function repText(t){
+  const n=t.repeat_every||1;
+  if(t.repeat_unit==="day") return n===1?"каждый день":`каждые ${n} дн.`;
+  if(t.repeat_unit==="week"){ const wd=t.weekdays&&t.weekdays.length?t.weekdays:[utc(t.start_date).getUTCDay()];
+    const names=WD.filter(([,v])=>wd.includes(v)).map(([k])=>k).join(", "); return (n===1?"каждую неделю":`каждые ${n} нед.`)+" ("+names+")"; }
+  if(t.repeat_unit==="month") return (n===1?"каждый месяц":`каждые ${n} мес.`)+", "+(t.month_day||utc(t.start_date).getUTCDate())+" числа";
+  return "";
 }
 // Локальный режим: пока API_URL не настроен или приложение открыто вне Telegram, данные лежат в localStorage.
 const LOCAL = API_URL.includes("PROJECT_REF") || !tg?.initData;
@@ -121,7 +139,7 @@ function render(){
   }).join("");
   const items = state.tasks.filter(t=>occurs(t,sel)).sort((a,b)=>(a.time||"99").localeCompare(b.time||"99"));
   $("list").innerHTML = items.length ? items.map(t=>{
-    const c=comp(t.id,sel), rep = t.repeat_unit==="none"?"":` · каждые ${t.repeat_every} ${({day:"дн.",week:"нед.",month:"мес."})[t.repeat_unit]}`;
+    const c=comp(t.id,sel), rep = t.repeat_unit==="none"?"":" · "+repText(t);
     return `<div class="task ${c?"done":""}" data-id="${t.id}"><button class="chk" data-chk="${t.id}">${c?"✓":""}</button>
       <div class="body" data-edit="${t.id}"><div class="ttl">${esc(t.title)}</div><div class="meta">${t.time?t.time.slice(0,5):"весь день"}${rep}${t.note?" · "+esc(t.note):""}</div></div></div>`;
   }).join("") : `<div class="empty">На этот день задач нет</div>`;
@@ -146,18 +164,32 @@ let nt; $("note").oninput = () => { clearTimeout(nt); nt=setTimeout(()=>call({op
 function openSheet(t){
   editing=t||null; $("sTitle").textContent=t?"Редактировать":"Новая задача";
   $("fTitle").value=t?.title||""; $("fNote").value=t?.note||""; $("fDate").value=t?.start_date||sel; $("fTime").value=t?.time?.slice(0,5)||"";
-  $("fUnit").value=t?.repeat_unit||"none"; $("fEvery").value=t?.repeat_every||1; $("fUntil").value=t?.until||""; $("fRemind").value=t?.remind_before||0;
+  $("fUnit").value=t?.repeat_unit||"none"; $("fEvery").value=t?.repeat_every||1; wdSel.clear(); (t?.weekdays||[]).forEach(v=>wdSel.add(v)); $("fMonthDay").value=t?.month_day||""; syncRepeat(); $("fUntil").value=t?.until||""; $("fRemind").value=t?.remind_before||0;
   delArmed=false; $("sDel").textContent="Удалить"; $("sDel").style.display=t?"":"none"; $("sheet").classList.add("open");
 }
 $("add").onclick = () => openSheet(null);
 $("sCancel").onclick = () => $("sheet").classList.remove("open");
+
+const wdSel=new Set();
+$("fWd").innerHTML=WD.map(([k,v])=>`<button type="button" class="chip" data-wd="${v}">${k}</button>`).join("");
+$("fWd").onclick=e=>{ const b=e.target.closest("[data-wd]"); if(!b) return; const v=+b.dataset.wd; wdSel.has(v)?wdSel.delete(v):wdSel.add(v); b.classList.toggle("on",wdSel.has(v)); };
+function syncRepeat(){
+  const u=$("fUnit").value;
+  $("fWeekBox").hidden=u!=="week"; $("fMonthBox").hidden=u!=="month"; $("fEveryBox").hidden=u==="none";
+  $("fUnitName").value={day:"дн.",week:"нед.",month:"мес."}[u]||"";
+  if(u==="week"&&!wdSel.size&&$("fDate").value){ wdSel.add(parse($("fDate").value).getDay()); }
+  if(u==="month"&&!$("fMonthDay").value&&$("fDate").value) $("fMonthDay").value=parse($("fDate").value).getDate();
+  document.querySelectorAll("#fWd .chip").forEach(b=>b.classList.toggle("on",wdSel.has(+b.dataset.wd)));
+}
+$("fUnit").onchange=syncRepeat;
 let delArmed=false;
 $("sDel").onclick = async () => { if(!delArmed){ delArmed=true; $("sDel").textContent="Точно удалить?"; return; }
   await call({op:"deleteTask",id:editing.id}); $("sheet").classList.remove("open"); load(); };
+$("fDate").onchange=()=>{ if($("fUnit").value==="month") $("fMonthDay").value=parse($("fDate").value).getDate(); if($("fUnit").value==="week"){ wdSel.clear(); wdSel.add(parse($("fDate").value).getDay()); syncRepeat(); } };
 $("sSave").onclick = async () => {
   if(!$("fTitle").value.trim()) return $("fTitle").focus();
   await call({op:"saveTask",task:{id:editing?.id,title:$("fTitle").value.trim(),note:$("fNote").value,start_date:$("fDate").value,time:$("fTime").value||null,
-    repeat_unit:$("fUnit").value,repeat_every:+$("fEvery").value||1,until:$("fUntil").value||null,remind_before:+$("fRemind").value||0}});
+    repeat_unit:$("fUnit").value,repeat_every:+$("fEvery").value||1,weekdays:$("fUnit").value==="week"?[...wdSel].sort():[],month_day:$("fUnit").value==="month"?(+$("fMonthDay").value||null):null,until:$("fUntil").value||null,remind_before:+$("fRemind").value||0}});
   $("sheet").classList.remove("open"); sel=$("fDate").value; load();
 };
 load();

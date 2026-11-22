@@ -16,6 +16,8 @@ create table public.tasks (
   time time,                                   -- null = задача на весь день
   repeat_unit text not null default 'none' check (repeat_unit in ('none','day','week','month')),
   repeat_every int not null default 1 check (repeat_every between 1 and 365),
+  weekdays smallint[] not null default '{}',   -- для «каждую неделю»: дни недели 0=вс … 6=сб (пусто = как у даты начала)
+  month_day smallint check (month_day between 1 and 31), -- для «каждый месяц»: число месяца
   until date,                                  -- повторять до (включительно)
   remind_before int not null default 0,        -- за сколько минут напомнить
   archived boolean not null default false,

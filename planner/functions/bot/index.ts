@@ -19,11 +19,16 @@ function occurs(t: any, ds: string): boolean {
   if (t.repeat_unit === "none") return ds === t.start_date;
   const n = t.repeat_every || 1, diff = Math.round((+d - +s) / 864e5);
   if (t.repeat_unit === "day") return diff % n === 0;
-  if (t.repeat_unit === "week") return diff % (7 * n) === 0;
+  if (t.repeat_unit === "week") {
+    const wd: number[] = t.weekdays?.length ? t.weekdays : [s.getUTCDay()];
+    if (!wd.includes(d.getUTCDay())) return false;
+    const mon = (x: Date) => Math.round((+x - ((x.getUTCDay() + 6) % 7) * 864e5) / 864e5);
+    return Math.round((mon(d) - mon(s)) / 7) % n === 0;
+  }
   const m = (d.getUTCFullYear() - s.getUTCFullYear()) * 12 + d.getUTCMonth() - s.getUTCMonth();
   if (m % n) return false;
   const last = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate();
-  return d.getUTCDate() === Math.min(s.getUTCDate(), last);
+  return d.getUTCDate() === Math.min(t.month_day || s.getUTCDate(), last);
 }
 
 function nowIn(tz: string) {
@@ -164,6 +169,8 @@ async function api(uid: number, b: any) {
         user_id: uid, title: String(t.title).slice(0, 200), note: String(t.note ?? "").slice(0, 2000), start_date: t.start_date,
         time: t.time || null, repeat_unit: ["none", "day", "week", "month"].includes(t.repeat_unit) ? t.repeat_unit : "none",
         repeat_every: Math.min(365, Math.max(1, Number(t.repeat_every) || 1)), until: okDate(t.until) ? t.until : null,
+        weekdays: Array.isArray(t.weekdays) ? [...new Set(t.weekdays.map(Number).filter((x: number) => x >= 0 && x <= 6))] : [],
+        month_day: Number(t.month_day) >= 1 && Number(t.month_day) <= 31 ? Number(t.month_day) : null,
         remind_before: Math.min(1440, Math.max(0, Number(t.remind_before) || 0)),
       };
       const q = t.id ? db.from("tasks").update(row).eq("id", t.id).eq("user_id", uid) : db.from("tasks").insert(row);
