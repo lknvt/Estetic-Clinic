@@ -35,6 +35,8 @@ label{display:block;font-size:13px;color:var(--hint);margin:10px 0 4px}.row{disp
 <textarea id="note" rows="3" placeholder="Как прошёл день, что важно запомнить…"></textarea>
 <button class="fab pri" id="add">+</button>
 
+<div class="sheet" id="cSheet"><div class="panel"><h1>Готово! Комментарий?</h1><label>Что получилось, как прошло (можно пропустить)</label><textarea id="cText" rows="3"></textarea>
+  <div class="row" style="margin-top:16px"><button id="cSkip">Без комментария</button><button id="cSave" class="pri">Сохранить</button></div></div></div>
 <div class="sheet" id="sheet"><div class="panel">
   <h1 id="sTitle">Новая задача</h1>
   <label>Задача</label><input id="fTitle" maxlength="200">
@@ -69,8 +71,9 @@ function occurs(t, ds){ // та же логика, что на сервере
 // Локальный режим: пока API_URL не настроен или приложение открыто вне Telegram, данные лежат в localStorage.
 const LOCAL = API_URL.includes("PROJECT_REF") || !tg?.initData;
 const DB_KEY = "planner-db-v1";
-const ldb = () => { try { return JSON.parse(localStorage.getItem(DB_KEY)) || {tasks:[],completions:[],notes:[]}; } catch { return {tasks:[],completions:[],notes:[]}; } };
-const lsave = d => localStorage.setItem(DB_KEY, JSON.stringify(d));
+const ldb = () => { if(mem) return mem; try { return JSON.parse(localStorage.getItem(DB_KEY)) || {tasks:[],completions:[],notes:[]}; } catch { return {tasks:[],completions:[],notes:[]}; } };
+let mem=null;
+const lsave = d => { mem=d; try { localStorage.setItem(DB_KEY, JSON.stringify(d)); } catch {} };
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+Math.random()));
 async function localCall(b){
   const d = ldb();
@@ -94,12 +97,12 @@ async function call(body){
 if(LOCAL){
   if("Notification" in window && Notification.permission==="default") document.addEventListener("click",()=>Notification.requestPermission(),{once:true});
   setInterval(async()=>{
-    const now=new Date(), ds=fmt(now), min=now.getHours()*60+now.getMinutes(), sent=JSON.parse(localStorage.getItem("planner-sent")||"{}");
+    const now=new Date(), ds=fmt(now), min=now.getHours()*60+now.getMinutes(), sent=(()=>{try{return JSON.parse(localStorage.getItem("planner-sent")||"{}")}catch{return{}}})();
     const {tasks,completions}=await localCall({op:"load"});
     for(const t of tasks){
       if(!t.time||!occurs(t,ds)||completions.some(c=>c.task_id===t.id&&c.date===ds)) continue;
       const at=+t.time.slice(0,2)*60+ +t.time.slice(3,5)-(t.remind_before||0), key=t.id+ds;
-      if(min>=at && min<=at+120 && !sent[key]){ sent[key]=1; localStorage.setItem("planner-sent",JSON.stringify(sent));
+      if(min>=at && min<=at+120 && !sent[key]){ sent[key]=1; try{localStorage.setItem("planner-sent",JSON.stringify(sent));}catch{}
         if(Notification.permission==="granted") new Notification("⏰ "+t.time.slice(0,5)+" "+t.title,{body:t.note||""}); else alert("⏰ "+t.time.slice(0,5)+" "+t.title); }
     }
   },30000);
@@ -136,8 +139,8 @@ $("list").onclick = async e => {
   const chk=e.target.closest("[data-chk]"), ed=e.target.closest("[data-edit]");
   if(chk){
     const id=chk.dataset.chk, was=comp(id,sel);
-    let comment=""; if(!was){ comment = prompt("Комментарий к выполнению (можно пропустить):","") ?? ""; }
-    await call({op:"toggle",task_id:id,date:sel,done:!was,comment}).catch(()=>{}); tg?.HapticFeedback?.notificationOccurred("success"); load();
+    if(was){ await call({op:"toggle",task_id:id,date:sel,done:false}).catch(()=>{}); load(); }
+    else { pending={id,date:sel}; $("cText").value=""; $("cSheet").classList.add("open"); $("cText").focus(); }
   } else if(ed){ openSheet(state.tasks.find(t=>t.id===ed.dataset.edit)); }
 };
 let nt; $("note").oninput = () => { clearTimeout(nt); nt=setTimeout(()=>call({op:"saveNote",date:sel,note:$("note").value}).catch(()=>{}),600); };
@@ -146,11 +149,17 @@ function openSheet(t){
   editing=t||null; $("sTitle").textContent=t?"Редактировать":"Новая задача";
   $("fTitle").value=t?.title||""; $("fNote").value=t?.note||""; $("fDate").value=t?.start_date||sel; $("fTime").value=t?.time?.slice(0,5)||"";
   $("fUnit").value=t?.repeat_unit||"none"; $("fEvery").value=t?.repeat_every||1; $("fUntil").value=t?.until||""; $("fRemind").value=t?.remind_before||0;
-  $("sDel").style.display=t?"":"none"; $("sheet").classList.add("open");
+  delArmed=false; $("sDel").textContent="Удалить"; $("sDel").style.display=t?"":"none"; $("sheet").classList.add("open");
 }
+let pending=null;
+async function finishDone(comment){ const p=pending; pending=null; $("cSheet").classList.remove("open");
+  await call({op:"toggle",task_id:p.id,date:p.date,done:true,comment}).catch(()=>{}); tg?.HapticFeedback?.notificationOccurred("success"); load(); }
+$("cSkip").onclick=()=>finishDone(""); $("cSave").onclick=()=>finishDone($("cText").value.trim());
 $("add").onclick = () => openSheet(null);
 $("sCancel").onclick = () => $("sheet").classList.remove("open");
-$("sDel").onclick = async () => { if(confirm("Удалить задачу (и все её повторы)?")){ await call({op:"deleteTask",id:editing.id}); $("sheet").classList.remove("open"); load(); } };
+let delArmed=false;
+$("sDel").onclick = async () => { if(!delArmed){ delArmed=true; $("sDel").textContent="Точно удалить?"; return; }
+  await call({op:"deleteTask",id:editing.id}); $("sheet").classList.remove("open"); load(); };
 $("sSave").onclick = async () => {
   if(!$("fTitle").value.trim()) return $("fTitle").focus();
   await call({op:"saveTask",task:{id:editing?.id,title:$("fTitle").value.trim(),note:$("fNote").value,start_date:$("fDate").value,time:$("fTime").value||null,
