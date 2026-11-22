@@ -12,3 +12,7 @@
 5. Вебхук: `setWebhook?url=<функция>&secret_token=<WEBHOOK_SECRET>`.
 6. В `app/index.html` указать `API_URL`, выложить на Netlify, в @BotFather → Menu Button указать адрес приложения.
 7. Включить pg_cron‑задачу из конца `schema.sql`.
+
+## Локальный режим
+Откройте `app/index.html` в браузере — всё работает без Telegram и базы (данные в localStorage, напоминания — пока вкладка открыта).
+Когда в `API_URL` будет адрес вашей функции и приложение откроется в Telegram, оно само переключится на базу.

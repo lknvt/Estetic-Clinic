@@ -66,9 +66,43 @@ function occurs(t, ds){ // та же логика, что на сервере
   const last=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)).getUTCDate();
   return d.getUTCDate()===Math.min(s.getUTCDate(),last);
 }
+// Локальный режим: пока API_URL не настроен или приложение открыто вне Telegram, данные лежат в localStorage.
+const LOCAL = API_URL.includes("PROJECT_REF") || !tg?.initData;
+const DB_KEY = "planner-db-v1";
+const ldb = () => { try { return JSON.parse(localStorage.getItem(DB_KEY)) || {tasks:[],completions:[],notes:[]}; } catch { return {tasks:[],completions:[],notes:[]}; } };
+const lsave = d => localStorage.setItem(DB_KEY, JSON.stringify(d));
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()+Math.random()));
+async function localCall(b){
+  const d = ldb();
+  switch(b.op){
+    case "load": return {tasks:d.tasks.filter(t=>!t.archived), completions:d.completions, notes:d.notes, tz:Intl.DateTimeFormat().resolvedOptions().timeZone};
+    case "saveTask": { const t=b.task; const row={...t, id:t.id||uid(), until:t.until||null, time:t.time||null, archived:false};
+      const i=d.tasks.findIndex(x=>x.id===row.id); if(i>=0) d.tasks[i]=row; else d.tasks.push(row); break; }
+    case "deleteTask": { const t=d.tasks.find(x=>x.id===b.id); if(t) t.archived=true; break; }
+    case "toggle": d.completions=d.completions.filter(c=>!(c.task_id===b.task_id&&c.date===b.date));
+      if(b.done) d.completions.push({task_id:b.task_id,date:b.date,comment:b.comment||"",done_at:new Date().toISOString()}); break;
+    case "saveNote": d.notes=d.notes.filter(n=>n.date!==b.date); if(b.note) d.notes.push({date:b.date,note:b.note}); break;
+  }
+  lsave(d); return {ok:true};
+}
 async function call(body){
+  if(LOCAL) return localCall(body);
   const r = await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json","x-telegram-init-data":tg?.initData||""},body:JSON.stringify(body)});
   const j = await r.json(); if(!r.ok||j.error) throw new Error(j.error||r.status); return j;
+}
+// Напоминания в локальном режиме: пока вкладка открыта (в Telegram их шлёт бот)
+if(LOCAL){
+  if("Notification" in window && Notification.permission==="default") document.addEventListener("click",()=>Notification.requestPermission(),{once:true});
+  setInterval(async()=>{
+    const now=new Date(), ds=fmt(now), min=now.getHours()*60+now.getMinutes(), sent=JSON.parse(localStorage.getItem("planner-sent")||"{}");
+    const {tasks,completions}=await localCall({op:"load"});
+    for(const t of tasks){
+      if(!t.time||!occurs(t,ds)||completions.some(c=>c.task_id===t.id&&c.date===ds)) continue;
+      const at=+t.time.slice(0,2)*60+ +t.time.slice(3,5)-(t.remind_before||0), key=t.id+ds;
+      if(min>=at && min<=at+120 && !sent[key]){ sent[key]=1; localStorage.setItem("planner-sent",JSON.stringify(sent));
+        if(Notification.permission==="granted") new Notification("⏰ "+t.time.slice(0,5)+" "+t.title,{body:t.note||""}); else alert("⏰ "+t.time.slice(0,5)+" "+t.title); }
+    }
+  },30000);
 }
 let sel = fmt(new Date()), state = {tasks:[],completions:[],notes:[]}, editing = null;
 
