@@ -35,8 +35,6 @@ label{display:block;font-size:13px;color:var(--hint);margin:10px 0 4px}.row{disp
 <textarea id="note" rows="3" placeholder="Как прошёл день, что важно запомнить…"></textarea>
 <button class="fab pri" id="add">+</button>
 
-<div class="sheet" id="cSheet"><div class="panel"><h1>Готово! Комментарий?</h1><label>Что получилось, как прошло (можно пропустить)</label><textarea id="cText" rows="3"></textarea>
-  <div class="row" style="margin-top:16px"><button id="cSkip">Без комментария</button><button id="cSave" class="pri">Сохранить</button></div></div></div>
 <div class="sheet" id="sheet"><div class="panel">
   <h1 id="sTitle">Новая задача</h1>
   <label>Задача</label><input id="fTitle" maxlength="200">
@@ -125,7 +123,7 @@ function render(){
   $("list").innerHTML = items.length ? items.map(t=>{
     const c=comp(t.id,sel), rep = t.repeat_unit==="none"?"":` · каждые ${t.repeat_every} ${({day:"дн.",week:"нед.",month:"мес."})[t.repeat_unit]}`;
     return `<div class="task ${c?"done":""}" data-id="${t.id}"><button class="chk" data-chk="${t.id}">${c?"✓":""}</button>
-      <div class="body" data-edit="${t.id}"><div class="ttl">${esc(t.title)}</div><div class="meta">${t.time?t.time.slice(0,5):"весь день"}${rep}${t.note?" · "+esc(t.note):""}</div>${c&&c.comment?`<div class="cmt">💬 ${esc(c.comment)}</div>`:""}</div></div>`;
+      <div class="body" data-edit="${t.id}"><div class="ttl">${esc(t.title)}</div><div class="meta">${t.time?t.time.slice(0,5):"весь день"}${rep}${t.note?" · "+esc(t.note):""}</div></div></div>`;
   }).join("") : `<div class="empty">На этот день задач нет</div>`;
   $("note").value = state.notes.find(n=>n.date===sel)?.note || "";
 }
@@ -140,7 +138,7 @@ $("list").onclick = async e => {
   if(chk){
     const id=chk.dataset.chk, was=comp(id,sel);
     if(was){ await call({op:"toggle",task_id:id,date:sel,done:false}).catch(()=>{}); load(); }
-    else { pending={id,date:sel}; $("cText").value=""; $("cSheet").classList.add("open"); $("cText").focus(); }
+    else { await call({op:"toggle",task_id:id,date:sel,done:true,comment:""}).catch(()=>{}); tg?.HapticFeedback?.notificationOccurred("success"); load(); }
   } else if(ed){ openSheet(state.tasks.find(t=>t.id===ed.dataset.edit)); }
 };
 let nt; $("note").oninput = () => { clearTimeout(nt); nt=setTimeout(()=>call({op:"saveNote",date:sel,note:$("note").value}).catch(()=>{}),600); };
@@ -151,10 +149,6 @@ function openSheet(t){
   $("fUnit").value=t?.repeat_unit||"none"; $("fEvery").value=t?.repeat_every||1; $("fUntil").value=t?.until||""; $("fRemind").value=t?.remind_before||0;
   delArmed=false; $("sDel").textContent="Удалить"; $("sDel").style.display=t?"":"none"; $("sheet").classList.add("open");
 }
-let pending=null;
-async function finishDone(comment){ const p=pending; pending=null; $("cSheet").classList.remove("open");
-  await call({op:"toggle",task_id:p.id,date:p.date,done:true,comment}).catch(()=>{}); tg?.HapticFeedback?.notificationOccurred("success"); load(); }
-$("cSkip").onclick=()=>finishDone(""); $("cSave").onclick=()=>finishDone($("cText").value.trim());
 $("add").onclick = () => openSheet(null);
 $("sCancel").onclick = () => $("sheet").classList.remove("open");
 let delArmed=false;
