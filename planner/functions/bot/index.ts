@@ -155,19 +155,21 @@ async function api(uid: number, b: any) {
       if (!okDate(b.from) || !okDate(b.to)) return { error: "bad_range" };
       const tasks = await tasksFor(uid);
       const ids = tasks.map((t) => t.id);
-      const [c, n, s] = await Promise.all([
+      const [c, n, s, pr] = await Promise.all([
         db.from("completions").select("*").in("task_id", ids).gte("date", b.from).lte("date", b.to),
         db.from("day_notes").select("*").eq("user_id", uid).gte("date", b.from).lte("date", b.to),
         db.from("settings").select("tz").eq("user_id", uid).maybeSingle(),
+        db.from("step_progress").select("*").in("task_id", ids).gte("date", b.from).lte("date", b.to),
       ]);
-      return { tasks, completions: c.data ?? [], notes: n.data ?? [], tz: s.data?.tz ?? "Europe/Moscow" };
+      return { tasks, completions: c.data ?? [], notes: n.data ?? [], progress: pr.data ?? [], tz: s.data?.tz ?? "Europe/Moscow" };
     }
     case "saveTask": {
       const t = b.task ?? {};
       if (!t.title || !okDate(t.start_date)) return { error: "bad_task" };
       const row = {
         user_id: uid, title: String(t.title).slice(0, 200), note: String(t.note ?? "").slice(0, 2000), start_date: t.start_date,
-        time: t.time || null, repeat_unit: ["none", "day", "week", "month"].includes(t.repeat_unit) ? t.repeat_unit : "none",
+        time: t.time || null,
+        steps: Array.isArray(t.steps) ? t.steps.slice(0, 30).map((x: any) => ({ id: String(x?.id ?? "").slice(0, 20), text: String(x?.text ?? "").slice(0, 200) })).filter((x: any) => x.id && x.text) : [], repeat_unit: ["none", "day", "week", "month"].includes(t.repeat_unit) ? t.repeat_unit : "none",
         repeat_every: Math.min(365, Math.max(1, Number(t.repeat_every) || 1)), until: okDate(t.until) ? t.until : null,
         weekdays: Array.isArray(t.weekdays) ? [...new Set(t.weekdays.map(Number).filter((x: number) => x >= 0 && x <= 6))] : [],
         month_day: Number(t.month_day) >= 1 && Number(t.month_day) <= 31 ? Number(t.month_day) : null,
@@ -184,6 +186,13 @@ async function api(uid: number, b: any) {
     case "toggle":
       if (!okDate(b.date)) return { error: "bad_date" };
       return { ok: await setDone(uid, b.task_id, b.date, !!b.done, String(b.comment ?? "").slice(0, 1000)) };
+    case "setSteps": {
+      if (!okDate(b.date) || !Array.isArray(b.done)) return { error: "bad_request" };
+      const { data: t } = await db.from("tasks").select("id").eq("id", b.task_id).eq("user_id", uid).maybeSingle();
+      if (!t) return { error: "not_found" };
+      await db.from("step_progress").upsert({ task_id: b.task_id, date: b.date, done: b.done.slice(0, 30).map((x: unknown) => String(x).slice(0, 20)) });
+      return { ok: true };
+    }
     case "saveNote":
       if (!okDate(b.date)) return { error: "bad_date" };
       await db.from("day_notes").upsert({ user_id: uid, date: b.date, note: String(b.note ?? "").slice(0, 4000) });

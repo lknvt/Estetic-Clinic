@@ -12,6 +12,7 @@ create table public.tasks (
   user_id bigint not null,
   title text not null,
   note text not null default '',
+  steps jsonb not null default '[]',           -- этапы: [{"id":"a1","text":"..."}]
   start_date date not null,
   time time,                                   -- null = задача на весь день
   repeat_unit text not null default 'none' check (repeat_unit in ('none','day','week','month')),
@@ -34,6 +35,14 @@ create table public.completions (
   primary key (task_id, date)
 );
 
+-- какие этапы выполнены в конкретный день
+create table public.step_progress (
+  task_id uuid not null references public.tasks(id) on delete cascade,
+  date date not null,
+  done text[] not null default '{}',
+  primary key (task_id, date)
+);
+
 -- комментарий к дню
 create table public.day_notes (
   user_id bigint not null,
@@ -51,6 +60,7 @@ create table public.reminders_sent (
 alter table public.settings enable row level security;
 alter table public.tasks enable row level security;
 alter table public.completions enable row level security;
+alter table public.step_progress enable row level security;
 alter table public.day_notes enable row level security;
 alter table public.reminders_sent enable row level security;
 
